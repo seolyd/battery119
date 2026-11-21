@@ -1,7 +1,6 @@
 import { OrderWizard } from "@/components/OrderWizard";
 import { requireUser } from "@/lib/auth";
 import { toCatalog } from "@/lib/catalog";
-import { decryptDoorCode } from "@/lib/crypto";
 import { pickupDateFor } from "@/lib/schedule";
 import { getStore } from "@/lib/store";
 
@@ -13,19 +12,14 @@ export default async function OrderPage({ searchParams }: { searchParams: Promis
   const store = getStore();
   const [models, closed] = await Promise.all([store.listModels({ activeOnly: true }), store.listClosedDates()]);
   const c = session.customer;
-  let doorCode = "";
-  try {
-    doorCode = c.doorCodeEnc ? decryptDoorCode(c.doorCodeEnc) : "";
-  } catch {
-    doorCode = "";
-  }
 
   return (
     <OrderWizard
       catalog={toCatalog(models)}
       initialKind={kind === "cordless" || kind === "robot" ? kind : null}
       pickupDate={pickupDateFor(new Date(), closed)}
-      profile={{ dong: c.dong ?? "", ho: c.ho ?? "", phone: c.phone ?? "", doorCode }}
+      // 저장된 공동현관 비밀번호는 화면으로 보내지 않고, 있는지만 알려 준다
+      profile={{ dong: c.dong, ho: c.ho, phone: c.phone ?? "", hasDoorCode: !!c.doorCodeEnc }}
     />
   );
 }

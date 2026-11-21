@@ -1,6 +1,7 @@
 -- 파크리오 배터리 119 초기 스키마
 -- 앱 서버만 서비스 롤 키로 접근한다. 모든 테이블에 RLS를 켜고 정책을 두지 않아
 -- 브라우저(anon 키)에서는 읽거나 쓸 수 없다.
+-- 로그인은 Supabase Auth를 쓰지 않고, 앱이 동·호수 + 4자리 비밀번호로 직접 처리한다.
 
 create extension if not exists pgcrypto;
 
@@ -12,16 +13,28 @@ create table partners (
   created_at timestamptz not null default now()
 );
 
+-- 한 세대(동·호수) = 한 계정
 create table customers (
-  id uuid primary key references auth.users (id) on delete cascade,
+  id uuid primary key default gen_random_uuid(),
+  dong text not null check (dong ~ '^[0-9]{3}$'),
+  ho text not null check (ho ~ '^[0-9]{3,4}$'),
+  pin_hash text not null,       -- scrypt, 앱에서 해시
+  failed_count integer not null default 0,
+  locked_until timestamptz,
   name text,
   phone text,
-  dong text,
-  ho text,
   door_code_enc text,           -- AES-256-GCM, 앱에서 암호화
-  is_admin boolean not null default false,
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  unique (dong, ho)
 );
+
+-- 로그인 실패 기록 (같은 접속지에서 여러 세대를 돌아가며 찍는 시도 제한)
+create table login_failures (
+  id bigint generated always as identity primary key,
+  ip text not null,
+  at timestamptz not null default now()
+);
+create index login_failures_ip_at on login_failures (ip, at);
 
 create table models (
   id text primary key,
@@ -141,3 +154,4 @@ alter table order_events enable row level security;
 alter table inspections enable row level security;
 alter table closed_dates enable row level security;
 alter table order_counters enable row level security;
+alter table login_failures enable row level security;

@@ -24,7 +24,6 @@ export interface OrderInput {
   dong: string;
   ho: string;
   phone: string;
-  doorCode: string;
   packagingAgreed: boolean;
 }
 
@@ -46,7 +45,6 @@ export function buildOrder(input: OrderInput, model: Model | null, customerId: s
   if (!/^\d{3}$/.test(input.dong)) throw new RuleError("동은 숫자 3자리로 적어 주세요.");
   if (!/^\d{3,4}$/.test(input.ho)) throw new RuleError("호는 숫자 3~4자리로 적어 주세요.");
   if (!PHONE.test(input.phone.trim())) throw new RuleError("연락처를 010-1234-5678 형식으로 적어 주세요.");
-  if (!input.doorCode.trim() || input.doorCode.length > 30) throw new RuleError("공동현관 비밀번호를 적어 주세요.");
   if (!input.packagingAgreed) throw new RuleError("포장 안내에 동의해야 신청할 수 있어요.");
   const symptoms = input.symptoms.filter((s) => (SYMPTOMS as readonly string[]).includes(s));
   if (!symptoms.length) throw new RuleError("증상을 하나 이상 골라 주세요.");

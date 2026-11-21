@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
-import { changeStatus, revealDoorCode, saveInspection, type ActionState } from "@/app/admin/orders/[id]/actions";
+import { changeStatus, resetPin, revealDoorCode, saveInspection, type ActionState } from "@/app/admin/orders/[id]/actions";
 import { STATUS_LABEL, type Inspection, type Order, type OrderStatus, type Partner } from "@/lib/domain";
 
 const VERB: Partial<Record<OrderStatus, string>> = {
@@ -168,5 +168,28 @@ export function DoorCode({ customerId }: { customerId: string }) {
     <button type="button" className="btn sm ghost" onClick={async () => setCode(await revealDoorCode(customerId))}>
       보기
     </button>
+  );
+}
+
+export function ResetPin({ customerId }: { customerId: string }) {
+  const [open, setOpen] = useState(false);
+  const [state, action, pending] = useActionState<ActionState, FormData>(resetPin.bind(null, customerId), {});
+  if (!open)
+    return (
+      <button type="button" className="btn sm ghost" onClick={() => setOpen(true)}>
+        로그인 비밀번호 새로 정하기
+      </button>
+    );
+  return (
+    <form action={action} className="stack" style={{ gap: 6 }}>
+      <label className="field">
+        새 비밀번호 (숫자 4자리)
+        <input name="pin" inputMode="numeric" maxLength={4} pattern="[0-9]{4}" required autoComplete="off" />
+      </label>
+      <Msg s={state} />
+      <button className="btn sm" disabled={pending}>
+        저장
+      </button>
+    </form>
   );
 }
