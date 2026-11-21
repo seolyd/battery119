@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AdminOrderActions, DoorCode } from "@/components/AdminOrderActions";
+import { AdminOrderActions, DoorCode, ResetPin } from "@/components/AdminOrderActions";
 import { StatusBadge, toSeoulDateTime } from "@/components/ui";
 import { ADMIN_TRANSITIONS, CATEGORY_LABEL, formatWon, STATUS_LABEL } from "@/lib/domain";
 import { formatDay, nextDeliveryDate } from "@/lib/schedule";
@@ -88,6 +88,7 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
               <dt>포장 동의</dt>
               <dd>{toSeoulDateTime(order.packagingAgreedAt)}</dd>
             </dl>
+            <ResetPin customerId={order.customerId} />
           </div>
         </section>
 

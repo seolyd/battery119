@@ -31,7 +31,12 @@ export type OrderPatch = Partial<
   >
 >;
 
-export type CustomerPatch = Partial<Pick<Customer, "name" | "phone" | "dong" | "ho" | "doorCodeEnc" | "isAdmin">>;
+export type CustomerPatch = Partial<Pick<Customer, "name" | "phone" | "doorCodeEnc" | "pinHash" | "failedCount" | "lockedUntil">>;
+
+export type NewCustomer = Pick<Customer, "dong" | "ho" | "pinHash"> & Partial<Pick<Customer, "name" | "phone">>;
+
+/** 이미 가입된 세대에 다시 가입하려 할 때 */
+export class UnitTakenError extends Error {}
 
 export type ModelPatch = Partial<Pick<Model, "partnerCost" | "price" | "options" | "partnerId" | "active" | "protectCircuitFee">>;
 
@@ -41,7 +46,9 @@ export type ModelPatch = Partial<Pick<Model, "partnerCost" | "price" | "options"
  */
 export interface Store {
   getCustomer(id: string): Promise<Customer | null>;
-  ensureCustomer(id: string, defaults: { name: string | null }): Promise<Customer>;
+  findCustomerByUnit(dong: string, ho: string): Promise<Customer | null>;
+  /** 같은 동·호수가 있으면 UnitTakenError */
+  createCustomer(input: NewCustomer): Promise<Customer>;
   updateCustomer(id: string, patch: CustomerPatch): Promise<Customer>;
   listCustomers(ids: string[]): Promise<Customer[]>;
 
@@ -64,4 +71,8 @@ export interface Store {
   getInspection(orderId: string): Promise<Inspection | null>;
 
   listClosedDates(): Promise<string[]>;
+
+  /** 로그인 실패 기록 (접속지별 시도 제한) */
+  recordLoginFailure(ip: string): Promise<void>;
+  countLoginFailures(ip: string, sinceIso: string): Promise<number>;
 }

@@ -1,7 +1,7 @@
 import "server-only";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { Customer, Inspection, Model, Order, OrderEvent, Partner } from "@/lib/domain";
-import type { Store } from "./types";
+import { UnitTakenError, type Store } from "./types";
 
 // 운영 저장소. 서비스 롤 키로 서버에서만 접근한다 (테이블은 RLS로 외부 접근 차단).
 
@@ -11,10 +11,12 @@ const toCustomer = (r: Row): Customer => ({
   id: r.id as string,
   name: (r.name as string) ?? null,
   phone: (r.phone as string) ?? null,
-  dong: (r.dong as string) ?? null,
-  ho: (r.ho as string) ?? null,
+  dong: r.dong as string,
+  ho: r.ho as string,
+  pinHash: r.pin_hash as string,
+  failedCount: (r.failed_count as number) ?? 0,
+  lockedUntil: (r.locked_until as string) ?? null,
   doorCodeEnc: (r.door_code_enc as string) ?? null,
-  isAdmin: !!r.is_admin,
   createdAt: r.created_at as string,
 });
 
@@ -85,7 +87,9 @@ const toInspection = (r: Row): Inspection => ({
 
 const snake: Record<string, string> = {
   doorCodeEnc: "door_code_enc",
-  isAdmin: "is_admin",
+  pinHash: "pin_hash",
+  failedCount: "failed_count",
+  lockedUntil: "locked_until",
   partnerCost: "partner_cost",
   partnerId: "partner_id",
   protectCircuitFee: "protect_circuit_fee",
@@ -124,7 +128,7 @@ function must(res: { data: unknown; error: { message: string } | null }): any {
 export function createSupabaseStore(client?: SupabaseClient): Store {
   const db =
     client ??
-    createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
       auth: { persistSession: false, autoRefreshToken: false },
     });
 
@@ -133,13 +137,14 @@ export function createSupabaseStore(client?: SupabaseClient): Store {
       const r = must(await db.from("customers").select("*").eq("id", id).maybeSingle());
       return r ? toCustomer(r) : null;
     },
-    async ensureCustomer(id, defaults) {
-      const existing = must(await db.from("customers").select("*").eq("id", id).maybeSingle());
-      if (existing) return toCustomer(existing);
-      const r = must(
-        await db.from("customers").upsert({ id, name: defaults.name }, { onConflict: "id", ignoreDuplicates: false }).select().single(),
-      );
-      return toCustomer(r);
+    async findCustomerByUnit(dong, ho) {
+      const r = must(await db.from("customers").select("*").eq("dong", dong).eq("ho", ho).maybeSingle());
+      return r ? toCustomer(r) : null;
+    },
+    async createCustomer(input) {
+      const res = await db.from("customers").insert(toRow(input)).select().single();
+      if (res.error?.code === "23505") throw new UnitTakenError();
+      return toCustomer(must(res));
     },
     async updateCustomer(id, patch) {
       return toCustomer(must(await db.from("customers").update(toRow(patch)).eq("id", id).select().single()));
@@ -212,6 +217,15 @@ export function createSupabaseStore(client?: SupabaseClient): Store {
 
     async listClosedDates() {
       return must(await db.from("closed_dates").select("date")).map((r: Row) => r.date as string);
+    },
+
+    async recordLoginFailure(ip) {
+      must(await db.from("login_failures").insert({ ip }));
+    },
+    async countLoginFailures(ip, sinceIso) {
+      const res = await db.from("login_failures").select("id", { count: "exact", head: true }).eq("ip", ip).gte("at", sinceIso);
+      if (res.error) throw new Error(res.error.message);
+      return res.count ?? 0;
     },
   };
 }

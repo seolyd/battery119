@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import type { Customer, Inspection, Model, Order, OrderEvent, Partner } from "@/lib/domain";
 import seedModels from "@/data/models.json";
 import { seoulToday } from "@/lib/schedule";
-import type { Store } from "./types";
+import { UnitTakenError, type Store } from "./types";
 
 // 데모 모드 저장소. 서버 프로세스 메모리에 있어서 재시작하면 초기화된다.
 
@@ -16,6 +16,7 @@ interface Db {
   events: OrderEvent[];
   inspections: Map<string, Inspection>;
   orderSeq: Map<string, number>;
+  loginFailures: { ip: string; at: string }[];
 }
 
 type SeedModel = Omit<Model, "partnerId" | "active">;
@@ -38,6 +39,7 @@ export function createMemoryDb(): Db {
     events: [],
     inspections: new Map(),
     orderSeq: new Map(),
+    loginFailures: [],
   };
 }
 
@@ -50,12 +52,25 @@ export function createMemoryStore(db: Db = createMemoryDb()): Store {
       const c = db.customers.get(id);
       return c ? clone(c) : null;
     },
-    async ensureCustomer(id, defaults) {
-      let c = db.customers.get(id);
-      if (!c) {
-        c = { id, name: defaults.name, phone: null, dong: null, ho: null, doorCodeEnc: null, isAdmin: false, createdAt: now() };
-        db.customers.set(id, c);
-      }
+    async findCustomerByUnit(dong, ho) {
+      const c = [...db.customers.values()].find((x) => x.dong === dong && x.ho === ho);
+      return c ? clone(c) : null;
+    },
+    async createCustomer(input) {
+      if ([...db.customers.values()].some((x) => x.dong === input.dong && x.ho === input.ho)) throw new UnitTakenError();
+      const c: Customer = {
+        id: randomUUID(),
+        name: input.name ?? null,
+        phone: input.phone ?? null,
+        dong: input.dong,
+        ho: input.ho,
+        pinHash: input.pinHash,
+        failedCount: 0,
+        lockedUntil: null,
+        doorCodeEnc: null,
+        createdAt: now(),
+      };
+      db.customers.set(c.id, c);
       return clone(c);
     },
     async updateCustomer(id, patch) {
@@ -149,6 +164,14 @@ export function createMemoryStore(db: Db = createMemoryDb()): Store {
 
     async listClosedDates() {
       return [];
+    },
+
+    async recordLoginFailure(ip) {
+      db.loginFailures.push({ ip, at: now() });
+      if (db.loginFailures.length > 5000) db.loginFailures.splice(0, 1000);
+    },
+    async countLoginFailures(ip, sinceIso) {
+      return db.loginFailures.filter((f) => f.ip === ip && f.at >= sinceIso).length;
     },
   };
 }

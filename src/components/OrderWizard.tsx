@@ -15,7 +15,7 @@ interface Profile {
   dong: string;
   ho: string;
   phone: string;
-  doorCode: string;
+  hasDoorCode: boolean;
 }
 
 export function OrderWizard({
@@ -41,7 +41,9 @@ export function OrderWizard({
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [age, setAge] = useState<string | null>(null);
   const [memo, setMemo] = useState("");
-  const [addr, setAddr] = useState<Profile>(profile);
+  const [phone, setPhone] = useState(profile.phone);
+  const [doorCode, setDoorCode] = useState("");
+  const [changeDoor, setChangeDoor] = useState(!profile.hasDoorCode);
   const [agree, setAgree] = useState(false);
   const [bq, setBq] = useState("");
   const [mq, setMq] = useState("");
@@ -71,14 +73,7 @@ export function OrderWizard({
   const canNext = (() => {
     if (step === 2) return !!custom && !!customModel.trim() && (custom !== "brand" || !!customBrand.trim());
     if (step === 3) return symptoms.length > 0 && (!model || !model.options.length || !!option);
-    if (step === 4)
-      return (
-        /^\d{3}$/.test(addr.dong) &&
-        /^\d{3,4}$/.test(addr.ho) &&
-        addr.phone.replace(/\D/g, "").length >= 10 &&
-        addr.doorCode.trim().length > 0 &&
-        agree
-      );
+    if (step === 4) return phone.replace(/\D/g, "").length >= 10 && (!changeDoor || doorCode.trim().length > 0) && agree;
     return true;
   })();
 
@@ -95,10 +90,8 @@ export function OrderWizard({
         symptoms,
         usageAge: age,
         memo,
-        dong: addr.dong,
-        ho: addr.ho,
-        phone: addr.phone,
-        doorCode: addr.doorCode,
+        phone,
+        doorCode: changeDoor ? doorCode : "",
         packagingAgreed: agree,
       });
       if (res?.error) setError(res.error);
@@ -349,24 +342,34 @@ export function OrderWizard({
         {step === 4 && (
           <>
             <h1 className="h2">수거 정보를 알려 주세요</h1>
-            <div className="grid2">
-              <label className="field">
-                동
-                <input inputMode="numeric" maxLength={3} placeholder="215" value={addr.dong} onChange={(e) => setAddr({ ...addr, dong: e.target.value.replace(/\D/g, "") })} />
-              </label>
-              <label className="field">
-                호
-                <input inputMode="numeric" maxLength={4} placeholder="1203" value={addr.ho} onChange={(e) => setAddr({ ...addr, ho: e.target.value.replace(/\D/g, "") })} />
-              </label>
+            <div className="card flat">
+              <div className="row">
+                <span className="small muted">수거·배송 주소</span>
+                <b>
+                  파크리오 {profile.dong}동 {profile.ho}호
+                </b>
+              </div>
             </div>
-            <label className="field">
-              공동현관 비밀번호
-              <input type="password" autoComplete="off" placeholder="예: 1234#" value={addr.doorCode} maxLength={30} onChange={(e) => setAddr({ ...addr, doorCode: e.target.value })} />
-              <span className="small">암호화해서 저장하고 수거·배송할 때만 확인해요.</span>
-            </label>
+            {profile.hasDoorCode && !changeDoor ? (
+              <div className="card flat">
+                <div className="row">
+                  <span className="small muted">공동현관 비밀번호</span>
+                  <span>저장된 번호 사용</span>
+                </div>
+                <button type="button" className="btn sm ghost" style={{ alignSelf: "flex-start" }} onClick={() => setChangeDoor(true)}>
+                  번호가 바뀌었어요
+                </button>
+              </div>
+            ) : (
+              <label className="field">
+                공동현관 비밀번호
+                <input type="password" autoComplete="off" placeholder="예: 1234#" value={doorCode} maxLength={30} onChange={(e) => setDoorCode(e.target.value)} />
+                <span className="small">암호화해서 저장하고, 수거·배송하는 운영자만 확인해요.</span>
+              </label>
+            )}
             <label className="field">
               연락처
-              <input type="tel" inputMode="tel" placeholder="010-1234-5678" value={addr.phone} maxLength={13} onChange={(e) => setAddr({ ...addr, phone: e.target.value })} />
+              <input type="tel" inputMode="tel" placeholder="010-1234-5678" value={phone} maxLength={13} onChange={(e) => setPhone(e.target.value)} />
             </label>
             <div className="card accent">
               <div className="row">
@@ -426,7 +429,7 @@ export function OrderWizard({
               <div>
                 <span className="m">주소</span>
                 <span>
-                  파크리오 {addr.dong}동 {addr.ho}호
+                  파크리오 {profile.dong}동 {profile.ho}호
                 </span>
               </div>
               <div>

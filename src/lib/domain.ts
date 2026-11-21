@@ -36,15 +36,20 @@ export interface Partner {
   contact: string | null;
 }
 
+/** 한 세대(동·호수)가 한 계정이다 */
 export interface Customer {
   id: string;
   name: string | null;
   phone: string | null;
-  dong: string | null;
-  ho: string | null;
+  dong: string;
+  ho: string;
+  /** 4자리 비밀번호의 scrypt 해시 */
+  pinHash: string;
+  /** 연속으로 틀린 횟수와 잠금 해제 시각 */
+  failedCount: number;
+  lockedUntil: string | null;
   /** 암호화된 공동현관 비밀번호 */
   doorCodeEnc: string | null;
-  isAdmin: boolean;
   createdAt: string;
 }
 

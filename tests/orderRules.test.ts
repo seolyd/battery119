@@ -32,7 +32,6 @@ const input = (over: Partial<OrderInput> = {}): OrderInput => ({
   dong: "215",
   ho: "1203",
   phone: "01012345678",
-  doorCode: "1234#",
   packagingAgreed: true,
   ...over,
 });

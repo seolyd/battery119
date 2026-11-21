@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { decryptDoorCode } from "@/lib/crypto";
+import { checkNewPin, LoginError } from "@/lib/loginRules";
+import { hashPin } from "@/lib/pin";
 import { STATUS_LABEL, type OrderStatus } from "@/lib/domain";
 import { RuleError, transitionPatch } from "@/lib/orderRules";
 import { getStore } from "@/lib/store";
@@ -91,4 +93,20 @@ export async function revealDoorCode(customerId: string): Promise<string> {
   } catch {
     return "복호화하지 못했어요. 고객에게 다시 받아 주세요.";
   }
+}
+
+/** 고객이 비밀번호를 잊었을 때 운영자가 새로 정해 준다 (본인 확인은 카카오톡 채널 등에서) */
+export async function resetPin(customerId: string, _: ActionState, formData: FormData): Promise<ActionState> {
+  await requireAdmin();
+  const pin = String(formData.get("pin") ?? "");
+  try {
+    checkNewPin(pin, pin);
+  } catch (e) {
+    if (e instanceof LoginError) return { error: e.message };
+    throw e;
+  }
+  const store = getStore();
+  if (!(await store.getCustomer(customerId))) return { error: "고객을 찾을 수 없어요." };
+  await store.updateCustomer(customerId, { pinHash: hashPin(pin), failedCount: 0, lockedUntil: null });
+  return { ok: "새 비밀번호로 바꿨어요. 고객에게 알려 주세요." };
 }

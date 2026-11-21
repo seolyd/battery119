@@ -10,24 +10,28 @@ export interface SubmitResult {
   error?: string;
 }
 
-export async function submitOrder(input: OrderInput): Promise<SubmitResult> {
+/** 주소(동·호수)는 계정에서 가져온다. 공동현관 비밀번호는 새로 적었을 때만 바꾼다. */
+export type WizardInput = Omit<OrderInput, "dong" | "ho"> & { doorCode: string };
+
+export async function submitOrder(input: WizardInput): Promise<SubmitResult> {
   const session = await getSession();
   if (!session) return { error: "로그인이 풀렸어요. 다시 로그인한 뒤 신청해 주세요." };
+  const { customer } = session;
   const store = getStore();
+  const doorCode = input.doorCode.trim();
 
   let orderId: string;
   try {
+    if (!doorCode && !customer.doorCodeEnc) throw new RuleError("공동현관 비밀번호를 적어 주세요.");
+    if (doorCode.length > 30) throw new RuleError("공동현관 비밀번호가 너무 길어요.");
     const model = input.modelId ? await store.getModel(input.modelId) : null;
     if (input.modelId && !model) return { error: "모델 정보를 찾을 수 없어요. 처음부터 다시 골라 주세요." };
-    const draft = buildOrder(input, model, session.userId);
+    const draft = buildOrder({ ...input, dong: customer.dong, ho: customer.ho }, model, customer.id);
     const order = await store.createOrder(draft);
     await store.addEvent({ orderId: order.id, from: null, to: order.status, actor: "customer", note: "신청 접수" });
-    // 다음 신청 때 다시 입력하지 않도록 고객 정보에 저장
-    await store.updateCustomer(session.userId, {
-      dong: draft.dong,
-      ho: draft.ho,
+    await store.updateCustomer(customer.id, {
       phone: draft.phone,
-      doorCodeEnc: encryptDoorCode(input.doorCode.trim()),
+      ...(doorCode ? { doorCodeEnc: encryptDoorCode(doorCode) } : {}),
     });
     orderId = order.id;
   } catch (e) {

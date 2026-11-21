@@ -1,63 +1,45 @@
 import "server-only";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { createServerClient } from "@supabase/ssr";
 import type { Customer } from "@/lib/domain";
+import { decodeSession, encodeSession, SESSION_COOKIE, type SessionPayload } from "@/lib/session";
 import { getStore, isDemoMode } from "@/lib/store";
 
-export const DEMO_COOKIE = "b119_demo";
-export const DEMO_USERS = {
-  customer: { id: "demo-customer", name: "데모 고객" },
-  admin: { id: "demo-admin", name: "데모 운영자" },
-} as const;
+// 로그인: 고객은 동·호수 + 4자리 비밀번호, 운영자는 관리자 비밀번호(ADMIN_PASSWORD)
 
 export interface Session {
   userId: string;
-  name: string | null;
-  isAdmin: boolean;
   customer: Customer;
 }
 
-export async function supabaseServer() {
-  const store = await cookies();
-  return createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
-    cookies: {
-      getAll: () => store.getAll(),
-      setAll: (list) => {
-        try {
-          list.forEach(({ name, value, options }) => store.set(name, value, options));
-        } catch {
-          // 서버 컴포넌트에서는 쿠키를 쓸 수 없다. 미들웨어가 세션을 갱신한다.
-        }
-      },
-    },
+async function payload(): Promise<SessionPayload | null> {
+  return decodeSession((await cookies()).get(SESSION_COOKIE)?.value);
+}
+
+export async function setSession(p: SessionPayload): Promise<void> {
+  (await cookies()).set(SESSION_COOKIE, encodeSession(p), {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production" && !isDemoMode(),
+    path: "/",
+    expires: new Date(p.exp),
   });
 }
 
-function envAdmins(): string[] {
-  return (process.env.ADMIN_USER_IDS ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+export async function clearSession(): Promise<void> {
+  (await cookies()).delete(SESSION_COOKIE);
 }
 
+/** 로그인한 고객. 운영자 세션이거나 계정이 없어졌으면 null */
 export async function getSession(): Promise<Session | null> {
-  const store = getStore();
-  if (isDemoMode()) {
-    const role = (await cookies()).get(DEMO_COOKIE)?.value;
-    if (role !== "customer" && role !== "admin") return null;
-    const u = DEMO_USERS[role];
-    let customer = await store.ensureCustomer(u.id, { name: u.name });
-    if (role === "admin" && !customer.isAdmin) customer = await store.updateCustomer(u.id, { isAdmin: true });
-    return { userId: u.id, name: customer.name, isAdmin: customer.isAdmin, customer };
-  }
+  const p = await payload();
+  if (!p || p.role !== "customer") return null;
+  const customer = await getStore().getCustomer(p.uid);
+  return customer ? { userId: customer.id, customer } : null;
+}
 
-  const sb = await supabaseServer();
-  const { data } = await sb.auth.getUser();
-  const user = data.user;
-  if (!user) return null;
-  const meta = user.user_metadata ?? {};
-  const name = (meta.name as string) || (meta.full_name as string) || (meta.nickname as string) || null;
-  const customer = await store.ensureCustomer(user.id, { name });
-  const isAdmin = customer.isAdmin || envAdmins().includes(user.id);
-  return { userId: user.id, name: customer.name, isAdmin, customer };
+export async function isAdmin(): Promise<boolean> {
+  return (await payload())?.role === "admin";
 }
 
 export async function requireUser(next: string): Promise<Session> {
@@ -66,8 +48,22 @@ export async function requireUser(next: string): Promise<Session> {
   return s;
 }
 
-export async function requireAdmin(): Promise<Session> {
-  const s = await requireUser("/admin");
-  if (!s.isAdmin) redirect("/?error=admin");
-  return s;
+export async function requireAdmin(): Promise<void> {
+  if (!(await isAdmin())) redirect("/admin-login");
+}
+
+/** 운영자 비밀번호. 데모 모드에서는 정하지 않았으면 "admin-demo" */
+export function adminPassword(): string | null {
+  const p = process.env.ADMIN_PASSWORD;
+  if (p && p.length >= 10) return p;
+  return isDemoMode() ? "admin-demo" : null;
+}
+
+export async function clientIp(): Promise<string> {
+  const h = await headers();
+  return h.get("x-forwarded-for")?.split(",")[0].trim() || h.get("x-real-ip") || "unknown";
+}
+
+export function safeNext(v: unknown): string {
+  return typeof v === "string" && v.startsWith("/") && !v.startsWith("//") && !v.startsWith("/admin") ? v : "/";
 }

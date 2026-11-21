@@ -6,7 +6,7 @@ import type { Store } from "./types";
 export type { Store } from "./types";
 
 export function isDemoMode(): boolean {
-  return !process.env.NEXT_PUBLIC_SUPABASE_URL;
+  return !process.env.SUPABASE_URL;
 }
 
 const g = globalThis as unknown as { __b119Store?: Store };

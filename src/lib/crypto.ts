@@ -11,7 +11,7 @@ function key(): Buffer {
     if (k.length !== 32) throw new Error("DOOR_CODE_KEY는 32바이트를 base64로 인코딩한 값이어야 해요.");
     return k;
   }
-  if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+  if (process.env.SUPABASE_URL) {
     throw new Error("DOOR_CODE_KEY가 없어요. 실제 DB를 쓸 때는 암호화 키가 꼭 필요해요.");
   }
   // 데모 모드 전용 고정 키 (메모리 저장이라 앱을 껐다 켜면 데이터가 사라진다)
