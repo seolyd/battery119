@@ -22,7 +22,7 @@ export default async function AdminModels({ searchParams }: { searchParams: Prom
     <>
       <h1 className="h2">모델·가격</h1>
       <p className="small muted">
-        고객에게는 판매가만 보이고, 원가와 협력업체는 보이지 않아요. 판매를 끄면 신청 화면에서 빠져요. 초기 데이터는 asbattery.com 리필가(2026-11-21)에 30,000원을
+        고객에게는 판매가만 보이고, 원가와 협력업체는 보이지 않아요. 판매를 끄면 신청 화면에서 빠져요. 초기 데이터는 asbattery.com 리필가(2026-11-21)에 20,000원을
         더한 값이에요.
       </p>
       <nav className="filters" aria-label="종류">

@@ -21,12 +21,12 @@ describe("공동현관 비밀번호 암호화", () => {
 });
 
 describe("초기 모델 데이터", () => {
-  it("무선·로봇 두 종류만 있고 판매가 = 원가 + 30,000원", () => {
+  it("무선·로봇 두 종류만 있고 판매가 = 원가 + 20,000원", () => {
     const models = seed as { category: string; partnerCost: number; price: number; options: { partnerCost: number; price: number }[] }[];
     expect(new Set(models.map((m) => m.category))).toEqual(new Set(["cordless", "robot"]));
     for (const m of models) {
-      expect(m.price - m.partnerCost).toBe(30000);
-      for (const o of m.options) expect(o.price - o.partnerCost).toBe(30000);
+      expect(m.price - m.partnerCost).toBe(20000);
+      for (const o of m.options) expect(o.price - o.partnerCost).toBe(20000);
     }
   });
 });

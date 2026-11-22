@@ -7,7 +7,7 @@ const q = (v) => (v === null || v === undefined ? "null" : `'${String(v).replace
 
 const lines = [
   "-- 자동 생성 파일입니다. src/data/models.json을 고친 뒤 npm run seed:sql 로 다시 만드세요.",
-  "-- 가격 출처: asbattery.com 배터리리필 메뉴 (2026-11-21 조사). 판매가 = 업체가 + 30,000원 (예시)",
+  "-- 가격 출처: asbattery.com 배터리리필 메뉴 (2026-11-21 조사). 판매가 = 업체가 + 20,000원",
   "",
   "insert into partners (id, name, region) values",
   "  ('partner-taegeuk', '태극전기 (asbattery.com)', '미정'),",

@@ -48,7 +48,7 @@ REQUESTED(목록 밖 모델, 견적 필요) → PAYMENT_PENDING(입금 대기) �
 ## 모델·가격 데이터
 
 `src/data/models.json`에 191개 모델(무선 148, 로봇 43)이 들어 있습니다.
-asbattery.com 배터리리필 메뉴의 공개 리필가(2026-11-21 조사)를 업체 원가로, **원가 + 30,000원**을 판매가로 넣은 예시 값입니다.
+asbattery.com 배터리리필 메뉴의 공개 리필가(2026-11-21 조사)를 업체 원가로, **원가 + 20,000원**을 판매가로 넣었습니다.
 실제 협력 단가와 판매가가 정해지면 관리자 화면의 **모델·가격**에서 바꾸면 됩니다.
 
 JSON을 고친 뒤 Supabase용 SQL을 다시 만들려면:
@@ -78,11 +78,14 @@ npm run seed:sql   # supabase/seed.sql 생성
 2. 이름 `battery119`, Database Password는 아무거나 길게 (따로 저장해 두기), Region은 **Northeast Asia (Seoul)**
 3. 만들어지기까지 1~2분 기다리기
 
-### 2. 표 만들기 (SQL 두 번 실행)
+### 2. 표 만들기 (SQL 세 번 실행)
 1. 왼쪽 메뉴 **SQL Editor** → **New query**
 2. 이 저장소의 `supabase/migrations/0001_init.sql` 내용을 전부 붙여 넣고 **Run**
-3. 새 쿼리에 `supabase/seed.sql` 내용을 붙여 넣고 **Run** (협력업체 4곳, 모델 191개)
-4. 왼쪽 **Table Editor**에서 `models` 표에 191줄이 보이면 성공
+3. 새 쿼리에 `supabase/migrations/0002_grants.sql` 내용을 붙여 넣고 **Run** (앱 서버에 표 권한 주기. 빠뜨리면 `permission denied for table` 오류가 나요)
+4. 새 쿼리에 `supabase/seed.sql` 내용을 붙여 넣고 **Run** (협력업체 4곳, 모델 191개)
+5. 왼쪽 **Table Editor**에서 `models` 표에 191줄이 보이면 성공
+
+> `supabase/migrations/0003_price_margin_20000.sql`은 11월 22일 전에 이미 DB를 만든 경우에만 실행합니다 (판매가를 원가 + 30,000원 → + 20,000원으로 변경). 새로 만들 때는 `seed.sql`에 이미 반영돼 있어요.
 
 ### 3. 키 두 개 복사하기
 - **Project Settings → Data API**: Project URL → `SUPABASE_URL`
