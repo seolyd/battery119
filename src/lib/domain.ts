@@ -220,7 +220,8 @@ export function flowIndex(status: OrderStatus): number {
   return FLOW.indexOf(status);
 }
 
-export const WARRANTY_MONTHS = 3;
+/** 최소 보증 기간. 모델에 따라 최대 12개월까지 안내한다 (src/lib/marketing.ts) */
+export const WARRANTY_MONTHS = 6;
 
 export function warrantyEnds(deliveredAt: string): Date {
   const d = new Date(deliveredAt);

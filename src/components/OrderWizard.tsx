@@ -442,7 +442,7 @@ export function OrderWizard({
                 <span>포함</span>
               </div>
               <div className="m">
-                <span>품질검사·3개월 보증</span>
+                <span>품질검사·6~12개월 보증</span>
                 <span>포함</span>
               </div>
               <div className="tot">
