@@ -1,15 +1,18 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { submitOrder } from "@/app/(app)/order/actions";
 import { KindIcon } from "@/components/ui";
 import { brandsOf, minPrice, type CatalogModel } from "@/lib/catalog";
 import { CATEGORY_LABEL, formatWon, SYMPTOMS, USAGE_AGES, type Category } from "@/lib/domain";
+import type { RuleField } from "@/lib/orderRules";
+import { isValidPhone } from "@/lib/phone";
 import { formatDay, VISIT_WINDOW } from "@/lib/schedule";
 
 const STEPS = ["청소기 종류", "제조사", "모델", "조건", "수거 정보", "견적 확인"];
 const SWOLLEN = "배터리가 부풀었어요";
+const FIELD_STEP: Record<RuleField, number> = { model: 2, conditions: 3, pickup: 4 };
 
 interface Profile {
   dong: string;
@@ -30,7 +33,8 @@ export function OrderWizard({
   profile: Profile;
 }) {
   const router = useRouter();
-  const [step, setStep] = useState(initialKind ? 1 : 0);
+  const firstStep = initialKind ? 1 : 0;
+  const [step, setStep] = useState(firstStep);
   const [kind, setKind] = useState<Category | null>(initialKind);
   const [brand, setBrand] = useState<string | null>(null);
   const [custom, setCustom] = useState<null | "brand" | "model">(null);
@@ -47,7 +51,7 @@ export function OrderWizard({
   const [agree, setAgree] = useState(false);
   const [bq, setBq] = useState("");
   const [mq, setMq] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<{ message: string; field?: RuleField } | null>(null);
   const [pending, start] = useTransition();
 
   const brands = useMemo(() => (kind ? brandsOf(catalog, kind) : []), [catalog, kind]);
@@ -64,16 +68,31 @@ export function OrderWizard({
   const brandName = custom === "brand" ? customBrand.trim() : brand ?? "";
   const modelName = custom ? customModel.trim() : model?.name ?? "";
 
-  const go = (n: number) => {
-    setError(null);
+  // 단계마다 브라우저 기록을 남겨서, 휴대폰의 뒤로 가기(스와이프)도 한 단계씩 돌아가게 한다
+  useEffect(() => {
+    window.history.replaceState({ ...window.history.state, wizardStep: firstStep }, "");
+    const onPop = (e: PopStateEvent) => {
+      const s = e.state?.wizardStep;
+      if (typeof s === "number") {
+        setStep(s);
+        window.scrollTo({ top: 0 });
+      }
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, [firstStep]);
+
+  const go = (n: number, keepError = false) => {
+    if (!keepError) setError(null);
     setStep(n);
+    window.history.pushState({ ...window.history.state, wizardStep: n }, "");
     window.scrollTo({ top: 0 });
   };
 
   const canNext = (() => {
     if (step === 2) return !!custom && !!customModel.trim() && (custom !== "brand" || !!customBrand.trim());
     if (step === 3) return symptoms.length > 0 && (!model || !model.options.length || !!option);
-    if (step === 4) return phone.replace(/\D/g, "").length >= 10 && (!changeDoor || doorCode.trim().length > 0) && agree;
+    if (step === 4) return isValidPhone(phone) && (!changeDoor || doorCode.trim().length > 0) && agree;
     return true;
   })();
 
@@ -94,15 +113,15 @@ export function OrderWizard({
         doorCode: changeDoor ? doorCode : "",
         packagingAgreed: agree,
       });
-      if (res?.error) setError(res.error);
+      if (res?.error) setError({ message: res.error, field: res.field });
       else router.refresh();
     });
   }
 
   const back = () => {
-    if (step === 3 && custom) return go(2);
-    if (step === 0) return router.push("/");
-    go(step - 1);
+    if (step <= firstStep) return router.push("/");
+    setError(null);
+    window.history.back();
   };
 
   return (
@@ -369,7 +388,8 @@ export function OrderWizard({
             )}
             <label className="field">
               연락처
-              <input type="tel" inputMode="tel" placeholder="010-1234-5678" value={phone} maxLength={13} onChange={(e) => setPhone(e.target.value)} />
+              <input type="tel" inputMode="tel" placeholder="010-1234-5678" value={phone} maxLength={16} onChange={(e) => setPhone(e.target.value)} />
+              {phone.trim() && !isValidPhone(phone) && <span className="small" style={{ color: "var(--danger)" }}>휴대폰 번호 10~11자리를 적어 주세요.</span>}
             </label>
             <div className="card accent">
               <div className="row">
@@ -397,9 +417,14 @@ export function OrderWizard({
           <>
             <h1 className="h2">신청 내용을 확인해 주세요</h1>
             <div className="card flat">
-              <span className="small muted">
-                {CATEGORY_LABEL[kind]} · {brandName}
-              </span>
+              <div className="row">
+                <span className="small muted">
+                  {CATEGORY_LABEL[kind]} · {brandName}
+                </span>
+                <button type="button" className="btn sm ghost" onClick={() => go(custom ? 2 : 3)}>
+                  수정
+                </button>
+              </div>
               <b>{modelName}</b>
               {option && <span className="small">{option}</span>}
               <span className="small muted">
@@ -426,11 +451,21 @@ export function OrderWizard({
               </div>
             </div>
             <div className="bill">
+              <div className="row">
+                <b className="small">수거 정보</b>
+                <button type="button" className="btn sm ghost" onClick={() => go(4)}>
+                  수정
+                </button>
+              </div>
               <div>
                 <span className="m">주소</span>
                 <span>
                   파크리오 {profile.dong}동 {profile.ho}호
                 </span>
+              </div>
+              <div>
+                <span className="m">연락처</span>
+                <span>{phone}</span>
               </div>
               <div>
                 <span className="m">수거</span>
@@ -450,8 +485,13 @@ export function OrderWizard({
         )}
 
         {error && (
-          <div className="alert err" role="alert">
-            <b>{error}</b>
+          <div className="alert err stack" role="alert" style={{ gap: 8 }}>
+            <b>{error.message}</b>
+            {error.field && FIELD_STEP[error.field] !== step && (
+              <button type="button" className="btn sm ghost" style={{ alignSelf: "flex-start" }} onClick={() => go(FIELD_STEP[error.field!], true)}>
+                고치러 가기
+              </button>
+            )}
           </div>
         )}
       </main>
@@ -464,15 +504,20 @@ export function OrderWizard({
               <b className="mono">{price != null ? formatWon(price) : "견적 후 안내"}</b>
             </div>
           )}
-          {step < 5 ? (
-            <button type="button" className="btn" disabled={!canNext} onClick={() => go(step + 1)}>
-              다음
+          <div className="foot-btns">
+            <button type="button" className="btn ghost" onClick={back}>
+              이전
             </button>
-          ) : (
-            <button type="button" className="btn" disabled={pending} onClick={submit}>
-              {pending ? "신청하는 중…" : custom ? "견적 요청하기" : "신청하고 입금 계좌 받기"}
-            </button>
-          )}
+            {step < 5 ? (
+              <button type="button" className="btn" disabled={!canNext} onClick={() => go(step + 1)}>
+                다음
+              </button>
+            ) : (
+              <button type="button" className="btn" disabled={pending} onClick={submit}>
+                {pending ? "신청하는 중…" : custom ? "견적 요청하기" : "신청하고 입금 계좌 받기"}
+              </button>
+            )}
+          </div>
         </div>
       )}
     </div>

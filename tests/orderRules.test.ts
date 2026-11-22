@@ -53,6 +53,16 @@ describe("buildOrder", () => {
   it("증상이 없으면 거절하고, 목록에 없는 증상은 버린다", () => {
     expect(() => buildOrder(input({ symptoms: ["아무거나"] }), robot, "c1")).toThrow(/증상/);
   });
+  it("연락처는 띄어쓰기가 있어도 받고, 틀리면 수거 정보 단계로 보낸다", () => {
+    expect(buildOrder(input({ phone: "010 1234 5678" }), robot, "c1").phone).toBe("010-1234-5678");
+    try {
+      buildOrder(input({ phone: "010-12" }), robot, "c1");
+      throw new Error("통과하면 안 됨");
+    } catch (e) {
+      expect(e).toBeInstanceOf(RuleError);
+      expect((e as RuleError).field).toBe("pickup");
+    }
+  });
   it("동·호 형식을 확인한다", () => {
     expect(() => buildOrder(input({ dong: "21" }), robot, "c1")).toThrow(/동/);
     expect(() => buildOrder(input({ ho: "12a3" }), robot, "c1")).toThrow(/호/);
