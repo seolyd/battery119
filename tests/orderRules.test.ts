@@ -8,6 +8,7 @@ const robot: Model = {
   category: "robot",
   brand: "로보락",
   name: "S5 ~ S8",
+  variants: ["S5", "S7", "S8 Pro"],
   partnerId: "partner-taegeuk",
   partnerCost: 60000,
   price: 90000,
@@ -26,6 +27,7 @@ const input = (over: Partial<OrderInput> = {}): OrderInput => ({
   modelId: robot.id,
   customModel: null,
   optionLabel: "삼성SDI 7000mAh",
+  variant: "S7",
   symptoms: ["사용 시간이 짧아요"],
   usageAge: "3~5년",
   memo: null,
@@ -43,6 +45,11 @@ describe("buildOrder", () => {
     expect(o.partnerCost).toBe(80000);
     expect(o.status).toBe("PAYMENT_PENDING");
     expect(o.phone).toBe("010-1234-5678");
+  });
+  it("여러 모델에 맞는 상품은 고객이 고른 모델 이름으로 주문을 남긴다", () => {
+    expect(buildOrder(input(), robot, "c1").modelName).toBe("S7");
+    expect(() => buildOrder(input({ variant: "S9" }), robot, "c1")).toThrow(/다시 골라/);
+    expect(() => buildOrder(input({ variant: null }), robot, "c1")).toThrow(/다시 골라/);
   });
   it("없는 용량을 고르면 거절한다", () => {
     expect(() => buildOrder(input({ optionLabel: "9999mAh" }), robot, "c1")).toThrow(RuleError);

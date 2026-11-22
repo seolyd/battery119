@@ -17,7 +17,10 @@ export interface Model {
   id: string;
   category: Category;
   brand: string;
+  /** 상품 이름 (여러 모델에 맞는 배터리면 묶음 이름) */
   name: string;
+  /** 이 배터리가 맞는 개별 모델들. 고객은 이 중 하나를 고른다. 비어 있으면 name 하나뿐 */
+  variants: string[];
   partnerId: string | null;
   /** 옵션이 없을 때의 업체 원가 / 판매가. 옵션이 있으면 첫 옵션 값과 같다. */
   partnerCost: number;

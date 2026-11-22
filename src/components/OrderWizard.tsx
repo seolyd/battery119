@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { submitOrder } from "@/app/(app)/order/actions";
 import { KindIcon } from "@/components/ui";
-import { brandsOf, minPrice, type CatalogModel } from "@/lib/catalog";
+import { brandsOf, matches, minPrice, pickEntries, type CatalogModel } from "@/lib/catalog";
 import { CATEGORY_LABEL, formatWon, SYMPTOMS, USAGE_AGES, type Category } from "@/lib/domain";
 import type { RuleField } from "@/lib/orderRules";
 import { isValidPhone } from "@/lib/phone";
@@ -41,6 +41,7 @@ export function OrderWizard({
   const [customBrand, setCustomBrand] = useState("");
   const [customModel, setCustomModel] = useState("");
   const [model, setModel] = useState<CatalogModel | null>(null);
+  const [variant, setVariant] = useState<string | null>(null);
   const [option, setOption] = useState<string | null>(null);
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [age, setAge] = useState<string | null>(null);
@@ -55,18 +56,14 @@ export function OrderWizard({
   const [pending, start] = useTransition();
 
   const brands = useMemo(() => (kind ? brandsOf(catalog, kind) : []), [catalog, kind]);
-  const models = useMemo(
-    () =>
-      catalog
-        .filter((m) => m.category === kind && m.brand === brand)
-        .filter((m) => !mq.trim() || m.name.toLowerCase().includes(mq.trim().toLowerCase()))
-        .sort((a, b) => a.name.localeCompare(b.name, "ko", { numeric: true })),
+  const entries = useMemo(
+    () => (kind && brand ? pickEntries(catalog, kind, brand).filter((e) => matches(e.label, mq)) : []),
     [catalog, kind, brand, mq],
   );
 
   const price = model ? (model.options.length ? model.options.find((o) => o.label === option)?.price ?? null : model.price) : null;
   const brandName = custom === "brand" ? customBrand.trim() : brand ?? "";
-  const modelName = custom ? customModel.trim() : model?.name ?? "";
+  const modelName = custom ? customModel.trim() : variant ?? model?.name ?? "";
 
   // 단계마다 브라우저 기록을 남겨서, 휴대폰의 뒤로 가기(스와이프)도 한 단계씩 돌아가게 한다
   useEffect(() => {
@@ -104,6 +101,7 @@ export function OrderWizard({
         category: kind,
         brand: brandName,
         modelId: custom ? null : model?.id ?? null,
+        variant: custom ? null : variant,
         customModel: custom ? customModel : null,
         optionLabel: option,
         symptoms,
@@ -233,31 +231,33 @@ export function OrderWizard({
               aria-label="모델명 검색"
             />
             <div className="list">
-              {models.map((m) => (
+              {entries.map((e) => (
                 <button
-                  key={m.id}
+                  key={e.key}
                   type="button"
                   className="item"
                   onClick={() => {
-                    setModel(m);
-                    setOption(m.options[0]?.label ?? null);
+                    setModel(e.model);
+                    setVariant(e.variant);
+                    setOption(e.model.options[0]?.label ?? null);
                     go(3);
                   }}
                 >
-                  <span className="nm">{m.name}</span>
+                  <span className="nm">{e.label}</span>
                   <span className="pr">
-                    {formatWon(minPrice(m))}
-                    {m.options.length > 1 && <small>부터</small>}
+                    {formatWon(minPrice(e.model))}
+                    {e.model.options.length > 1 && <small>부터</small>}
                   </span>
                 </button>
               ))}
-              {!models.length && <p className="muted small" style={{ textAlign: "center", padding: 12 }}>검색 결과가 없어요.</p>}
+              {!entries.length && <p className="muted small" style={{ textAlign: "center", padding: 12 }}>검색 결과가 없어요.</p>}
             </div>
             <button
               type="button"
               className="item alt"
               onClick={() => {
                 setModel(null);
+                setVariant(null);
                 setOption(null);
                 setCustom("model");
               }}

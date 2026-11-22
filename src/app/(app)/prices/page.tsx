@@ -28,6 +28,11 @@ export default async function Prices({ searchParams }: { searchParams: Promise<{
               <div key={m.id} className="item" style={{ cursor: "default" }}>
                 <span className="nm small">
                   {m.name}
+                  {m.variants.length > 1 && (
+                    <span className="muted" style={{ display: "block", fontSize: 12 }}>
+                      {m.variants.join(", ")}
+                    </span>
+                  )}
                   {m.options.length > 1 && (
                     <span className="muted" style={{ display: "block", fontSize: 12 }}>
                       {m.options.map((o) => `${o.label} ${formatWon(o.price)}`).join(" · ")}

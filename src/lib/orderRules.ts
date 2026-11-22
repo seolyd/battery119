@@ -16,6 +16,8 @@ export interface OrderInput {
   category: string;
   brand: string;
   modelId: string | null;
+  /** 여러 모델에 맞는 상품에서 고객이 고른 모델 이름 */
+  variant?: string | null;
   /** 목록에 없는 모델일 때 고객이 적은 모델명 */
   customModel: string | null;
   optionLabel: string | null;
@@ -84,7 +86,12 @@ export function buildOrder(input: OrderInput, model: Model | null, customerId: s
     };
   }
 
-  if (!model.active) throw new RuleError("지금은 접수하지 않는 모델이에요.");
+  if (!model.active) throw new RuleError("지금은 접수하지 않는 모델이에요.", "model");
+  let modelName = model.name;
+  if (model.variants.length) {
+    if (!input.variant || !model.variants.includes(input.variant)) throw new RuleError("모델을 다시 골라 주세요.", "model");
+    modelName = input.variant;
+  }
   if (model.category !== category) throw new RuleError("청소기 종류와 모델이 맞지 않아요.");
   let price = model.price;
   let partnerCost = model.partnerCost;
@@ -100,7 +107,7 @@ export function buildOrder(input: OrderInput, model: Model | null, customerId: s
     ...base,
     brand: model.brand,
     modelId: model.id,
-    modelName: model.name,
+    modelName,
     optionLabel,
     price,
     partnerCost,

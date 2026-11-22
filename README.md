@@ -51,10 +51,13 @@ REQUESTED(목록 밖 모델, 견적 필요) → PAYMENT_PENDING(입금 대기) �
 asbattery.com 배터리리필 메뉴의 공개 리필가(2026-11-21 조사)를 업체 원가로, **원가 + 20,000원**을 판매가로 넣었습니다.
 실제 협력 단가와 판매가가 정해지면 관리자 화면의 **모델·가격**에서 바꾸면 됩니다.
 
-JSON을 고친 뒤 Supabase용 SQL을 다시 만들려면:
+한 배터리 상품이 여러 모델에 맞으면(예: 로보락 S5~S8) `variants`에 개별 모델을 적어 두고, 고객 화면에는 모델마다 한 줄씩 보여 줍니다. 가격은 상품 하나에서 관리합니다. 모델 이름 정리는 `scripts/model-variants.mjs`에서 합니다.
+
+모델 정리나 JSON을 고친 뒤 Supabase용 SQL을 다시 만들려면:
 
 ```bash
-npm run seed:sql   # supabase/seed.sql 생성
+node scripts/apply-variants.mjs   # model-variants.mjs → src/data/models.json
+npm run seed:sql                  # supabase/seed.sql, migrations/0004_model_variants.sql 생성
 ```
 
 ## 로그인 방식
@@ -85,6 +88,8 @@ npm run seed:sql   # supabase/seed.sql 생성
 4. 새 쿼리에 `supabase/seed.sql` 내용을 붙여 넣고 **Run** (협력업체 4곳, 모델 191개)
 5. 왼쪽 **Table Editor**에서 `models` 표에 191줄이 보이면 성공
 
+> `supabase/migrations/0004_model_variants.sql`은 새로 만들 때도 실행해도 되고(아무 변화 없음), 11월 22일 전에 만든 DB에는 꼭 실행해야 합니다 (모델 나누기).
+>
 > `supabase/migrations/0003_price_margin_20000.sql`은 11월 22일 전에 이미 DB를 만든 경우에만 실행합니다 (판매가를 원가 + 30,000원 → + 20,000원으로 변경). 새로 만들 때는 `seed.sql`에 이미 반영돼 있어요.
 
 ### 3. 키 두 개 복사하기
