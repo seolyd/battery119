@@ -17,6 +17,12 @@
   --danger-soft: #fde4e4;
   --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --f-serif: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", serif;
+  /* 브랜드: 단지 간판 같은 브론즈 + 네이비 */
+  --bronze: #9a6a3a;
+  --bronze-soft: #f3e9dc;
+  --navy: #1c3148;
+  --brand-cream: #f6efe4;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -36,6 +42,10 @@
     --warn-soft: #3a2f17;
     --danger: #ff6b6b;
     --danger-soft: #3a1c1c;
+    --bronze: #b98a57;
+    --bronze-soft: #2c241b;
+    --navy: #dfe7f0;
+    --brand-cream: #fbf5ec;
     color-scheme: dark;
   }
 }
@@ -287,3 +297,65 @@ table.tbl { border-collapse: collapse; width: 100%; font-size: 14px; }
 .shell:has(.wizard) .tabbar { display: none; }
 
 .foot-btns { display: grid; grid-template-columns: 1fr 2.4fr; gap: 8px; }
+
+/* ---------- 브랜드 / 첫 화면 ---------- */
+.lockup { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.lockup-text { display: flex; flex-direction: column; line-height: 1.1; }
+.lockup-ko { font-family: var(--f-serif); font-weight: 700; font-size: 17px; color: var(--navy); letter-spacing: 0.02em; }
+.lockup-en { font-family: var(--f-serif); font-size: 11px; letter-spacing: 0.32em; color: var(--bronze); font-weight: 600; }
+.lockup-en b { color: var(--accent); letter-spacing: 0.12em; }
+.lockup.compact .lockup-ko { font-size: 15px; }
+.lockup.compact .lockup-en { font-size: 10px; }
+
+.brandbar {
+  position: sticky; top: 0; z-index: 10; background: var(--surface);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
+  border-bottom: 1px solid var(--line);
+}
+.brandbar-link { font-size: 14px; color: var(--muted); text-decoration: none; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; }
+
+.landing { flex: 1; display: flex; flex-direction: column; gap: 32px; padding: 16px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); }
+
+.hero2 {
+  background: linear-gradient(180deg, var(--bronze-soft), var(--surface));
+  border: 1px solid var(--line); border-radius: 20px;
+  padding: 28px 20px 22px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
+}
+.hero2-sign { margin-bottom: 4px; }
+.parkrio-official { width: 96px; height: auto; }
+.hero2-eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: 0.12em; color: var(--bronze); border: 1px solid var(--bronze); border-radius: 999px; padding: 4px 12px; }
+.hero2-title { font-family: var(--f-serif); font-size: clamp(26px, 7.4vw, 34px); font-weight: 800; color: var(--navy); line-height: 1.28; letter-spacing: -0.01em; }
+.hero2-body { font-size: 15.5px; color: var(--fg); max-width: 30ch; line-height: 1.65; }
+.tagline { font-family: var(--f-serif); font-size: 17px; font-weight: 700; color: var(--accent); margin-top: 4px; }
+.hero2-cta { display: grid; gap: 8px; width: 100%; margin-top: 6px; }
+.hero2-note { font-size: 12.5px; color: var(--muted); }
+
+.section { display: flex; flex-direction: column; gap: 12px; }
+.section-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--bronze); }
+.section-title { font-family: var(--f-serif); font-size: 21px; font-weight: 700; color: var(--navy); line-height: 1.35; }
+
+.benefits { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.benefit { border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; grid-template-columns: 40px 1fr; column-gap: 12px; row-gap: 2px; align-items: start; }
+.benefit-icon { grid-row: span 2; width: 40px; height: 40px; border-radius: 12px; background: var(--bronze-soft); color: var(--bronze); display: grid; place-items: center; }
+.benefit-icon svg { width: 22px; height: 22px; }
+.benefit b { font-size: 15.5px; color: var(--navy); }
+.benefit p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+.flow4 { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; counter-reset: f; }
+.flow4 li { counter-increment: f; position: relative; padding: 0 0 18px 44px; display: flex; flex-direction: column; gap: 2px; }
+.flow4 li::before {
+  content: counter(f); position: absolute; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--navy); color: var(--surface); font-family: var(--f-mono); font-weight: 600; font-size: 14px; display: grid; place-items: center;
+}
+.flow4 li::after { content: ""; position: absolute; left: 14px; top: 32px; bottom: 2px; border-left: 2px dotted var(--line); }
+.flow4 li:last-child { padding-bottom: 0; }
+.flow4 li:last-child::after { display: none; }
+.flow4 b { font-size: 15px; color: var(--navy); padding-top: 4px; }
+.flow4 span { font-size: 13.5px; color: var(--muted); }
+
+.landing-foot { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.landing-foot p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* 한국어는 단어 중간에서 줄을 바꾸지 않는다 */
+.landing, .content { word-break: keep-all; overflow-wrap: anywhere; }

@@ -22,7 +22,7 @@ export default async function Prices({ searchParams }: { searchParams: Promise<{
       <>
         <AppBar title={`${brand} 가격`} back={`/prices?kind=${kind}`} sub={CATEGORY_LABEL[kind]} />
         <main className="content">
-          <p className="lead">수거·배송, 품질검사, 3개월 보증이 포함된 가격이에요. 용량을 고를 수 있는 모델은 가장 낮은 가격을 보여 드려요.</p>
+          <p className="lead">수거·배송, 품질검사, 6~12개월 보증이 포함된 가격이에요. 용량을 고를 수 있는 모델은 가장 낮은 가격을 보여 드려요.</p>
           <div className="list">
             {models.map((m) => (
               <div key={m.id} className="item" style={{ cursor: "default" }}>
