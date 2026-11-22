@@ -19,12 +19,12 @@ interface Db {
   loginFailures: { ip: string; at: string }[];
 }
 
-type SeedModel = Omit<Model, "partnerId" | "active">;
+type SeedModel = Omit<Model, "partnerId" | "active"> & { active?: boolean };
 
 export function createMemoryDb(): Db {
   const models = new Map<string, Model>();
   for (const m of seedModels as SeedModel[]) {
-    models.set(m.id, { ...m, partnerId: DEMO_PARTNER_ID, active: true });
+    models.set(m.id, { ...m, variants: m.variants ?? [], partnerId: DEMO_PARTNER_ID, active: m.active ?? true });
   }
   return {
     customers: new Map(),

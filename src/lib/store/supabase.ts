@@ -25,6 +25,7 @@ const toModel = (r: Row): Model => ({
   category: r.category as Model["category"],
   brand: r.brand as string,
   name: r.name as string,
+  variants: (r.variants as string[]) ?? [],
   partnerId: (r.partner_id as string) ?? null,
   partnerCost: r.partner_cost as number,
   price: r.price as number,

@@ -285,3 +285,5 @@ table.tbl { border-collapse: collapse; width: 100%; font-size: 14px; }
 
 /* 신청 화면에서는 하단 탭 대신 신청 버튼을 고정한다 */
 .shell:has(.wizard) .tabbar { display: none; }
+
+.foot-btns { display: grid; grid-template-columns: 1fr 2.4fr; gap: 8px; }

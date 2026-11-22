@@ -41,6 +41,7 @@ create table models (
   category text not null check (category in ('cordless', 'robot')),
   brand text not null,
   name text not null,
+  variants text[] not null default '{}',        -- 이 배터리가 맞는 개별 모델들
   partner_id text references partners (id),
   partner_cost integer not null check (partner_cost >= 0),
   price integer not null check (price >= 0),

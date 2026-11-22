@@ -3,11 +3,13 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { encryptDoorCode } from "@/lib/crypto";
-import { buildOrder, RuleError, type OrderInput } from "@/lib/orderRules";
+import { buildOrder, RuleError, type OrderInput, type RuleField } from "@/lib/orderRules";
 import { getStore } from "@/lib/store";
 
 export interface SubmitResult {
   error?: string;
+  /** 고칠 단계 */
+  field?: RuleField;
 }
 
 /** 주소(동·호수)는 계정에서 가져온다. 공동현관 비밀번호는 새로 적었을 때만 바꾼다. */
@@ -22,8 +24,8 @@ export async function submitOrder(input: WizardInput): Promise<SubmitResult> {
 
   let orderId: string;
   try {
-    if (!doorCode && !customer.doorCodeEnc) throw new RuleError("공동현관 비밀번호를 적어 주세요.");
-    if (doorCode.length > 30) throw new RuleError("공동현관 비밀번호가 너무 길어요.");
+    if (!doorCode && !customer.doorCodeEnc) throw new RuleError("공동현관 비밀번호를 적어 주세요.", "pickup");
+    if (doorCode.length > 30) throw new RuleError("공동현관 비밀번호가 너무 길어요.", "pickup");
     const model = input.modelId ? await store.getModel(input.modelId) : null;
     if (input.modelId && !model) return { error: "모델 정보를 찾을 수 없어요. 처음부터 다시 골라 주세요." };
     const draft = buildOrder({ ...input, dong: customer.dong, ho: customer.ho }, model, customer.id);
@@ -35,7 +37,7 @@ export async function submitOrder(input: WizardInput): Promise<SubmitResult> {
     });
     orderId = order.id;
   } catch (e) {
-    if (e instanceof RuleError) return { error: e.message };
+    if (e instanceof RuleError) return { error: e.message, field: e.field };
     console.error("submitOrder failed", e);
     return { error: "신청을 저장하지 못했어요. 잠시 후 다시 시도해 주세요." };
   }

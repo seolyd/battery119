@@ -15,7 +15,7 @@ export default async function AdminModels({ searchParams }: { searchParams: Prom
   const brand = sp.brand && brands.includes(sp.brand) ? sp.brand : "";
   const q = (sp.q ?? "").trim().toLowerCase();
   const list = inKind
-    .filter((m) => (!brand || m.brand === brand) && (!q || m.name.toLowerCase().includes(q)))
+    .filter((m) => (!brand || m.brand === brand) && (!q || [m.name, ...m.variants].join(" ").toLowerCase().includes(q)))
     .sort((a, b) => a.brand.localeCompare(b.brand, "ko") || a.name.localeCompare(b.name, "ko", { numeric: true }));
 
   return (
@@ -75,6 +75,7 @@ export default async function AdminModels({ searchParams }: { searchParams: Prom
                     <td style={{ whiteSpace: "nowrap" }}>{m.brand}</td>
                     <td style={{ minWidth: 240 }}>
                       {m.name}
+                      {m.variants.length > 0 && <div className="small muted">{m.variants.join(", ")}</div>}
                       {m.sourceUrl && (
                         <>
                           {" "}

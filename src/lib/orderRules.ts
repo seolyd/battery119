@@ -10,11 +10,14 @@ import {
 } from "@/lib/domain";
 import { isDeliveryDay, pickupDateFor, type DateStr } from "@/lib/schedule";
 import type { NewOrder, OrderPatch } from "@/lib/store/types";
+import { isValidPhone, normalizePhone } from "@/lib/phone";
 
 export interface OrderInput {
   category: string;
   brand: string;
   modelId: string | null;
+  /** 여러 모델에 맞는 상품에서 고객이 고른 모델 이름 */
+  variant?: string | null;
   /** 목록에 없는 모델일 때 고객이 적은 모델명 */
   customModel: string | null;
   optionLabel: string | null;
@@ -27,16 +30,19 @@ export interface OrderInput {
   packagingAgreed: boolean;
 }
 
-export class RuleError extends Error {}
+/** 어느 신청 단계에서 고쳐야 하는지 알려 주면 화면이 그 단계로 보내 준다 */
+export type RuleField = "model" | "conditions" | "pickup";
 
-const PHONE = /^01[016789]-?\d{3,4}-?\d{4}$/;
-
-export function normalizePhone(p: string): string {
-  const d = p.replace(/\D/g, "");
-  if (d.length === 11) return `${d.slice(0, 3)}-${d.slice(3, 7)}-${d.slice(7)}`;
-  if (d.length === 10) return `${d.slice(0, 3)}-${d.slice(3, 6)}-${d.slice(6)}`;
-  return p.trim();
+export class RuleError extends Error {
+  constructor(
+    message: string,
+    public field?: RuleField,
+  ) {
+    super(message);
+  }
 }
+
+export { normalizePhone } from "@/lib/phone";
 
 /** 고객 입력을 확인하고 저장할 주문을 만든다. 가격은 항상 서버의 모델 정보로 다시 계산한다. */
 export function buildOrder(input: OrderInput, model: Model | null, customerId: string, now: Date = new Date()): NewOrder {
@@ -44,10 +50,10 @@ export function buildOrder(input: OrderInput, model: Model | null, customerId: s
   if (category !== "cordless" && category !== "robot") throw new RuleError("청소기 종류를 골라 주세요.");
   if (!/^\d{3}$/.test(input.dong)) throw new RuleError("동은 숫자 3자리로 적어 주세요.");
   if (!/^\d{3,4}$/.test(input.ho)) throw new RuleError("호는 숫자 3~4자리로 적어 주세요.");
-  if (!PHONE.test(input.phone.trim())) throw new RuleError("연락처를 010-1234-5678 형식으로 적어 주세요.");
-  if (!input.packagingAgreed) throw new RuleError("포장 안내에 동의해야 신청할 수 있어요.");
+  if (!isValidPhone(input.phone)) throw new RuleError("연락처를 010-1234-5678처럼 휴대폰 번호로 적어 주세요.", "pickup");
+  if (!input.packagingAgreed) throw new RuleError("포장 안내에 동의해야 신청할 수 있어요.", "pickup");
   const symptoms = input.symptoms.filter((s) => (SYMPTOMS as readonly string[]).includes(s));
-  if (!symptoms.length) throw new RuleError("증상을 하나 이상 골라 주세요.");
+  if (!symptoms.length) throw new RuleError("증상을 하나 이상 골라 주세요.", "conditions");
   const usageAge = input.usageAge && (USAGE_AGES as readonly string[]).includes(input.usageAge) ? input.usageAge : null;
   const memo = input.memo?.trim().slice(0, 500) || null;
 
@@ -65,8 +71,8 @@ export function buildOrder(input: OrderInput, model: Model | null, customerId: s
 
   if (!model) {
     const name = input.customModel?.trim();
-    if (!name) throw new RuleError("모델명을 적어 주세요. 모르면 '모름'이라고 적어도 돼요.");
-    if (!input.brand.trim()) throw new RuleError("제조사를 적어 주세요.");
+    if (!name) throw new RuleError("모델명을 적어 주세요. 모르면 '모름'이라고 적어도 돼요.", "model");
+    if (!input.brand.trim()) throw new RuleError("제조사를 적어 주세요.", "model");
     return {
       ...base,
       brand: input.brand.trim().slice(0, 40),
@@ -80,14 +86,19 @@ export function buildOrder(input: OrderInput, model: Model | null, customerId: s
     };
   }
 
-  if (!model.active) throw new RuleError("지금은 접수하지 않는 모델이에요.");
+  if (!model.active) throw new RuleError("지금은 접수하지 않는 모델이에요.", "model");
+  let modelName = model.name;
+  if (model.variants.length) {
+    if (!input.variant || !model.variants.includes(input.variant)) throw new RuleError("모델을 다시 골라 주세요.", "model");
+    modelName = input.variant;
+  }
   if (model.category !== category) throw new RuleError("청소기 종류와 모델이 맞지 않아요.");
   let price = model.price;
   let partnerCost = model.partnerCost;
   let optionLabel: string | null = null;
   if (model.options.length) {
     const opt = model.options.find((o) => o.label === input.optionLabel) ?? null;
-    if (!opt) throw new RuleError("배터리 용량을 골라 주세요.");
+    if (!opt) throw new RuleError("배터리 용량을 골라 주세요.", "conditions");
     price = opt.price;
     partnerCost = opt.partnerCost;
     optionLabel = opt.label;
@@ -96,7 +107,7 @@ export function buildOrder(input: OrderInput, model: Model | null, customerId: s
     ...base,
     brand: model.brand,
     modelId: model.id,
-    modelName: model.name,
+    modelName,
     optionLabel,
     price,
     partnerCost,

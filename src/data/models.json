@@ -8,29 +8,39 @@
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735105"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735105",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-119295",
   "category": "cordless",
   "brand": "LG",
-  "name": "코드제로 핸디스틱 터보 무선청소기 리튬이온 18V [EAC62258405, EAC62258401 EAC63341001]",
+  "name": "코드제로 핸디스틱 터보 (18V)",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119295"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119295",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-120334",
   "category": "cordless",
   "brand": "LG",
-  "name": "코드제로 A9, A9S, P9 무선청소기 리튬이온 25.55V [EAC63382201, [EAC63382202, EAC63382204, EAC63382205, EAC63758601, EBZ64298801]",
+  "name": "코드제로 A9 / A9S / P9",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120334"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120334",
+  "variants": [
+   "코드제로 A9",
+   "코드제로 A9S",
+   "코드제로 P9"
+  ],
+  "active": true
  },
  {
   "id": "cordless-737939",
@@ -41,7 +51,9 @@
   "price": 200000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=737939"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=737939",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-736342",
@@ -52,13 +64,15 @@
   "price": 200000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736342"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736342",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-721292",
   "category": "cordless",
   "brand": "NHN위투",
-  "name": "라이프썸 LFS-HA17 [NHNWETOO]",
+  "name": "라이프썸 LFS-HA17",
   "partnerCost": 20000,
   "price": 40000,
   "options": [
@@ -79,150 +93,217 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721292"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721292",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-119933",
   "category": "cordless",
   "brand": "SK매직",
-  "name": "싸이클론 투인원 VCL-DA10, VCL-D100",
+  "name": "싸이클론 투인원",
   "partnerCost": 55000,
   "price": 75000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119933"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119933",
+  "variants": [
+   "싸이클론 투인원 VCL-DA10",
+   "싸이클론 투인원 VCL-D100"
+  ],
+  "active": true
  },
  {
   "id": "cordless-111204",
   "category": "cordless",
   "brand": "다이슨",
-  "name": "무선청소기 micro SV21",
+  "name": "마이크로 1.5kg (SV21)",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-111204-1",
   "category": "cordless",
   "brand": "다이슨",
-  "name": "무선청소기 V2 [DC16 31 33 34 35 43 44 45 48 52]",
+  "name": "DC 시리즈 (DC16·DC31~DC52)",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204",
+  "variants": [
+   "DC16",
+   "DC31",
+   "DC33",
+   "DC34",
+   "DC35",
+   "DC43",
+   "DC44",
+   "DC45",
+   "DC48",
+   "DC52"
+  ],
+  "active": true
  },
  {
   "id": "cordless-111204-2",
   "category": "cordless",
   "brand": "다이슨",
-  "name": "무선청소기 V6 [DC58 59 61 62 74]",
+  "name": "V6 (DC58·DC59·DC61·DC62·DC74)",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": 25000,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204",
+  "variants": [
+   "V6",
+   "DC58",
+   "DC59",
+   "DC61",
+   "DC62",
+   "DC74"
+  ],
+  "active": true
  },
  {
   "id": "cordless-111204-3",
   "category": "cordless",
   "brand": "다이슨",
-  "name": "무선청소기 V10 silm (SV18)",
+  "name": "V10 슬림 (SV18)",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-111204-4",
   "category": "cordless",
   "brand": "다이슨",
-  "name": "무선청소기 V7 (SV11)",
+  "name": "V7 (SV11)",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-111204-5",
   "category": "cordless",
   "brand": "다이슨",
-  "name": "무선청소기 V10 (SV12)",
+  "name": "V10 (SV12)",
   "partnerCost": 70000,
   "price": 90000,
   "options": [],
   "protectCircuitFee": 25000,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-111204-6",
   "category": "cordless",
   "brand": "다이슨",
-  "name": "무선청소기 V8 (SV10)",
+  "name": "V8 (SV10)",
   "partnerCost": 80000,
   "price": 100000,
   "options": [],
   "protectCircuitFee": 25000,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-111204-7",
   "category": "cordless",
   "brand": "다이슨",
-  "name": "무선청소기 V11 (SV14 SV15 SV17 SV28)",
+  "name": "V11 (SV14·SV15·SV17·SV28)",
   "partnerCost": 90000,
   "price": 110000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-111204-8",
   "category": "cordless",
   "brand": "다이슨",
-  "name": "무선청소기 V12 (SV20 SV34 SV35 SV44 SV46)",
+  "name": "V12 (SV20·SV34·SV35·SV44·SV46)",
   "partnerCost": 90000,
   "price": 110000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-111204-9",
   "category": "cordless",
   "brand": "다이슨",
-  "name": "무선청소기 V15 (SV22 SV28 SV29)",
+  "name": "V15 (SV22·SV28·SV29)",
   "partnerCost": 90000,
   "price": 110000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111204",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-120984",
   "category": "cordless",
   "brand": "디베아",
-  "name": "DW200 Pro, M500 Pro, D008 Pro, V008 Pro, ECO19 Pro",
+  "name": "Pro 시리즈",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120984"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120984",
+  "variants": [
+   "DW200 Pro",
+   "M500 Pro",
+   "D008 Pro",
+   "V008 Pro",
+   "ECO19 Pro"
+  ],
+  "active": true
  },
  {
   "id": "cordless-119925",
   "category": "cordless",
   "brand": "디베아",
-  "name": "C17, D18, C19B, Z10pro, D250 MAX, NEW X10, NEW X10 Plus, NEW X20 ALLNEW12000 ALLNEW22000, PDK-12000N",
+  "name": "C17 / D18 / X10 / X20 등",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119925"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119925",
+  "variants": [
+   "C17",
+   "D18",
+   "C19B",
+   "Z10 Pro",
+   "D250 MAX",
+   "NEW X10",
+   "NEW X10 Plus",
+   "NEW X20",
+   "ALLNEW12000",
+   "ALLNEW22000",
+   "PDK-12000N"
+  ],
+  "active": true
  },
  {
   "id": "cordless-724798",
@@ -233,40 +314,55 @@
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=724798"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=724798",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-721062",
   "category": "cordless",
   "brand": "디베아",
-  "name": "M500 퀀텀 무선청소기 150% UP [Dibea M500 QUANTUM]",
+  "name": "M500 퀀텀",
   "partnerCost": 70000,
   "price": 90000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721062"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721062",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-720790",
   "category": "cordless",
   "brand": "디베아",
-  "name": "NEW F20 MAX, TSX-2500A, X30 [Dibea]",
+  "name": "F20 MAX / TSX-2500A / X30",
   "partnerCost": 70000,
   "price": 90000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720790"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720790",
+  "variants": [
+   "NEW F20 MAX",
+   "TSX-2500A",
+   "X30"
+  ],
+  "active": true
  },
  {
   "id": "cordless-734703",
   "category": "cordless",
   "brand": "레이캅",
-  "name": "RSC-100 / 300 청소기 RSC-BA [Raycop RSC-BA]",
+  "name": "RSC-100 / RSC-300",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734703"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734703",
+  "variants": [
+   "RSC-100",
+   "RSC-300"
+  ],
+  "active": true
  },
  {
   "id": "cordless-119931",
@@ -277,194 +373,251 @@
   "price": 40000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119931"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119931",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-724832",
   "category": "cordless",
   "brand": "벤투스",
-  "name": "아쿠아 슈퍼",
+  "name": "벤투스 아쿠아 슈퍼",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=724832"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=724832",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-734457",
   "category": "cordless",
   "brand": "벤투스아쿠아",
-  "name": "드라이 무선청소기 VENTUS AQUA DRY [좋은생활지웰]",
+  "name": "벤투스 아쿠아 드라이",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734457"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734457",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-121123",
   "category": "cordless",
   "brand": "벤투스아쿠아",
-  "name": "프로, 아쿠아 맥스 [좋은생활지웰]",
+  "name": "벤투스 아쿠아 프로 / 맥스",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121123"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121123",
+  "variants": [
+   "벤투스 아쿠아 프로",
+   "벤투스 아쿠아 맥스"
+  ],
+  "active": true
  },
  {
   "id": "cordless-722974",
   "category": "cordless",
   "brand": "보아스",
-  "name": "프리미엄 BLDC VO1000PG, VD-603, VO802R [Voaas]",
+  "name": "프리미엄 BLDC",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722974"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722974",
+  "variants": [
+   "VO1000PG",
+   "VD-603",
+   "VO802R"
+  ],
+  "active": true
  },
  {
   "id": "cordless-116950",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "DV6010 asbattery 2.0Ah (중국)",
+  "name": "DV6010",
   "partnerCost": 12000,
   "price": 32000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=116950"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=116950",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-116950-1",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "DV7210 asbattery 2.0Ah (중국)",
+  "name": "DV7210",
   "partnerCost": 12000,
   "price": 32000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=116950"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=116950",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-87535",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "무선청소기 CV-7205",
+  "name": "CV-7205",
   "partnerCost": 12000,
   "price": 32000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87535"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87535",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-116950-2",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "DV9610 asbattery 2.0Ah (중국)",
+  "name": "DV9610",
   "partnerCost": 16000,
   "price": 36000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=116950"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=116950",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-87539",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "핸디형 청소기 CV-9605",
+  "name": "CV-9605 핸디",
   "partnerCost": 16000,
   "price": 36000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87539"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87539",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-116950-3",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "DV1210 asbattery 2.0Ah (중국)",
+  "name": "DV1210",
   "partnerCost": 20000,
   "price": 40000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=116950"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=116950",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-90157",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "무선청소기 배터리 Black & Decker FV1205, FV1210P",
+  "name": "FV1205 / FV1210P",
   "partnerCost": 20000,
   "price": 40000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=90157"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=90157",
+  "variants": [
+   "FV1205",
+   "FV1210P"
+  ],
+  "active": true
  },
  {
   "id": "cordless-113253",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "무선청소기 PD1200B, PV1210, PV1220",
+  "name": "PD1200B / PV1210 / PV1220",
   "partnerCost": 20000,
   "price": 40000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113253"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113253",
+  "variants": [
+   "PD1200B",
+   "PV1210",
+   "PV1220"
+  ],
+  "active": true
  },
  {
   "id": "cordless-736598",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "펠리컨 HLVC320B 무선 핸디형 [Black&Decker Precision)",
+  "name": "펠리컨 HLVC320B",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736598"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736598",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-734865",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "DVC320B01, DVC320B21, DVC320B24 슬림 무선 핸디 [BLACK+DECKER]",
+  "name": "DVC320B 슬림 핸디",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734865"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734865",
+  "variants": [
+   "DVC320B01",
+   "DVC320B21",
+   "DVC320B24"
+  ],
+  "active": true
  },
  {
   "id": "cordless-120907",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "코끼리코 무선 핸디 청소기 PDB315JB, NSVA315J",
+  "name": "코끼리코 PDB315JB / NSVA315J",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120907"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120907",
+  "variants": [
+   "코끼리코 PDB315JB",
+   "코끼리코 NSVA315J"
+  ],
+  "active": true
  },
  {
   "id": "cordless-120005",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "무선청소기 PV1020",
+  "name": "PV1020",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120005"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120005",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-119540",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "무선청소기 DVJ315B",
+  "name": "DVJ315B",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119540"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119540",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-119353",
@@ -475,194 +628,258 @@
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119353"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119353",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-726610",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "CHV1410L Dustbuster 16V 리튬 핸드 (BLACK+DECKER)",
+  "name": "더스트버스터 CHV1410L (16V)",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=726610"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=726610",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-119449",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "BDH1620FLFH, PD1420B (Black&Decker)",
+  "name": "BDH1620FLFH / PD1420B",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119449"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119449",
+  "variants": [
+   "BDH1620FLFH",
+   "PD1420B"
+  ],
+  "active": true
  },
  {
   "id": "cordless-118460",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "PV1420C 호루라기 (Black&Decker)",
+  "name": "호루라기 PV1420C",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=118460"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=118460",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-118147",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "PV1810 PV1820C PV1820BK PV1820CEXT TPV1820RAC BDH2000PL BDH2020FL (Black&Decker)",
+  "name": "PV1810 / PV1820 / BDH2000PL 등",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=118147"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=118147",
+  "variants": [
+   "PV1810",
+   "PV1820C",
+   "PV1820BK",
+   "PV1820CEXT",
+   "TPV1820RAC",
+   "BDH2000PL",
+   "BDH2020FL"
+  ],
+  "active": true
  },
  {
   "id": "cordless-735268",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "BDH2000L 20V 리튬 핸드",
+  "name": "BDH2000L (20V)",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735268"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735268",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-120988",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "CS1830B 스마트 터치 (BLACK+DECKER)",
+  "name": "스마트 터치 CS1830B",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120988"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120988",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-120735",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "SVA520B, SVJ520BFSP 듀얼스틱 18V",
+  "name": "듀얼스틱 SVA520B / SVJ520BFSP",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120735"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120735",
+  "variants": [
+   "SVA520B",
+   "SVJ520BFSP"
+  ],
+  "active": true
  },
  {
   "id": "cordless-119808",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "무선청소기 PD1810BEXT, TPD1810BGEXT",
+  "name": "PD1810BEXT / TPD1810BGEXT",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119808"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119808",
+  "variants": [
+   "PD1810BEXT",
+   "TPD1810BGEXT"
+  ],
+  "active": true
  },
  {
   "id": "cordless-736763",
   "category": "cordless",
   "brand": "블랙앤데커",
-  "name": "20V 무선청소기 BHHV520BF00, BHHV520BFP07",
+  "name": "20V BHHV520BF00 / BHHV520BFP07",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736763"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736763",
+  "variants": [
+   "BHHV520BF00",
+   "BHHV520BFP07"
+  ],
+  "active": true
  },
  {
   "id": "cordless-120896",
   "category": "cordless",
   "brand": "삼성",
-  "name": "핸디 청소기 VC-LSH62",
+  "name": "핸디 VC-LSH62",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120896"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120896",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-89363",
   "category": "cordless",
   "brand": "삼성",
-  "name": "무선청소기 2in1 무선 핸디스틱형 청소기 VC-LSS90, VC-LSS91, VC-LSS92, VC-LSS93",
+  "name": "2in1 핸디스틱 VC-LSS90~93",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89363"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89363",
+  "variants": [
+   "VC-LSS90",
+   "VC-LSS91",
+   "VC-LSS92",
+   "VC-LSS93"
+  ],
+  "active": true
  },
  {
   "id": "cordless-119928",
   "category": "cordless",
   "brand": "삼성",
-  "name": "파워스틱 [VCA-SBT60, VCA-SBT65]",
+  "name": "파워스틱 (VCA-SBT60·SBT65)",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119928"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119928",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-719644",
   "category": "cordless",
   "brand": "삼성",
-  "name": "제트 200W용 VCA-SBT90ES, VCA-SBT90EB",
+  "name": "제트 200W (VCA-SBT90ES·SBT90EB)",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=719644"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=719644",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-719645",
   "category": "cordless",
   "brand": "삼성",
-  "name": "제트 150W용 VCA-SBT90E",
+  "name": "제트 150W (VCA-SBT90E)",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=719645"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=719645",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-719643",
   "category": "cordless",
   "brand": "삼성",
-  "name": "제트 200W용 VCA-SBT90",
+  "name": "제트 200W (VCA-SBT90)",
   "partnerCost": 80000,
   "price": 100000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=719643"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=719643",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-120676",
   "category": "cordless",
   "brand": "삼성",
-  "name": "파워건 130W, 150W, [VCA-SBT80, DJ96-00214A]",
+  "name": "파워건 130W / 150W (VCA-SBT80)",
   "partnerCost": 90000,
   "price": 110000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120676"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120676",
+  "variants": [
+   "파워건 130W",
+   "파워건 150W"
+  ],
+  "active": true
  },
  {
   "id": "cordless-734320",
   "category": "cordless",
   "brand": "샤오미",
-  "name": "미지아 차량용 미니 [SSXCQ01XY]",
+  "name": "미지아 차량용 미니 (SSXCQ01XY)",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734320"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734320",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-722849",
@@ -673,62 +890,88 @@
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722849"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722849",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-121129",
   "category": "cordless",
   "brand": "샤오미",
-  "name": "Trouver Tech solo10",
+  "name": "Trouver Solo 10",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121129"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121129",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-120987",
   "category": "cordless",
   "brand": "샤오미",
-  "name": "미지아 SCWXCQ01RR [MIJIA]",
+  "name": "미지아 SCWXCQ01RR",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120987"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120987",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-121139",
   "category": "cordless",
   "brand": "샤오미",
-  "name": "TROUVER POWER 11, 12",
+  "name": "Trouver Power 11 / 12",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121139"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121139",
+  "variants": [
+   "Trouver Power 11",
+   "Trouver Power 12"
+  ],
+  "active": true
  },
  {
   "id": "cordless-121133",
   "category": "cordless",
   "brand": "샤오미",
-  "name": "미지아 K10, K10 pro [Xiaomi Mijia]",
+  "name": "미지아 K10 / K10 Pro",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121133"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121133",
+  "variants": [
+   "미지아 K10",
+   "미지아 K10 Pro"
+  ],
+  "active": true
  },
  {
   "id": "cordless-120147",
   "category": "cordless",
   "brand": "샤오미",
-  "name": "드리미 V8, V9, V10, V11, V11 es, V12, T20 (dreame)",
+  "name": "드리미 V8~V12, T20",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120147"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120147",
+  "variants": [
+   "드리미 V8",
+   "드리미 V9",
+   "드리미 V10",
+   "드리미 V11",
+   "드리미 V11 SE",
+   "드리미 V12",
+   "드리미 T20"
+  ],
+  "active": true
  },
  {
   "id": "cordless-121124",
@@ -739,18 +982,22 @@
   "price": 100000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121124"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121124",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-736687",
   "category": "cordless",
   "brand": "샤크",
-  "name": "에보 파워 플러스 WV250KR2 핸디",
+  "name": "에보 파워 플러스 WV250KR2",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736687"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736687",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-735346",
@@ -761,7 +1008,9 @@
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735346"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735346",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-735347",
@@ -772,7 +1021,9 @@
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735347"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735347",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-737602",
@@ -783,7 +1034,9 @@
   "price": 45000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=737602"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=737602",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-736445",
@@ -794,84 +1047,114 @@
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736445"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736445",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-729211",
   "category": "cordless",
   "brand": "아이닉",
-  "name": "무선청소기 i30 아이타워 [inic i30 i-Tower]",
+  "name": "i30 아이타워",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729211"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729211",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-729210",
   "category": "cordless",
   "brand": "아이닉",
-  "name": "i20, NEW i20, 엘리트 [inic]",
+  "name": "i20 / NEW i20 / 엘리트",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729210"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729210",
+  "variants": [
+   "i20",
+   "NEW i20",
+   "엘리트"
+  ],
+  "active": true
  },
  {
   "id": "cordless-727934",
   "category": "cordless",
   "brand": "아이룸",
-  "name": "iRoom D10, AST-009 PLUS, AST-009 MEGA [iRoom]",
+  "name": "D10 / AST-009",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=727934"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=727934",
+  "variants": [
+   "D10",
+   "AST-009 PLUS",
+   "AST-009 MEGA"
+  ],
+  "active": true
  },
  {
   "id": "cordless-730568",
   "category": "cordless",
   "brand": "아이룸",
-  "name": "iRoom Wind Force F9, KHAN A15 [iRoom]",
+  "name": "윈드포스 F9 / 칸 A15",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=730568"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=730568",
+  "variants": [
+   "윈드포스 F9",
+   "칸 A15"
+  ],
+  "active": true
  },
  {
   "id": "cordless-87532",
   "category": "cordless",
   "brand": "에이스",
-  "name": "싹쓰 무선청소기 AVC-800RCK, 551S 용",
+  "name": "싹쓰 AVC-800RCK / 551S",
   "partnerCost": 10000,
   "price": 30000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87532"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87532",
+  "variants": [
+   "싹쓰 AVC-800RCK",
+   "싹쓰 551S"
+  ],
+  "active": true
  },
  {
   "id": "cordless-738184",
   "category": "cordless",
   "brand": "오토모",
-  "name": "오토모 A33 더스트컷",
+  "name": "A33 더스트컷",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=738184"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=738184",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-111101",
   "category": "cordless",
   "brand": "유로플렉스",
-  "name": "유로플렉스(euroflex) CS192",
+  "name": "CS192",
   "partnerCost": 56000,
   "price": 76000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111101"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111101",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-737706",
@@ -882,51 +1165,65 @@
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=737706"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=737706",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-119574",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "무선청소기 ZB4104 [ZB4104]",
+  "name": "ZB4104",
   "partnerCost": 12000,
   "price": 32000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119574"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119574",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-118269",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "무선청소기 ZB5104",
+  "name": "ZB5104",
   "partnerCost": 16000,
   "price": 36000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=118269"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=118269",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-113164",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "라피도 무선청소기 2in1 ZB406, ZB4106, ZB5106",
+  "name": "라피도 2in1 ZB406 / ZB4106 / ZB5106",
   "partnerCost": 25000,
   "price": 45000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113164"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113164",
+  "variants": [
+   "라피도 ZB406",
+   "라피도 ZB4106",
+   "라피도 ZB5106"
+  ],
+  "active": true
  },
  {
   "id": "cordless-120592",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "라피도 무선청소기 ZB6106",
+  "name": "라피도 ZB6106",
   "partnerCost": 25000,
   "price": 45000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120592"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120592",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-729341",
@@ -937,370 +1234,558 @@
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729341"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729341",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-119927",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "라피도 무선청소기 ZB6108 [ZB6108]",
+  "name": "라피도 ZB6108",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119927"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119927",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-119357",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "라피도 무선청소기 ZB5108 [ZB5108]",
+  "name": "라피도 ZB5108",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119357"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119357",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-115097",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 무선청소기 ZB3101 ZB3102 ZB3103",
+  "name": "에르고라피도 ZB3101~3103",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=115097"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=115097",
+  "variants": [
+   "에르고라피도 ZB3101",
+   "에르고라피도 ZB3102",
+   "에르고라피도 ZB3103"
+  ],
+  "active": true
  },
  {
   "id": "cordless-88473",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "라피도 무선청소기 2in1 ZB271, ZB406, ZB408, ZB4108",
+  "name": "라피도 2in1 ZB271 / ZB408 / ZB4108",
   "partnerCost": 35000,
   "price": 55000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=88473"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=88473",
+  "variants": [
+   "라피도 ZB271",
+   "라피도 ZB408",
+   "라피도 ZB4108"
+  ],
+  "active": true
  },
  {
   "id": "cordless-89361",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "무선청소기 유니라피도 ZB2802, ZB2803",
+  "name": "유니라피도 ZB2802 / ZB2803",
   "partnerCost": 35000,
   "price": 55000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89361"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89361",
+  "variants": [
+   "유니라피도 ZB2802",
+   "유니라피도 ZB2803"
+  ],
+  "active": true
  },
  {
   "id": "cordless-720767",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 ZB3501EB ZB3501WR ZB3502IGA",
+  "name": "에르고라피도 ZB3501 / ZB3502",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720767"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720767",
+  "variants": [
+   "에르고라피도 ZB3501EB",
+   "에르고라피도 ZB3501WR",
+   "에르고라피도 ZB3502IGA"
+  ],
+  "active": true
  },
  {
   "id": "cordless-87543",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 무선청소기 ZB2811, ZB2812,ZB2813, ZB2815, ZB2820, ZB2821, ZB2901, ZB2902, ZB2903, ZB2905, ZB2933, ZB2934",
+  "name": "에르고라피도 ZB28xx / ZB29xx",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87543"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87543",
+  "variants": [
+   "에르고라피도 ZB2811",
+   "에르고라피도 ZB2812",
+   "에르고라피도 ZB2813",
+   "에르고라피도 ZB2815",
+   "에르고라피도 ZB2820",
+   "에르고라피도 ZB2821",
+   "에르고라피도 ZB2901",
+   "에르고라피도 ZB2902",
+   "에르고라피도 ZB2903",
+   "에르고라피도 ZB2905",
+   "에르고라피도 ZB2933",
+   "에르고라피도 ZB2934"
+  ],
+  "active": true
  },
  {
   "id": "cordless-119848",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 무선청소기 ZB3301, ZB3302",
+  "name": "에르고라피도 ZB3301 / ZB3302",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119848"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119848",
+  "variants": [
+   "에르고라피도 ZB3301",
+   "에르고라피도 ZB3302"
+  ],
+  "active": true
  },
  {
   "id": "cordless-115083",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 무선청소기 ZB6114 ZB3104 ZB3105 ZB3106 ZB3107",
+  "name": "에르고라피도 ZB3104~3107, ZB6114",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=115083"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=115083",
+  "variants": [
+   "에르고라피도 ZB3104",
+   "에르고라피도 ZB3105",
+   "에르고라피도 ZB3106",
+   "에르고라피도 ZB3107",
+   "에르고라피도 ZB6114"
+  ],
+  "active": true
  },
  {
   "id": "cordless-87401",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 ZB2902 [ZB2902 밧데리 리필]",
+  "name": "에르고라피도 ZB2902 (중복)",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87401"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87401",
+  "variants": [],
+  "active": false
  },
  {
   "id": "cordless-87400",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 2in1 ZB2811 [ZB2812,ZB2901, ZB2903, 밧데리 리필]",
+  "name": "에르고라피도 2in1 ZB2811 (중복)",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87400"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87400",
+  "variants": [],
+  "active": false
  },
  {
   "id": "cordless-119275",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 무선청소기 ZB3230, ZB3233, ZB3235",
+  "name": "에르고라피도 ZB3230~3235",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119275"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119275",
+  "variants": [
+   "에르고라피도 ZB3230",
+   "에르고라피도 ZB3233",
+   "에르고라피도 ZB3235"
+  ],
+  "active": true
  },
  {
   "id": "cordless-730526",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "라피도 ZB6218STM 핸디 [ZB6218]",
+  "name": "라피도 ZB6218STM 핸디",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=730526"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=730526",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-121126",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 ZB3511, ZB3512, ZB3515",
+  "name": "에르고라피도 ZB3511~3515",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121126"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121126",
+  "variants": [
+   "에르고라피도 ZB3511",
+   "에르고라피도 ZB3512",
+   "에르고라피도 ZB3515"
+  ],
+  "active": true
  },
  {
   "id": "cordless-120742",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 베드프로 ZB3411 ZB3414 ZB3416 ZB3423 ZB3424 ZB3426",
+  "name": "에르고라피도 베드프로 ZB34xx",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120742"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120742",
+  "variants": [
+   "베드프로 ZB3411",
+   "베드프로 ZB3414",
+   "베드프로 ZB3416",
+   "베드프로 ZB3423",
+   "베드프로 ZB3424",
+   "베드프로 ZB3426"
+  ],
+  "active": true
  },
  {
   "id": "cordless-120116",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 무선청소기 ZB3311, ZB3314, ZB3316, ZB3320, ZB3323, ZB3324, ZB3325",
+  "name": "에르고라피도 ZB3311~3325",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120116"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120116",
+  "variants": [
+   "에르고라피도 ZB3311",
+   "에르고라피도 ZB3314",
+   "에르고라피도 ZB3316",
+   "에르고라피도 ZB3320",
+   "에르고라피도 ZB3323",
+   "에르고라피도 ZB3324",
+   "에르고라피도 ZB3325"
+  ],
+  "active": true
  },
  {
   "id": "cordless-115012",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 무선청소기 ZB3111, ZB3112, ZB3113, ZB3114",
+  "name": "에르고라피도 ZB3111~3114",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=115012"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=115012",
+  "variants": [
+   "에르고라피도 ZB3111",
+   "에르고라피도 ZB3112",
+   "에르고라피도 ZB3113",
+   "에르고라피도 ZB3114"
+  ],
+  "active": true
  },
  {
   "id": "cordless-87403",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도플러스 2in1 (핸디+스틱) ZB2904X, ZB2904C [Electrolux 18V 리튬이온 밧데리 리필]",
+  "name": "에르고라피도 플러스 2in1 ZB2904X / ZB2904C",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87403"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87403",
+  "variants": [
+   "에르고라피도 플러스 ZB2904X",
+   "에르고라피도 플러스 ZB2904C"
+  ],
+  "active": true
  },
  {
   "id": "cordless-111909",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 무선청소기 ZB3010, ZB3011, ZB3012, ZB3013",
+  "name": "에르고라피도 ZB3010~3013",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111909"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=111909",
+  "variants": [
+   "에르고라피도 ZB3010",
+   "에르고라피도 ZB3011",
+   "에르고라피도 ZB3012",
+   "에르고라피도 ZB3013"
+  ],
+  "active": true
  },
  {
   "id": "cordless-89923",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "에르고라피도 무선청소기 ZB3002 ZB3003 ZB3004 ZB3006",
+  "name": "에르고라피도 ZB3002~3006",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89923"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89923",
+  "variants": [
+   "에르고라피도 ZB3002",
+   "에르고라피도 ZB3003",
+   "에르고라피도 ZB3004",
+   "에르고라피도 ZB3006"
+  ],
+  "active": true
  },
  {
   "id": "cordless-736629",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "500 라이트 [EFP52212DB]",
+  "name": "500 라이트 (EFP52212DB)",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736629"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=736629",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-121127",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "Well Q6 [WQ61-1PSH, WQ61-1EDB, WQ61-1EDBF, WQ61-1OGG]",
+  "name": "Well Q6",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121127"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121127",
+  "variants": [
+   "Well Q6 WQ61-1PSH",
+   "Well Q6 WQ61-1EDB",
+   "Well Q6 WQ61-1EDBF",
+   "Well Q6 WQ61-1OGG"
+  ],
+  "active": true
  },
  {
   "id": "cordless-119360",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "무선청소기 울트라파워 ZB5021",
+  "name": "울트라파워 ZB5021",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119360"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119360",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-99472",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "무선청소기 울트라파워 ZB5010 18V",
+  "name": "울트라파워 ZB5010",
   "partnerCost": 52500,
   "price": 72500,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=99472"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=99472",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-729817",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "얼티밋홈 700 라이트 무선청소기 ZE167 (14.4V 5000mAh)[EFP71512, EFP71522, EFP71523]",
+  "name": "얼티밋홈 700 라이트 ZE167",
   "partnerCost": 55000,
   "price": 75000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729817"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729817",
+  "variants": [
+   "얼티밋홈 700 EFP71512",
+   "얼티밋홈 700 EFP71522",
+   "얼티밋홈 700 EFP71523"
+  ],
+  "active": true
  },
  {
   "id": "cordless-121136",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "퓨어 Q9 [PQ91-2OG, PQ92-2OGF]",
+  "name": "퓨어 Q9 (PQ91-2OG · PQ92-2OGF)",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121136"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121136",
+  "variants": [
+   "퓨어 Q9 PQ91-2OG",
+   "퓨어 Q9 PQ92-2OGF"
+  ],
+  "active": true
  },
  {
   "id": "cordless-121128",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "Well Q7 [WQ71-2PSSF, WQ71-2BSWF, WQ71-2ESSF, WQ71-2OIB, WQ71-2OIBF]",
+  "name": "Well Q7",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121128"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121128",
+  "variants": [
+   "Well Q7 WQ71-2PSSF",
+   "Well Q7 WQ71-2BSWF",
+   "Well Q7 WQ71-2ESSF",
+   "Well Q7 WQ71-2OIB",
+   "Well Q7 WQ71-2OIBF"
+  ],
+  "active": true
  },
  {
   "id": "cordless-89448",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "무선청소기 울트라파워 플러스 ZB5012 ZB5022",
+  "name": "울트라파워 플러스 ZB5012 / ZB5022",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89448"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89448",
+  "variants": [
+   "울트라파워 플러스 ZB5012",
+   "울트라파워 플러스 ZB5022"
+  ],
+  "active": true
  },
  {
   "id": "cordless-729818",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "얼티밋홈 900 엑스트라 ZE150 25.2V [EFP91813, EFP91814, EFP91814WH, EFP91824BU, EFP91824BR, EFP91825, EFP91835, EFP91822]",
+  "name": "얼티밋홈 900 엑스트라 ZE150",
   "partnerCost": 70000,
   "price": 90000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729818"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729818",
+  "variants": [
+   "얼티밋홈 900 EFP91813",
+   "얼티밋홈 900 EFP91814",
+   "얼티밋홈 900 EFP91814WH",
+   "얼티밋홈 900 EFP91822",
+   "얼티밋홈 900 EFP91824BU",
+   "얼티밋홈 900 EFP91824BR",
+   "얼티밋홈 900 EFP91825",
+   "얼티밋홈 900 EFP91835"
+  ],
+  "active": true
  },
  {
   "id": "cordless-722344",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "WELL Q8 WQ81-3PSGF, WQ81-3BSWF, WQ81-3OMBF",
+  "name": "Well Q8",
   "partnerCost": 70000,
   "price": 90000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722344"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722344",
+  "variants": [
+   "Well Q8 WQ81-3PSGF",
+   "Well Q8 WQ81-3BSWF",
+   "Well Q8 WQ81-3OMBF"
+  ],
+  "active": true
  },
  {
   "id": "cordless-721826",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "퓨어 Q9 [PQ92-3OBF, PQ92-3BWF, PQ92-3EMF]",
+  "name": "퓨어 Q9 (PQ92-3)",
   "partnerCost": 70000,
   "price": 90000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721826"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721826",
+  "variants": [
+   "퓨어 Q9 PQ92-3OBF",
+   "퓨어 Q9 PQ92-3BWF",
+   "퓨어 Q9 PQ92-3EMF"
+  ],
+  "active": true
  },
  {
   "id": "cordless-120989",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "퓨어 Q9 [PQ91-3OB, PQ91-3BW, PQ91-3EM]",
+  "name": "퓨어 Q9 (PQ91-3)",
   "partnerCost": 70000,
   "price": 90000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120989"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120989",
+  "variants": [
+   "퓨어 Q9 PQ91-3OB",
+   "퓨어 Q9 PQ91-3BW",
+   "퓨어 Q9 PQ91-3EM"
+  ],
+  "active": true
  },
  {
   "id": "cordless-89649",
   "category": "cordless",
   "brand": "일렉트로룩스",
-  "name": "무선청소기 울트라파워 ZB5011",
+  "name": "울트라파워 ZB5011",
   "partnerCost": 70000,
   "price": 90000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89649"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89649",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-722717",
@@ -1311,7 +1796,9 @@
   "price": 100000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722717"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722717",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-735730",
@@ -1322,51 +1809,67 @@
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735730"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735730",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-735729",
   "category": "cordless",
   "brand": "캐치웰",
-  "name": "TW100, C10 Pro 매직타워",
+  "name": "매직타워 TW100 / C10 Pro",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735729"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735729",
+  "variants": [
+   "매직타워 TW100",
+   "매직타워 C10 Pro"
+  ],
+  "active": true
  },
  {
   "id": "cordless-735732",
   "category": "cordless",
   "brand": "캐치웰",
-  "name": "CX PRO 매직타워",
+  "name": "매직타워 CX PRO",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735732"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735732",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-735731",
   "category": "cordless",
   "brand": "캐치웰",
-  "name": "HC20, 에이센스 (A sense)",
+  "name": "HC20 / 에이센스",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735731"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735731",
+  "variants": [
+   "HC20",
+   "에이센스"
+  ],
+  "active": true
  },
  {
   "id": "cordless-738025",
   "category": "cordless",
   "brand": "쿠쿠",
-  "name": "파워클론 CVC-HNLE0730NW 초경량 스테이션",
+  "name": "파워클론 CVC-HNLE0730NW",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=738025"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=738025",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-738024",
@@ -1377,51 +1880,69 @@
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=738024"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=738024",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-738315",
   "category": "cordless",
   "brand": "쿠쿠",
-  "name": "무선청소기 CVCB-B2000",
+  "name": "CVCB-B2000",
   "partnerCost": 70000,
   "price": 90000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=738315"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=738315",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-734978",
   "category": "cordless",
   "brand": "쿠쿠",
-  "name": "파워클론 CVC-AE1410NW, CVC-AE1420NW [CVCB-A2000 배터리]",
+  "name": "파워클론 CVC-AE1410NW / AE1420NW",
   "partnerCost": 70000,
   "price": 90000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734978"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734978",
+  "variants": [
+   "파워클론 CVC-AE1410NW",
+   "파워클론 CVC-AE1420NW"
+  ],
+  "active": true
  },
  {
   "id": "cordless-720705",
   "category": "cordless",
   "brand": "클릭",
-  "name": "더스트 제로 EV-693 [CLICK]",
+  "name": "더스트 제로 EV-693",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720705"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720705",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-120782",
   "category": "cordless",
   "brand": "테팔",
-  "name": "에어포스 라이트 TY6541, TY6543, TY6544, TY6545",
+  "name": "에어포스 라이트 TY6541~6545",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120782"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120782",
+  "variants": [
+   "에어포스 라이트 TY6541",
+   "에어포스 라이트 TY6543",
+   "에어포스 라이트 TY6544",
+   "에어포스 라이트 TY6545"
+  ],
+  "active": true
  },
  {
   "id": "cordless-121057",
@@ -1432,18 +1953,22 @@
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121057"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121057",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-113252",
   "category": "cordless",
   "brand": "테팔",
-  "name": "에어포스 익스트림 리튬 18V",
+  "name": "에어포스 익스트림 (18V)",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113252"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113252",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-734416",
@@ -1454,106 +1979,155 @@
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734416"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734416",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-724932",
   "category": "cordless",
   "brand": "테팔",
-  "name": "에어포스 360 라이트 무선청소기 TY5510, TY5516, TY5518, TY5520, TY5530, TY5584, TY5586, TY5588",
+  "name": "에어포스 360 라이트 TY55xx",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=724932"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=724932",
+  "variants": [
+   "에어포스 360 TY5510",
+   "에어포스 360 TY5516",
+   "에어포스 360 TY5518",
+   "에어포스 360 TY5520",
+   "에어포스 360 TY5530",
+   "에어포스 360 TY5584",
+   "에어포스 360 TY5586",
+   "에어포스 360 TY5588"
+  ],
+  "active": true
  },
  {
   "id": "cordless-723576",
   "category": "cordless",
   "brand": "테팔",
-  "name": "엑스퍼트3.60 무선청소기 TY-6938KO, TY6921, TY9635, TY6974KO, TY6751KO, 이지 TY5520, TY6933, TY7231",
+  "name": "엑스퍼트 3.60",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=723576"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=723576",
+  "variants": [
+   "엑스퍼트 TY6938KO",
+   "엑스퍼트 TY6921",
+   "엑스퍼트 TY9635",
+   "엑스퍼트 TY6974KO",
+   "엑스퍼트 TY6751KO",
+   "엑스퍼트 이지 TY5520",
+   "엑스퍼트 TY6933",
+   "엑스퍼트 TY7231"
+  ],
+  "active": true
  },
  {
   "id": "cordless-120197",
   "category": "cordless",
   "brand": "테팔",
-  "name": "무선청소기 에어포스 360",
+  "name": "에어포스 360",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120197"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120197",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-731720",
   "category": "cordless",
   "brand": "툴앤툴",
-  "name": "네오스틱 T5, S1 [TOOLnTOOL NEO STICK]",
+  "name": "네오스틱 T5 / S1",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=731720"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=731720",
+  "variants": [
+   "네오스틱 T5",
+   "네오스틱 S1"
+  ],
+  "active": true
  },
  {
   "id": "cordless-722292",
   "category": "cordless",
   "brand": "파나소닉",
-  "name": "MC-SD787 / AVV61V-PWZ",
+  "name": "MC-SD787 (AVV61V-PWZ)",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722292"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722292",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-120572",
   "category": "cordless",
   "brand": "플러스마이너스제로",
-  "name": "XJB-Y010, XJB-A020, XJC-B021, XJB-C030, XJB-G040, XJC-G040, XJC-G110",
+  "name": "XJB / XJC 시리즈",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120572"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120572",
+  "variants": [
+   "XJB-Y010",
+   "XJB-A020",
+   "XJC-B021",
+   "XJB-C030",
+   "XJB-G040",
+   "XJC-G040",
+   "XJC-G110"
+  ],
+  "active": true
  },
  {
   "id": "cordless-120593",
   "category": "cordless",
   "brand": "필립스",
-  "name": "MiniVac 핸디형 청소기 FC-6144",
+  "name": "미니백 FC6144",
   "partnerCost": 24000,
   "price": 44000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120593"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120593",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-113452",
   "category": "cordless",
   "brand": "필립스",
-  "name": "FC-6146",
+  "name": "FC6146",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113452"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113452",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-113619",
   "category": "cordless",
   "brand": "필립스",
-  "name": "FC-6162 파워프로 듀오 [교환]",
+  "name": "파워프로 듀오 FC6162",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113619"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113619",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-730778",
@@ -1564,84 +2138,112 @@
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=730778"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=730778",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-119276",
   "category": "cordless",
   "brand": "필립스",
-  "name": "파워프로 아쿠아 FC6168 FC6401 FC6404",
+  "name": "파워프로 아쿠아 FC6168 / FC6401 / FC6404",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119276"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119276",
+  "variants": [
+   "파워프로 아쿠아 FC6168",
+   "파워프로 아쿠아 FC6401",
+   "파워프로 아쿠아 FC6404"
+  ],
+  "active": true
  },
  {
   "id": "cordless-89877",
   "category": "cordless",
   "brand": "필립스",
-  "name": "FC-6161",
+  "name": "FC6161",
   "partnerCost": 49000,
   "price": 69000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89877"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89877",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-116688",
   "category": "cordless",
   "brand": "한경희",
-  "name": "HAAN VH-400WT",
+  "name": "VH-400WT",
   "partnerCost": 18000,
   "price": 38000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=116688"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=116688",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-119590",
   "category": "cordless",
   "brand": "한경희",
-  "name": "듀얼 VS-1000WT/MB",
+  "name": "듀얼 VS-1000WT / VS-1000MB",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119590"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119590",
+  "variants": [
+   "듀얼 VS-1000WT",
+   "듀얼 VS-1000MB"
+  ],
+  "active": true
  },
  {
   "id": "cordless-89358",
   "category": "cordless",
   "brand": "후버",
-  "name": "HOOVER LINX 무선청소기BH-50000, BH-50010, BH-50015, UH-70120",
+  "name": "LINX BH-50000 등",
   "partnerCost": 45000,
   "price": 65000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89358"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=89358",
+  "variants": [
+   "LINX BH-50000",
+   "LINX BH-50010",
+   "LINX BH-50015",
+   "LINX UH-70120"
+  ],
+  "active": true
  },
  {
   "id": "cordless-119637",
   "category": "cordless",
   "brand": "후버",
-  "name": "슬림백 (HOOVER Slimvac)",
+  "name": "슬림백",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119637"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119637",
+  "variants": [],
+  "active": true
  },
  {
   "id": "cordless-114007",
   "category": "cordless",
   "brand": "후버",
-  "name": "(Hoover Air cordless standard) BH0300PC",
+  "name": "에어 코드리스 BH0300PC",
   "partnerCost": 80000,
   "price": 100000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=114007"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=114007",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-113366",
@@ -1652,7 +2254,9 @@
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113366"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113366",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-737999",
@@ -1674,24 +2278,28 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=737999"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=737999",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-121132",
   "category": "robot",
   "brand": "LG",
-  "name": "코드제로 R9 [EAC63419402]",
+  "name": "코드제로 R9",
   "partnerCost": 96000,
   "price": 116000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121132"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121132",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-732186",
   "category": "robot",
   "brand": "나르왈",
-  "name": "나르왈 프레오",
+  "name": "프레오",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -1707,35 +2315,45 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=732186"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=732186",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-121140",
   "category": "robot",
   "brand": "다이슨",
-  "name": "360",
+  "name": "360 아이",
   "partnerCost": 80000,
   "price": 100000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121140"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121140",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-121125",
   "category": "robot",
   "brand": "라이프로·라이스타",
-  "name": "라이스타 로봇청소기 RX3, RX9, RX9 PLUS [LIFERO/LISTAR 로봇청소기]",
+  "name": "라이스타 RX3 / RX9 / RX9 PLUS",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121125"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121125",
+  "variants": [
+   "라이스타 RX3",
+   "라이스타 RX9",
+   "라이스타 RX9 PLUS"
+  ],
+  "active": true
  },
  {
   "id": "robot-722317",
   "category": "robot",
   "brand": "라이프로·라이스타",
-  "name": "RX10 [LISTAR RX10]",
+  "name": "라이스타 RX10",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -1751,13 +2369,15 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722317"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722317",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-121135",
   "category": "robot",
   "brand": "로보락",
-  "name": "S5, S5 MAX, S6, S6 Pure, S6 MaxV, S7, S7 plus. S8, S8 Pro, S8 plus, S8 Pro Ultra, S8 MaxV Ultra [Roborock]",
+  "name": "S5 ~ S8 시리즈",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -1773,13 +2393,28 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121135"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121135",
+  "variants": [
+   "S5",
+   "S5 MAX",
+   "S6",
+   "S6 Pure",
+   "S6 MaxV",
+   "S7",
+   "S7 Plus",
+   "S8",
+   "S8 Pro",
+   "S8 Plus",
+   "S8 Pro Ultra",
+   "S8 MaxV Ultra"
+  ],
+  "active": true
  },
  {
   "id": "robot-720663",
   "category": "robot",
   "brand": "로이모",
-  "name": "[LRW-001, SYB2 Pro]",
+  "name": "LRW-001 / SYB2 Pro",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -1795,90 +2430,115 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720663"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720663",
+  "variants": [
+   "LRW-001",
+   "SYB2 Pro"
+  ],
+  "active": true
  },
  {
   "id": "robot-120668",
   "category": "robot",
   "brand": "삼성",
-  "name": "스마트 탱고 [DJ43-00006A. DJ43-00006B, DJ96-00152B, DJ96-00203A]",
+  "name": "스마트 탱고",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120668"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120668",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-720084",
   "category": "robot",
   "brand": "삼성",
-  "name": "로봇청소기 파워봇 VR20K9000UB [DJ96-00193C, DJ96-00193E, DJ96-00202A]",
+  "name": "파워봇 VR20K9000UB",
   "partnerCost": 50000,
   "price": 70000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720084"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720084",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-735010",
   "category": "robot",
   "brand": "삼성",
-  "name": "비스포크 제트봇 [VCA-RBT80]",
+  "name": "비스포크 제트봇 (VCA-RBT80)",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735010"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=735010",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-720720",
   "category": "robot",
   "brand": "삼성",
-  "name": "VC-RM84V [DJ96-00113A]",
+  "name": "VC-RM84V",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720720"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=720720",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-88601",
   "category": "robot",
   "brand": "삼성",
-  "name": "하우젠 로봇청소기 samsung hauzen VC-RE70V, VC-RE72V 용",
+  "name": "하우젠 VC-RE70V / VC-RE72V",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=88601"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=88601",
+  "variants": [
+   "하우젠 VC-RE70V",
+   "하우젠 VC-RE72V"
+  ],
+  "active": true
  },
  {
   "id": "robot-121130",
   "category": "robot",
   "brand": "삼성",
-  "name": "로봇청소기 파워봇 VR20H9031UC, VR20K9350WK [DJ96-00193A, DJ96-00193D, DJ96-00193F]",
+  "name": "파워봇 VR20H9031UC / VR20K9350WK",
   "partnerCost": 100000,
   "price": 120000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121130"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121130",
+  "variants": [
+   "파워봇 VR20H9031UC",
+   "파워봇 VR20K9350WK"
+  ],
+  "active": true
  },
  {
   "id": "robot-722244",
   "category": "robot",
   "brand": "샤오미",
-  "name": "미지아 3C LDS 에디션 STYTJ02YM",
+  "name": "미지아 3C LDS STYTJ02YM",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722244"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722244",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-723049",
   "category": "robot",
   "brand": "샤오미",
-  "name": "라이드스토 R1, S1 [Lydsto STYTJOX, YM-S1-B06, YM-S1-W06]",
+  "name": "라이드스토 R1 / S1",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -1894,13 +2554,18 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=723049"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=723049",
+  "variants": [
+   "라이드스토 R1",
+   "라이드스토 S1"
+  ],
+  "active": true
  },
  {
   "id": "robot-722676",
   "category": "robot",
   "brand": "샤오미",
-  "name": "미지아 STYTJ06ZHM [XIAOMI MIJIA]",
+  "name": "미지아 STYTJ06ZHM",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -1916,13 +2581,15 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722676"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=722676",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-119992",
   "category": "robot",
   "brand": "샤오미",
-  "name": "로봇청소기",
+  "name": "로봇청소기 (기타 모델)",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -1938,13 +2605,15 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119992"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=119992",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-730466",
   "category": "robot",
   "brand": "스위스밀리터리",
-  "name": "프라임봇 SMA-RTX6000 [SWISS MILITARY]",
+  "name": "프라임봇 SMA-RTX6000",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -1960,13 +2629,15 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=730466"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=730466",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-729212",
   "category": "robot",
   "brand": "아이닉",
-  "name": "NEW i9, NEW i9, iX10 [inic]",
+  "name": "i9 / iX10",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -1982,101 +2653,138 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729212"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=729212",
+  "variants": [
+   "NEW i9",
+   "iX10"
+  ],
+  "active": true
  },
  {
   "id": "robot-115494",
   "category": "robot",
   "brand": "아이로봇",
-  "name": "Braava 380t [아이로봇 브라바 380t]",
+  "name": "브라바 380t",
   "partnerCost": 25000,
   "price": 45000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=115494"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=115494",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-112412",
   "category": "robot",
   "brand": "아이로봇",
-  "name": "브라바 320 물걸레 로봇 청소기 [iRobot Braava 320]",
+  "name": "브라바 320",
   "partnerCost": 25000,
   "price": 45000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=112412"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=112412",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-88472",
   "category": "robot",
   "brand": "아이로봇",
-  "name": "룸바 ROOMBA 500, 600, 700 시리즈 APS",
+  "name": "룸바 500 / 600 / 700 시리즈",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=88472"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=88472",
+  "variants": [
+   "룸바 500 시리즈",
+   "룸바 600 시리즈",
+   "룸바 700 시리즈"
+  ],
+  "active": true
  },
  {
   "id": "robot-87533",
   "category": "robot",
   "brand": "아이로봇",
-  "name": "룸바 로봇청소기 APS 4905, 400 시리즈",
+  "name": "룸바 400 시리즈 (APS 4905)",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87533"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=87533",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-721426",
   "category": "robot",
   "brand": "아이클레보",
-  "name": "아이클레보 A3 YCR-M08-30 [iCLEBO]",
+  "name": "A3 (YCR-M08-30)",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721426"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721426",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-721424",
   "category": "robot",
   "brand": "아이클레보",
-  "name": "아이클레보 아르떼 YCR-M05-10, YCR-M05-20, YCR-M05-30, YCR-M05-50 [iCLEBO]",
+  "name": "아르떼 YCR-M05",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721424"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721424",
+  "variants": [
+   "아르떼 YCR-M05-10",
+   "아르떼 YCR-M05-20",
+   "아르떼 YCR-M05-30",
+   "아르떼 YCR-M05-50"
+  ],
+  "active": true
  },
  {
   "id": "robot-721425",
   "category": "robot",
   "brand": "아이클레보",
-  "name": "아이클레보 콜라보레이션 YCR-M08-10, YCR-M08-20 [iCLEBO]",
+  "name": "콜라보레이션 YCR-M08",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721425"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721425",
+  "variants": [
+   "콜라보레이션 YCR-M08-10",
+   "콜라보레이션 YCR-M08-20"
+  ],
+  "active": true
  },
  {
   "id": "robot-721420",
   "category": "robot",
   "brand": "아이클레보",
-  "name": "아이클레보 G5, G7, G7 PLUS [iCLEBO]",
+  "name": "G5 / G7 / G7 PLUS",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721420"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721420",
+  "variants": [
+   "G5",
+   "G7",
+   "G7 PLUS"
+  ],
+  "active": true
  },
  {
   "id": "robot-721427",
   "category": "robot",
   "brand": "아이클레보",
-  "name": "아이클레보 오메가 YCR-M07-10, YCR-M07-20 [iCLEBO]",
+  "name": "오메가 YCR-M07",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -2092,29 +2800,41 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721427"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=721427",
+  "variants": [
+   "오메가 YCR-M07-10",
+   "오메가 YCR-M07-20"
+  ],
+  "active": true
  },
  {
   "id": "robot-113165",
   "category": "robot",
   "brand": "아이클레보",
-  "name": "스마트 로봇 청소기 YCR-M04-01, YCR-M04-02",
+  "name": "스마트 YCR-M04",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113165"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=113165",
+  "variants": [
+   "스마트 YCR-M04-01",
+   "스마트 YCR-M04-02"
+  ],
+  "active": true
  },
  {
   "id": "robot-738019",
   "category": "robot",
   "brand": "에브리봇",
-  "name": "에브리봇 쓰리스핀 T300 물걸레",
+  "name": "쓰리스핀 T300",
   "partnerCost": 30000,
   "price": 50000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=738019"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=738019",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-120977",
@@ -2125,7 +2845,9 @@
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-120977-1",
@@ -2136,7 +2858,9 @@
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-120977-2",
@@ -2147,7 +2871,9 @@
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-120977-3",
@@ -2158,13 +2884,15 @@
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-734147",
   "category": "robot",
   "brand": "에코백스",
-  "name": "디봇 T5, T8, T9, T10, T20, DLX11, DLX13, DLN12, X1, 옴니",
+  "name": "디봇 T5 ~ X1 옴니",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -2180,7 +2908,20 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734147"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=734147",
+  "variants": [
+   "디봇 T5",
+   "디봇 T8",
+   "디봇 T9",
+   "디봇 T10",
+   "디봇 T20",
+   "디봇 DLX11",
+   "디봇 DLX13",
+   "디봇 DLN12",
+   "디봇 X1",
+   "디봇 X1 옴니"
+  ],
+  "active": true
  },
  {
   "id": "robot-120977-4",
@@ -2191,7 +2932,9 @@
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-120977-5",
@@ -2202,13 +2945,15 @@
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120977",
+  "variants": [],
+  "active": true
  },
  {
   "id": "robot-723390",
   "category": "robot",
   "brand": "원더스",
-  "name": "다이나킹 R9, R15 [원더스리빙]",
+  "name": "다이나킹 R9 / R15",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -2224,24 +2969,36 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=723390"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=723390",
+  "variants": [
+   "다이나킹 R9",
+   "다이나킹 R15"
+  ],
+  "active": true
  },
  {
   "id": "robot-120972",
   "category": "robot",
   "brand": "치후 360",
-  "name": "360 S5, S6, S7, S8",
+  "name": "S5 / S6 / S7 / S8",
   "partnerCost": 40000,
   "price": 60000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120972"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=120972",
+  "variants": [
+   "360 S5",
+   "360 S6",
+   "360 S7",
+   "360 S8"
+  ],
+  "active": true
  },
  {
   "id": "robot-121138",
   "category": "robot",
   "brand": "치후 360",
-  "name": "360 S9, S9 MAX, S10, X90, x95",
+  "name": "S9 / S10 / X90 / X95",
   "partnerCost": 60000,
   "price": 80000,
   "options": [
@@ -2257,17 +3014,27 @@
    }
   ],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121138"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=121138",
+  "variants": [
+   "360 S9",
+   "360 S9 MAX",
+   "360 S10",
+   "360 X90",
+   "360 X95"
+  ],
+  "active": true
  },
  {
   "id": "robot-88470",
   "category": "robot",
   "brand": "카처",
-  "name": "로봇청소기 CARCHER 로봇 크리너 RC3000",
+  "name": "로봇 크리너 RC3000",
   "partnerCost": 60000,
   "price": 80000,
   "options": [],
   "protectCircuitFee": null,
-  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=88470"
+  "sourceUrl": "https://www.asbattery.com/shop/shopdetail.html?branduid=88470",
+  "variants": [],
+  "active": true
  }
 ]
