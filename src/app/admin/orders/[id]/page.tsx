@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AdminOrderActions, DoorCode, ResetPin } from "@/components/AdminOrderActions";
+import { SmsCard } from "@/components/SmsCard";
+import { shortLink } from "@/lib/notify";
+import { smsDraft } from "@/lib/sms";
 import { StatusBadge, toSeoulDateTime } from "@/components/ui";
 import { ADMIN_TRANSITIONS, CATEGORY_LABEL, formatWon, STATUS_LABEL } from "@/lib/domain";
 import { formatDay, nextDeliveryDate } from "@/lib/schedule";
@@ -22,6 +25,10 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
     store.listClosedDates(),
     store.listNotifications({ orderId: id }),
   ]);
+  const pushDevices = (await store.listPushSubscriptions({ customerId: order.customerId })).length;
+  const sms = smsDraft(order, events);
+  // 이 상태 알림을 웹 푸시로 이미 보냈는지
+  const pushedNow = sms ? notes.some((n) => n.channel === "push" && n.event === sms.event && n.status === "sent") : false;
   const partner = partners.find((p) => p.id === order.partnerId);
   const margin = order.price != null && order.partnerCost != null ? order.price - order.partnerCost : null;
 
@@ -36,6 +43,24 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
         </div>
         <StatusBadge status={order.status} admin />
       </div>
+
+      {sms && (
+        <SmsCard
+          key={sms.event /* 상태가 바뀌면 새 문구로 다시 채운다 */}
+          orderId={order.id}
+          event={sms.event}
+          eventName={TEMPLATES[sms.event].name}
+          phone={sms.phone}
+          text={sms.text}
+          pushNote={
+            pushedNow
+              ? "웹 푸시로 이미 보냈어요. 문자는 선택이에요."
+              : pushDevices
+                ? `고객이 알림을 켠 기기 ${pushDevices}대`
+                : "고객이 알림을 켜지 않았어요. 문자로 알려 주세요."
+          }
+        />
+      )}
 
       <div className="cols">
         <section className="panel">
@@ -87,6 +112,12 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
               <dd>{order.pickupDate ? formatDay(order.pickupDate) : "-"}</dd>
               <dt>배송일</dt>
               <dd>{order.deliveryDate ? formatDay(order.deliveryDate) : "-"}</dd>
+              <dt>고객 링크</dt>
+              <dd>
+                <a href={shortLink(order)} target="_blank" rel="noopener noreferrer" className="mono small">
+                  {shortLink(order).replace(/^https?:\/\//, "")}
+                </a>
+              </dd>
               <dt>포장 동의</dt>
               <dd>{toSeoulDateTime(order.packagingAgreedAt)}</dd>
             </dl>
@@ -129,7 +160,7 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
 
         <section className="panel">
           <h2>
-            알림 발송 <span className="small muted">알림톡·문자</span>
+            알림 발송 <span className="small muted">웹 푸시·운영자 문자</span>
           </h2>
           <div className="body">
             {notes.length ? (
@@ -139,8 +170,9 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
                     <time>{toSeoulDateTime(n.createdAt)}</time>
                     <span>
                       <b>{TEMPLATES[n.event]?.name ?? n.event}</b>{" "}
-                      <span className={`badge ${n.status === "sent" ? "ok" : n.status === "failed" ? "warn" : "mute"}`}>
-                        {n.status === "sent" ? "보냄" : n.status === "failed" ? "실패" : "안 보냄"}
+                      <span className="small muted">{n.channel === "push" ? "웹 푸시" : n.channel === "sms_manual" ? "운영자 문자" : "알림톡"}</span>{" "}
+                      <span className={`badge ${n.status === "sent" || n.status === "manual" ? "ok" : n.status === "failed" ? "warn" : "mute"}`}>
+                        {n.status === "sent" ? "보냄" : n.status === "manual" ? "문자 앱 열림" : n.status === "failed" ? "실패" : "안 보냄"}
                       </span>
                       <span className="muted">
                         {" "}

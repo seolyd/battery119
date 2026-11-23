@@ -2,6 +2,9 @@ import Link from "next/link";
 import { StatusBadge } from "@/components/ui";
 import { formatWon, type Order } from "@/lib/domain";
 import { formatDay, isDeliveryDay, isPickupDay, seoulToday, VISIT_WINDOW } from "@/lib/schedule";
+import { PushOptIn } from "@/components/PushOptIn";
+import { pushKeys } from "@/lib/push";
+import { smsDraft } from "@/lib/sms";
 import { getStore } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -25,6 +28,15 @@ export default async function AdminToday() {
   const atPartner = orders.filter((o) => (o.status === "AT_PARTNER" || o.status === "REPAIRING") && new Date(o.updatedAt).getTime() < staleCut);
   const inShop = orders.filter((o) => ["PICKED_UP", "AT_PARTNER", "REPAIRING", "QC", "NOT_REPAIRABLE"].includes(o.status));
 
+  // 오늘 방문할 집마다 "문자" 버튼 (지금 상태에 맞는 안내 문구가 채워진다)
+  const smsLinks = new Map(
+    await Promise.all(
+      route.map(async ({ o }) => {
+        const d = smsDraft(o, await store.listEvents(o.id));
+        return [o.id, d?.href] as const;
+      }),
+    ),
+  );
   const pickupOpen = isPickupDay(today, closed);
   const deliveryOpen = isDeliveryDay(today, closed);
 
@@ -60,6 +72,8 @@ export default async function AdminToday() {
         </Link>
       </div>
 
+      <PushOptIn publicKey={pushKeys()?.publicKey ?? null} admin />
+
       <div className="cols">
         <section className="panel" id="route">
           <h2>
@@ -68,7 +82,8 @@ export default async function AdminToday() {
           {route.length ? (
             <div className="route">
               {route.map(({ o, kind }) => (
-                <Link key={o.id + kind} href={`/admin/orders/${o.id}`}>
+                <div key={o.id + kind} className="route-row">
+                <Link href={`/admin/orders/${o.id}`}>
                   <span className="dong">{o.dong}</span>
                   <span>
                     {kind} · {o.brand} {o.modelName.slice(0, 28)}
@@ -80,6 +95,12 @@ export default async function AdminToday() {
                   </span>
                   <span className={`badge ${kind === "배송" ? "ok" : ""}`}>{kind}</span>
                 </Link>
+                {smsLinks.get(o.id) && (
+                  <a className="btn sm ghost" href={smsLinks.get(o.id)} aria-label={`${o.dong}동 ${o.ho}호에 문자 보내기`}>
+                    문자
+                  </a>
+                )}
+                </div>
               ))}
             </div>
           ) : (

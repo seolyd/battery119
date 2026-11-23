@@ -359,3 +359,54 @@ table.tbl { border-collapse: collapse; width: 100%; font-size: 14px; }
 
 /* 한국어는 단어 중간에서 줄을 바꾸지 않는다 */
 .landing, .content { word-break: keep-all; overflow-wrap: anywhere; }
+
+/* ---------- 문자 링크 화면 (/s/코드): 70대 고객 기준, 큰 글씨 ---------- */
+.easy { font-size: 18px; word-break: keep-all; overflow-wrap: anywhere; }
+.easy-main { flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 20px max(16px, env(safe-area-inset-right, 0px)) 32px max(16px, env(safe-area-inset-left, 0px)); }
+.easy-hello { font-size: 18px; color: var(--muted); }
+.easy-status { border-radius: 20px; padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; border: 2px solid var(--line); }
+.easy-status h1 { font-family: var(--f-serif); font-size: clamp(26px, 7.5vw, 32px); line-height: 1.35; color: var(--navy); }
+.easy-status p { font-size: 19px; line-height: 1.6; }
+.easy-status.action { border-color: var(--accent); background: var(--accent-soft); }
+.easy-status.action h1 { color: var(--fg); }
+.easy-status.done { border-color: var(--ok); background: var(--ok-soft); }
+.easy-status.stop { border-color: var(--warn); background: var(--warn-soft); }
+.easy-card { border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; background: var(--surface); }
+.easy-card.soft { background: var(--sunk); border-color: transparent; }
+.easy-card.done { border-color: var(--ok); background: var(--ok-soft); }
+.easy-label { font-size: 16px; color: var(--muted); font-weight: 600; }
+.easy-account { font-size: 20px; line-height: 1.5; user-select: all; }
+.easy-amount { font-family: var(--f-mono); font-size: 26px; }
+.easy-small { font-size: 15px; color: var(--muted); }
+.easy-btn { font-size: 19px; padding: 18px 16px; border-radius: 14px; min-height: 60px; }
+.easy-input { font: inherit; font-size: 19px; padding: 14px; border: 2px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--fg); width: 100%; }
+.easy-error { color: var(--danger); font-weight: 600; }
+.easy-answer { border-left: 4px solid var(--ok); padding-left: 12px; display: flex; flex-direction: column; gap: 4px; }
+.easy-foot { font-size: 15px; color: var(--muted); text-align: center; line-height: 1.6; }
+.easy-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.easy-steps li { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 15px; color: var(--muted); text-align: center; }
+.easy-steps .dot { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--sunk); font-family: var(--f-mono); font-weight: 700; font-size: 17px; }
+.easy-steps li.done { color: var(--ok); }
+.easy-steps li.done .dot { background: var(--ok); color: var(--surface); }
+.easy-steps li.now { color: var(--fg); font-weight: 700; }
+.easy-steps li.now .dot { background: var(--accent); color: var(--on-accent); box-shadow: 0 0 0 5px var(--accent-soft); }
+
+/* 알림 받기 */
+.push-box { border: 1px dashed var(--line); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.push-box.on { border-style: solid; border-color: var(--ok); background: var(--ok-soft); }
+.push-box.big { font-size: 18px; padding: 18px; }
+.push-box.big .push-btn { font-size: 20px; padding: 18px; min-height: 62px; }
+.push-note { font-size: 13.5px; color: var(--muted); }
+.push-box.big .push-note { font-size: 16px; }
+.ios-steps { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; line-height: 1.5; }
+.ios-share { display: inline-block; border: 1.5px solid currentColor; border-radius: 6px; padding: 0 6px; font-size: 0.85em; font-weight: 600; }
+
+/* 관리자: 고객에게 문자 */
+.sms-card { border: 2px solid var(--accent); border-radius: 12px; background: var(--surface); padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.sms-card textarea { font: inherit; font-size: 14px; line-height: 1.55; padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--sunk); color: var(--fg); min-height: 230px; width: 100%; }
+.sms-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.sms-row > * { flex: 1 1 140px; }
+.route-row { display: grid; grid-template-columns: 1fr auto; align-items: center; border-bottom: 1px solid var(--line); }
+.route-row:last-child { border-bottom: 0; }
+.route-row > a:first-child { border-bottom: 0 !important; }
+.route-row .btn { margin-right: 12px; }

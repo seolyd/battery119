@@ -1,17 +1,27 @@
 import "server-only";
 import { CATEGORY_LABEL, formatWon, warrantyEnds, type Inquiry, type NotifyEvent, type Order } from "@/lib/domain";
+import { simpleMessage } from "@/lib/messages";
 import { phoneDigits } from "@/lib/phone";
+import { pushToAdmins, pushToCustomer } from "@/lib/push";
 import { formatDay, pickupDateFor, SAME_DAY_CUTOFF_HOUR, seoulToday } from "@/lib/schedule";
 import { getStore } from "@/lib/store";
 import { solapiConfig, solapiSend, type SolapiMessage } from "./solapi";
 import { render, TEMPLATES } from "./templates";
 
 // 알림 보내기. 실패해도 주문 처리는 그대로 진행되도록 오류를 밖으로 던지지 않고 기록만 남긴다.
+//  1. 웹 푸시 (무료): 알림을 켠 기기로 자동 발송
+//  2. 알림톡 (유료, 선택): SOLAPI_* 를 넣었을 때만. 넣지 않으면 아무것도 하지 않는다
+//  3. 운영자 휴대폰 문자: 관리자 화면의 "문자 보내기" 버튼 (src/lib/messages.ts)
 
 export function appUrl(): string {
   if (process.env.APP_URL) return process.env.APP_URL.replace(/\/$/, "");
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
   return "http://localhost:3000";
+}
+
+/** 문자에 넣는 바로가기 링크. 로그인하지 않아도 이 주문을 볼 수 있다 */
+export function shortLink(order: Pick<Order, "accessToken">): string {
+  return `${appUrl()}/s/${order.accessToken}`;
 }
 
 /** SOLAPI_TEMPLATES="ORDER_RECEIVED=KA01TP...,PAID=KA01TP..." */
@@ -41,7 +51,6 @@ function pickupGuide(now = new Date()): string {
 
 /** 주문 알림에 쓰는 변수들 */
 export function orderVars(o: Order, extra: Record<string, string> = {}, now = new Date()): Record<string, string> {
-  const link = `${appUrl()}/orders/${o.id}`;
   return {
     동호: unit(o.dong, o.ho),
     주문번호: o.orderNo,
@@ -55,7 +64,7 @@ export function orderVars(o: Order, extra: Record<string, string> = {}, now = ne
     // 서울 날짜로 보여 준다
     보증종료: o.deliveredAt ? formatDay(new Date(warrantyEnds(o.deliveredAt).getTime() + 9 * 3600_000).toISOString().slice(0, 10)) : "",
     환불안내: o.paidAt ? (o.refunded ? `결제하신 ${o.price != null ? formatWon(o.price) : "금액"}은 환불해 드렸어요.` : "결제 금액은 확인 후 환불해 드려요.") : "결제 전이라 따로 하실 일은 없어요.",
-    링크: link,
+    링크: shortLink(o),
     ...extra,
   };
 }
@@ -70,23 +79,25 @@ interface Target {
 
 export type DispatchStatus = "sent" | "failed" | "skipped";
 
-async function dispatch(t: Target): Promise<DispatchStatus> {
-  const store = getStore();
+async function writeLog(t: Pick<Target, "event" | "orderId" | "inquiryId">, channel: "alimtalk" | "push", toMasked: string, status: DispatchStatus, detail: string) {
+  await getStore()
+    .addNotification({ event: t.event, channel, orderId: t.orderId ?? null, inquiryId: t.inquiryId ?? null, toMasked, status, detail })
+    .catch((e) => console.error("notification log failed", e));
+}
+
+/** 알림톡 (유료). 설정하지 않았으면 기록도 남기지 않고 넘어간다 */
+async function alimtalk(t: Target): Promise<DispatchStatus> {
+  const cfg = solapiConfig();
+  if (!cfg) return "skipped";
   const tpl = TEMPLATES[t.event];
-  const log = async (status: DispatchStatus, detail: string): Promise<DispatchStatus> => {
-    await store
-      .addNotification({ event: t.event, orderId: t.orderId ?? null, inquiryId: t.inquiryId ?? null, toMasked: maskPhone(t.to), status, detail })
-      .catch((e) => console.error("notification log failed", e));
+  const log = async (status: DispatchStatus, detail: string) => {
+    await writeLog(t, "alimtalk", maskPhone(t.to), status, detail);
     return status;
   };
-
   try {
     const to = phoneDigits(t.to);
     if (!/^01\d{8,9}$/.test(to)) return log("skipped", "받을 휴대폰 번호가 없어요");
     const text = render(tpl.body, t.vars);
-    const cfg = solapiConfig();
-    if (!cfg) return log("skipped", "알림톡 설정 전 (SOLAPI_* 환경 변수 없음)");
-
     let message: SolapiMessage;
     if (tpl.toAdmin) {
       if (!cfg.sender) return log("skipped", "운영자 문자 발신번호(SOLAPI_SENDER) 없음");
@@ -104,40 +115,57 @@ async function dispatch(t: Target): Promise<DispatchStatus> {
     const r = await solapiSend(cfg, message);
     return log(r.ok ? "sent" : "failed", r.detail);
   } catch (e) {
-    console.error("notify failed", t.event, e);
+    console.error("alimtalk failed", t.event, e);
     return log("failed", e instanceof Error ? e.message : String(e));
+  }
+}
+
+/** 웹 푸시 (무료) */
+async function push(t: Target, customerId: string | null, admin = false): Promise<DispatchStatus> {
+  const m = simpleMessage(t.event, t.vars);
+  if (!m) return "skipped";
+  try {
+    const payload = { title: m.title, body: m.lines.filter(Boolean).join(" "), url: t.vars.링크 };
+    const r = admin ? await pushToAdmins(payload) : customerId ? await pushToCustomer(customerId, payload) : null;
+    if (!r) return "skipped";
+    await writeLog(t, "push", admin ? "운영자 기기" : "고객 기기", r.status, r.detail);
+    return r.status;
+  } catch (e) {
+    console.error("push failed", t.event, e);
+    await writeLog(t, "push", admin ? "운영자 기기" : "고객 기기", "failed", e instanceof Error ? e.message : String(e));
+    return "failed";
   }
 }
 
 /** 주문 상태 알림 (고객에게) */
 export async function notifyOrder(event: NotifyEvent, order: Order, extra?: Record<string, string>): Promise<void> {
-  await dispatch({ event, to: order.phone, vars: orderVars(order, extra), orderId: order.id });
+  const t: Target = { event, to: order.phone, vars: orderVars(order, extra), orderId: order.id };
+  await Promise.all([push(t, order.customerId), alimtalk(t)]);
 }
 
-/** 운영자에게 새 신청 알림 (문자) */
+/** 운영자에게 새 신청 알림 */
 export async function notifyAdminOrder(order: Order): Promise<void> {
-  const to = process.env.ADMIN_PHONE;
-  if (!to) return;
-  await dispatch({ event: "ADMIN_NEW_ORDER", to, vars: { ...orderVars(order), 링크: `${appUrl()}/admin/orders/${order.id}` }, orderId: order.id });
+  const t: Target = { event: "ADMIN_NEW_ORDER", to: process.env.ADMIN_PHONE ?? "", vars: { ...orderVars(order), 링크: `${appUrl()}/admin/orders/${order.id}` }, orderId: order.id };
+  await Promise.all([push(t, null, true), t.to ? alimtalk(t) : Promise.resolve("skipped")]);
 }
 
 export async function notifyAdminInquiry(q: Inquiry): Promise<void> {
-  const to = process.env.ADMIN_PHONE;
-  if (!to) return;
-  await dispatch({
+  const t: Target = {
     event: "ADMIN_NEW_INQUIRY",
-    to,
+    to: process.env.ADMIN_PHONE ?? "",
     vars: { 동호: unit(q.dong, q.ho), 문의종류: q.kind === "pin_reset" ? "비밀번호 재설정 요청" : "일반 문의", 링크: `${appUrl()}/admin/inquiries` },
     inquiryId: q.id,
-  });
+  };
+  await Promise.all([push(t, null, true), t.to ? alimtalk(t) : Promise.resolve("skipped")]);
 }
 
 export async function notifyInquiryAnswered(q: Inquiry): Promise<void> {
-  await dispatch({ event: "INQUIRY_ANSWERED", to: q.phone, vars: { 동호: unit(q.dong, q.ho), 링크: `${appUrl()}/help` }, inquiryId: q.id });
+  const order = q.orderId ? await getStore().getOrder(q.orderId) : null;
+  const t: Target = { event: "INQUIRY_ANSWERED", to: q.phone, vars: { 동호: unit(q.dong, q.ho), 링크: order ? shortLink(order) : `${appUrl()}/help` }, inquiryId: q.id };
+  await Promise.all([push(t, q.customerId), alimtalk(t)]);
 }
 
-/** 새 로그인 비밀번호를 계정에 등록된 번호로 보낸다 */
+/** 새 로그인 비밀번호를 계정에 등록된 번호로 보낸다 (알림톡이 설정됐을 때만. 푸시는 잠금 화면에 보여서 쓰지 않는다) */
 export async function notifyPinReset(dong: string, ho: string, phone: string, pin: string, inquiryId: string | null): Promise<DispatchStatus> {
-  return dispatch({ event: "PIN_RESET", to: phone, vars: { 동호: unit(dong, ho), 비밀번호: pin, 링크: `${appUrl()}/login` }, inquiryId });
+  return alimtalk({ event: "PIN_RESET", to: phone, vars: { 동호: unit(dong, ho), 비밀번호: pin, 링크: `${appUrl()}/login` }, inquiryId });
 }
-

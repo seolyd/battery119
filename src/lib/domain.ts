@@ -73,6 +73,8 @@ export type OrderStatus =
 export interface Order {
   id: string;
   orderNo: string;
+  /** 문자에 넣는 바로가기 링크(/s/코드)의 코드. 로그인 없이 이 주문을 볼 수 있다 */
+  accessToken: string;
   customerId: string;
   category: Category;
   brand: string;
@@ -275,15 +277,33 @@ export type NotifyEvent =
   | "ADMIN_NEW_ORDER"
   | "ADMIN_NEW_INQUIRY";
 
+export type NotifyChannel = "alimtalk" | "push" | "sms_manual";
+
 export interface NotificationLog {
   id: string;
   event: NotifyEvent;
+  /** alimtalk: 솔라피 알림톡·문자 / push: 웹 푸시 / sms_manual: 운영자가 자기 휴대폰으로 보낸 문자 */
+  channel: NotifyChannel;
   orderId: string | null;
   inquiryId: string | null;
   /** 받는 번호 (뒤 4자리만 남겨서 저장) */
   toMasked: string;
-  /** sent: 발송 요청 성공 / failed: 발송 실패 / skipped: 알림톡 설정 전이라 보내지 않음 */
-  status: "sent" | "failed" | "skipped";
+  /** sent: 발송 성공 / failed: 실패 / skipped: 설정 전이라 보내지 않음 / manual: 운영자가 문자 앱을 열었음 (실제 전송은 확인 불가) */
+  status: "sent" | "failed" | "skipped" | "manual";
   detail: string | null;
+  createdAt: string;
+}
+
+// ---------- 웹 푸시 ----------
+
+export interface PushSubscriptionRecord {
+  id: string;
+  /** 고객 기기면 고객 ID, 운영자 기기면 null */
+  customerId: string | null;
+  admin: boolean;
+  endpoint: string;
+  p256dh: string;
+  auth: string;
+  userAgent: string | null;
   createdAt: string;
 }

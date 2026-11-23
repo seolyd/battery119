@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
-import type { Customer, Inquiry, Inspection, Model, NotificationLog, Order, OrderEvent, Partner } from "@/lib/domain";
+import type { Customer, Inquiry, Inspection, Model, NotificationLog, Order, OrderEvent, Partner, PushSubscriptionRecord } from "@/lib/domain";
+import { newAccessToken } from "@/lib/token";
 import seedModels from "@/data/models.json";
 import { seoulToday } from "@/lib/schedule";
 import { UnitTakenError, type Store } from "./types";
@@ -19,6 +20,7 @@ interface Db {
   loginFailures: { ip: string; at: string }[];
   inquiries: Map<string, Inquiry>;
   notifications: NotificationLog[];
+  pushSubs: Map<string, PushSubscriptionRecord>;
 }
 
 type SeedModel = Omit<Model, "partnerId" | "active"> & { active?: boolean };
@@ -44,6 +46,7 @@ export function createMemoryDb(): Db {
     loginFailures: [],
     inquiries: new Map(),
     notifications: [],
+    pushSubs: new Map(),
   };
 }
 
@@ -115,6 +118,7 @@ export function createMemoryStore(db: Db = createMemoryDb()): Store {
         partnerId: input.partnerId ?? null,
         id: randomUUID(),
         orderNo: `PR-${day}-${String(seq).padStart(2, "0")}`,
+        accessToken: newAccessToken(),
         depositorName: null,
         paidAt: null,
         pickupDate: null,
@@ -129,6 +133,10 @@ export function createMemoryStore(db: Db = createMemoryDb()): Store {
     },
     async getOrder(id) {
       const o = db.orders.get(id);
+      return o ? clone(o) : null;
+    },
+    async getOrderByToken(token) {
+      const o = [...db.orders.values()].find((x) => x.accessToken === token);
       return o ? clone(o) : null;
     },
     async listOrdersByCustomer(customerId) {
@@ -208,6 +216,17 @@ export function createMemoryStore(db: Db = createMemoryDb()): Store {
       return clone(
         db.notifications.filter((n) => (!opts.orderId || n.orderId === opts.orderId) && (!opts.inquiryId || n.inquiryId === opts.inquiryId)),
       );
+    },
+
+    async savePushSubscription(sub) {
+      const prev = db.pushSubs.get(sub.endpoint);
+      db.pushSubs.set(sub.endpoint, { ...sub, id: prev?.id ?? randomUUID(), createdAt: prev?.createdAt ?? now() });
+    },
+    async listPushSubscriptions(who) {
+      return clone([...db.pushSubs.values()].filter((s) => ("admin" in who ? s.admin : s.customerId === who.customerId)));
+    },
+    async deletePushSubscription(endpoint) {
+      db.pushSubs.delete(endpoint);
     },
   };
 }

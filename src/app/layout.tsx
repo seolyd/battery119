@@ -4,7 +4,8 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "파크리오 배터리 119",
   description: "청소기 배터리, 이제 들고 나가지 마세요. 파크리오 주민 전용 배터리 교체 서비스.",
-  appleWebApp: { title: "배터리 119", capable: true },
+  appleWebApp: { title: "배터리 119", capable: true, statusBarStyle: "default" },
+  manifest: "/app.webmanifest",
 };
 
 export const viewport: Viewport = {
