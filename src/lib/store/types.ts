@@ -1,6 +1,7 @@
 import type {
   Inquiry,
   NotificationLog,
+  PushSubscriptionRecord,
   Customer,
   Inspection,
   Model,
@@ -12,7 +13,7 @@ import type {
 
 export type NewOrder = Omit<
   Order,
-  "id" | "orderNo" | "createdAt" | "updatedAt" | "paidAt" | "pickupDate" | "deliveryDate" | "deliveredAt" | "refunded" | "depositorName" | "partnerId"
+  "id" | "orderNo" | "accessToken" | "createdAt" | "updatedAt" | "paidAt" | "pickupDate" | "deliveryDate" | "deliveredAt" | "refunded" | "depositorName" | "partnerId"
 > & { partnerId?: string | null };
 
 export type OrderPatch = Partial<
@@ -33,7 +34,7 @@ export type OrderPatch = Partial<
   >
 >;
 
-export type CustomerPatch = Partial<Pick<Customer, "name" | "phone" | "doorCodeEnc" | "pinHash" | "failedCount" | "lockedUntil">>;
+export type CustomerPatch = Partial<Pick<Customer, "name" | "phone" | "doorCodeEnc" | "pinHash" | "failedCount" | "lockedUntil" | "kakaoLinkedAt">>;
 
 export type NewCustomer = Pick<Customer, "dong" | "ho" | "pinHash"> & Partial<Pick<Customer, "name" | "phone">>;
 
@@ -62,6 +63,7 @@ export interface Store {
 
   createOrder(input: NewOrder): Promise<Order>;
   getOrder(id: string): Promise<Order | null>;
+  getOrderByToken(token: string): Promise<Order | null>;
   listOrdersByCustomer(customerId: string): Promise<Order[]>;
   listOrders(opts?: { statuses?: OrderStatus[] }): Promise<Order[]>;
   updateOrder(id: string, patch: OrderPatch): Promise<Order>;
@@ -85,4 +87,9 @@ export interface Store {
 
   addNotification(log: Omit<NotificationLog, "id" | "createdAt">): Promise<void>;
   listNotifications(opts: { orderId?: string; inquiryId?: string }): Promise<NotificationLog[]>;
+
+  /** 같은 endpoint가 있으면 주인을 바꿔 저장한다 */
+  savePushSubscription(sub: Omit<PushSubscriptionRecord, "id" | "createdAt">): Promise<void>;
+  listPushSubscriptions(who: { customerId: string } | { admin: true }): Promise<PushSubscriptionRecord[]>;
+  deletePushSubscription(endpoint: string): Promise<void>;
 }

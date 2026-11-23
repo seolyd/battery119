@@ -88,6 +88,7 @@ describe("buildOrder", () => {
 const order = (over: Partial<Order> = {}): Order => ({
   id: "o1",
   orderNo: "PR-261123-01",
+  accessToken: "AbCdEfGhIjKl",
   customerId: "c1",
   category: "robot",
   brand: "로보락",

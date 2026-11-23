@@ -4,6 +4,8 @@ import { AppBar, CustomerTimeline, StatusBadge, toSeoulDate } from "@/components
 import { requireUser } from "@/lib/auth";
 import { CATEGORY_LABEL, CUSTOMER_CANCELABLE, formatWon, inWarranty, warrantyEnds } from "@/lib/domain";
 import { formatDay, pickupDateFor, VISIT_WINDOW } from "@/lib/schedule";
+import { PushOptIn } from "@/components/PushOptIn";
+import { pushKeys } from "@/lib/push";
 import { getStore } from "@/lib/store";
 import { cancelOrder, requestAs } from "./actions";
 
@@ -88,6 +90,8 @@ export default async function OrderDetail({
             {order.refunded && <span className="small muted">교체가 어려워 결제 금액을 환불하고 제품을 돌려드려요.</span>}
           </div>
         )}
+
+        <PushOptIn publicKey={pushKeys()?.publicKey ?? null} />
 
         <div className="label">진행 상황</div>
         <CustomerTimeline order={order} />

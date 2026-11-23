@@ -32,7 +32,10 @@ npm run dev
 | 포장 | 고객이 박스로 직접 포장. 동의해야 신청 가능, 동의 시각 기록 | `src/lib/orderRules.ts` |
 | 협력업체 | 모델별로 지정. **고객 화면에는 보이지 않음** | `models.partner_id` |
 | 교체 불가 | 전액 환불 + 무료 반송 | 관리자 주문 상세 |
-| 알림 | 상태가 바뀔 때마다 고객에게 카카오 알림톡(실패 시 문자), 운영자에게 새 신청·문의 문자 | `src/lib/notify/` · [설정 가이드](docs/alimtalk.md) |
+| 알림 (무료) | ① **웹 푸시**: 고객·운영자가 "알림 받기"를 켜면 상태가 바뀔 때 자동 발송 ② **운영자 문자**: 관리자 주문 화면의 "문자 보내기"를 누르면 휴대폰 문자 앱에 번호와 안내 문구가 채워짐 (요금제 무료 문자) | `src/lib/push.ts`, `src/lib/messages.ts` |
+| 문자 바로가기 링크 | 모든 알림과 문자에 `/s/코드` 링크가 들어감. 로그인·앱 설치 없이 큰 글씨로 진행 상황, 입금 계좌, 문의하기. 거기서 "홈 화면에 추가"하면 그 화면이 바로 열림 | `src/app/s/[token]/` |
+| 카카오톡 채널 (무료, 선택) | `KAKAO_CHANNEL_URL`을 넣으면 링크 화면에 "카카오톡으로 소식 받기". 고객이 채널에 동·호수를 보내 오면 관리자가 "카톡 연결됨"을 켜고, 이후 "카톡용 문구 복사"로 번호 노출 없이 보냄 | `src/lib/kakao.ts` |
+| 알림톡 (유료, 선택) | 키를 넣었을 때만 발송. 넣지 않으면 비용 없음 | `src/lib/notify/` · [가이드](docs/alimtalk.md) |
 | 문의 | 앱 안 문의하기(로그인), 비밀번호 재설정 요청(로그인 없이). 관리자 **문의** 화면에서 답변 | `src/app/(app)/help/` |
 | 보증 | 배송일부터 최소 6개월 (모델별 최대 12개월), 고객이 무상 재점검 요청 가능 | `src/lib/domain.ts` |
 
@@ -88,7 +91,7 @@ npm run seed:sql                  # supabase/seed.sql, migrations/0004_model_var
 2. 이 저장소의 `supabase/migrations/0001_init.sql` 내용을 전부 붙여 넣고 **Run**
 3. 새 쿼리에 `supabase/migrations/0002_grants.sql` 내용을 붙여 넣고 **Run** (앱 서버에 표 권한 주기. 빠뜨리면 `permission denied for table` 오류가 나요)
 4. 새 쿼리에 `supabase/seed.sql` 내용을 붙여 넣고 **Run** (협력업체 4곳, 모델 191개)
-   그다음 `supabase/migrations/0004_model_variants.sql`, `0005_inquiries_notifications.sql`도 차례로 **Run**
+   그다음 `supabase/migrations/0004_model_variants.sql`, `0005_inquiries_notifications.sql`, `0006_links_push.sql`, `0007_kakao_link.sql`도 차례로 **Run**
 5. 왼쪽 **Table Editor**에서 `models` 표에 191줄이 보이면 성공
 
 > `supabase/migrations/0004_model_variants.sql`은 새로 만들 때도 실행해도 되고(아무 변화 없음), 11월 22일 전에 만든 DB에는 꼭 실행해야 합니다 (모델 나누기).

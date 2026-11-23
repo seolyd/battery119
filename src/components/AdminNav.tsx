@@ -9,6 +9,7 @@ export function AdminNav({ openInquiries = 0 }: { openInquiries?: number }) {
     { href: "/admin/orders", label: "주문" },
     { href: "/admin/inquiries", label: openInquiries ? `문의 ${openInquiries}` : "문의" },
     { href: "/admin/models", label: "모델·가격" },
+    { href: "/admin/setup", label: "설정" },
   ];
   const path = usePathname();
   return (

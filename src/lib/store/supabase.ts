@@ -1,6 +1,7 @@
 import "server-only";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import type { Customer, Inquiry, Inspection, Model, NotificationLog, Order, OrderEvent, Partner } from "@/lib/domain";
+import type { Customer, Inquiry, Inspection, Model, NotificationLog, Order, OrderEvent, Partner, PushSubscriptionRecord } from "@/lib/domain";
+import { newAccessToken } from "@/lib/token";
 import { UnitTakenError, type Store } from "./types";
 
 // 운영 저장소. 서비스 롤 키로 서버에서만 접근한다 (테이블은 RLS로 외부 접근 차단).
@@ -17,6 +18,7 @@ const toCustomer = (r: Row): Customer => ({
   failedCount: (r.failed_count as number) ?? 0,
   lockedUntil: (r.locked_until as string) ?? null,
   doorCodeEnc: (r.door_code_enc as string) ?? null,
+  kakaoLinkedAt: (r.kakao_linked_at as string) ?? null,
   createdAt: r.created_at as string,
 });
 
@@ -38,6 +40,7 @@ const toModel = (r: Row): Model => ({
 const toOrder = (r: Row): Order => ({
   id: r.id as string,
   orderNo: r.order_no as string,
+  accessToken: r.access_token as string,
   customerId: r.customer_id as string,
   category: r.category as Order["category"],
   brand: r.brand as string,
@@ -114,6 +117,9 @@ const snake: Record<string, string> = {
   inquiryId: "inquiry_id",
   toMasked: "to_masked",
   answeredAt: "answered_at",
+  accessToken: "access_token",
+  kakaoLinkedAt: "kakao_linked_at",
+  userAgent: "user_agent",
 };
 
 const toInquiry = (r: Row): Inquiry => ({
@@ -134,6 +140,7 @@ const toInquiry = (r: Row): Inquiry => ({
 const toNotification = (r: Row): NotificationLog => ({
   id: String(r.id),
   event: r.event as NotificationLog["event"],
+  channel: ((r.channel as string) ?? "alimtalk") as NotificationLog["channel"],
   orderId: (r.order_id as string) ?? null,
   inquiryId: (r.inquiry_id as string) ?? null,
   toMasked: r.to_masked as string,
@@ -205,10 +212,14 @@ export function createSupabaseStore(client?: SupabaseClient): Store {
 
     async createOrder(input) {
       // order_no는 DB 트리거가 매긴다
-      return toOrder(must(await db.from("orders").insert(toRow(input)).select().single()));
+      return toOrder(must(await db.from("orders").insert(toRow({ ...input, accessToken: newAccessToken() })).select().single()));
     },
     async getOrder(id) {
       const r = must(await db.from("orders").select("*").eq("id", id).maybeSingle());
+      return r ? toOrder(r) : null;
+    },
+    async getOrderByToken(token) {
+      const r = must(await db.from("orders").select("*").eq("access_token", token).maybeSingle());
       return r ? toOrder(r) : null;
     },
     async listOrdersByCustomer(customerId) {
@@ -285,6 +296,28 @@ export function createSupabaseStore(client?: SupabaseClient): Store {
       if (opts.orderId) q = q.eq("order_id", opts.orderId);
       if (opts.inquiryId) q = q.eq("inquiry_id", opts.inquiryId);
       return must(await q).map(toNotification);
+    },
+
+    async savePushSubscription(sub) {
+      must(await db.from("push_subscriptions").upsert(toRow(sub), { onConflict: "endpoint" }));
+    },
+    async listPushSubscriptions(who) {
+      const q = db.from("push_subscriptions").select("*");
+      return must(await ("admin" in who ? q.eq("admin", true) : q.eq("customer_id", who.customerId))).map(
+        (r: Row): PushSubscriptionRecord => ({
+          id: r.id as string,
+          customerId: (r.customer_id as string) ?? null,
+          admin: !!r.admin,
+          endpoint: r.endpoint as string,
+          p256dh: r.p256dh as string,
+          auth: r.auth as string,
+          userAgent: (r.user_agent as string) ?? null,
+          createdAt: r.created_at as string,
+        }),
+      );
+    },
+    async deletePushSubscription(endpoint) {
+      must(await db.from("push_subscriptions").delete().eq("endpoint", endpoint));
     },
   };
 }

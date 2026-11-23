@@ -8,6 +8,7 @@ import { render, TEMPLATES, templateVars } from "@/lib/notify/templates";
 const order: Order = {
   id: "o1",
   orderNo: "PR-261124-01",
+  accessToken: "AbCdEfGhIjKl",
   customerId: "c1",
   category: "robot",
   brand: "로보락",

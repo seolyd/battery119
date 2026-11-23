@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { ProfileForm } from "@/components/ProfileForm";
 import { AppBar } from "@/components/ui";
+import { PushOptIn } from "@/components/PushOptIn";
 import { requireUser } from "@/lib/auth";
+import { pushKeys } from "@/lib/push";
 import { logout } from "../login/actions";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +22,7 @@ export default async function Me() {
             파크리오 {c.dong}동 {c.ho}호
           </b>
         </div>
+        <PushOptIn publicKey={pushKeys()?.publicKey ?? null} />
         <ProfileForm name={c.name ?? ""} phone={c.phone ?? ""} hasDoorCode={!!c.doorCodeEnc} />
         <Link href="/help" className="btn ghost">
           문의하기
