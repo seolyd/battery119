@@ -34,7 +34,7 @@ export type OrderPatch = Partial<
   >
 >;
 
-export type CustomerPatch = Partial<Pick<Customer, "name" | "phone" | "doorCodeEnc" | "pinHash" | "failedCount" | "lockedUntil">>;
+export type CustomerPatch = Partial<Pick<Customer, "name" | "phone" | "doorCodeEnc" | "pinHash" | "failedCount" | "lockedUntil" | "kakaoLinkedAt">>;
 
 export type NewCustomer = Pick<Customer, "dong" | "ho" | "pinHash"> & Partial<Pick<Customer, "name" | "phone">>;
 

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BrandLockup } from "@/components/BrandMark";
-import { AskForm, CopyButton } from "@/components/EasyParts";
+import { AskForm, CopyButton, KakaoConnect } from "@/components/EasyParts";
 import { PushOptIn } from "@/components/PushOptIn";
 import { toSeoulDateTime } from "@/components/ui";
 import { formatWon } from "@/lib/domain";
 import { EASY_STEPS, easyStatus } from "@/lib/easyStatus";
+import { kakaoChatUrl } from "@/lib/kakao";
 import { pushKeys } from "@/lib/push";
 import { getStore } from "@/lib/store";
 import { isAccessToken } from "@/lib/token";
@@ -30,7 +31,12 @@ export default async function EasyOrder({ params }: { params: Promise<{ token: s
   const store = getStore();
   const order = await store.getOrderByToken(token);
   if (!order) notFound();
-  const [closed, inquiries] = await Promise.all([store.listClosedDates(), store.listInquiries({ customerId: order.customerId })]);
+  const [closed, inquiries, customer] = await Promise.all([
+    store.listClosedDates(),
+    store.listInquiries({ customerId: order.customerId }),
+    store.getCustomer(order.customerId),
+  ]);
+  const chatUrl = kakaoChatUrl();
   const mine = inquiries.filter((q) => q.orderId === order.id);
   const s = easyStatus(order, new Date(), closed);
   const bank = process.env.BANK_ACCOUNT || "";
@@ -83,6 +89,8 @@ export default async function EasyOrder({ params }: { params: Promise<{ token: s
         </section>
 
         <PushOptIn publicKey={pushKeys()?.publicKey ?? null} token={token} big />
+
+        {chatUrl && <KakaoConnect chatUrl={chatUrl} unit={`${order.dong}동 ${order.ho}호`} linked={!!customer?.kakaoLinkedAt} />}
 
         {mine.length > 0 && (
           <section className="stack">

@@ -1,6 +1,7 @@
 import { generatePushKeys, pushKeys } from "@/lib/push";
 import { appUrl } from "@/lib/notify";
 import { solapiConfig } from "@/lib/notify/solapi";
+import { kakaoChannelUrl } from "@/lib/kakao";
 import { isDemoMode } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -62,6 +63,13 @@ export default function AdminSetup() {
         </Row>
         <Row ok={bank} label="입금 계좌 (BANK_ACCOUNT)">
           <span className="small muted">{bank ? process.env.BANK_ACCOUNT : "고객 화면과 문자에 보여 줄 계좌를 넣어 주세요."}</span>
+        </Row>
+        <Row ok={!!kakaoChannelUrl()} label="카카오톡 채널 (무료, 선택)">
+          <span className="small muted">
+            {kakaoChannelUrl()
+              ? `${kakaoChannelUrl()} · 고객 링크 화면에 "카카오톡으로 소식 받기"가 보여요.`
+              : "KAKAO_CHANNEL_URL에 채널 주소(https://pf.kakao.com/_xxxxx)를 넣으면, 번호 노출 없이 카톡으로 소식을 보낼 수 있어요."}
+          </span>
         </Row>
         <div className="card flat">
           <div className="row">

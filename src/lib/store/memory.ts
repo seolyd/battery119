@@ -75,6 +75,7 @@ export function createMemoryStore(db: Db = createMemoryDb()): Store {
         failedCount: 0,
         lockedUntil: null,
         doorCodeEnc: null,
+        kakaoLinkedAt: null,
         createdAt: now(),
       };
       db.customers.set(c.id, c);

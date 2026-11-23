@@ -18,6 +18,7 @@ const toCustomer = (r: Row): Customer => ({
   failedCount: (r.failed_count as number) ?? 0,
   lockedUntil: (r.locked_until as string) ?? null,
   doorCodeEnc: (r.door_code_enc as string) ?? null,
+  kakaoLinkedAt: (r.kakao_linked_at as string) ?? null,
   createdAt: r.created_at as string,
 });
 
@@ -117,6 +118,7 @@ const snake: Record<string, string> = {
   toMasked: "to_masked",
   answeredAt: "answered_at",
   accessToken: "access_token",
+  kakaoLinkedAt: "kakao_linked_at",
   userAgent: "user_agent",
 };
 

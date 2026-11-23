@@ -53,6 +53,8 @@ export interface Customer {
   lockedUntil: string | null;
   /** 암호화된 공동현관 비밀번호 */
   doorCodeEnc: string | null;
+  /** 카카오톡 채널에 말을 걸어 와서 운영자가 "카톡 연결됨"으로 표시한 시각 */
+  kakaoLinkedAt: string | null;
   createdAt: string;
 }
 
@@ -277,7 +279,7 @@ export type NotifyEvent =
   | "ADMIN_NEW_ORDER"
   | "ADMIN_NEW_INQUIRY";
 
-export type NotifyChannel = "alimtalk" | "push" | "sms_manual";
+export type NotifyChannel = "alimtalk" | "push" | "sms_manual" | "kakao_manual";
 
 export interface NotificationLog {
   id: string;

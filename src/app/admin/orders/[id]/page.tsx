@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { AdminOrderActions, DoorCode, ResetPin } from "@/components/AdminOrderActions";
 import { SmsCard } from "@/components/SmsCard";
 import { shortLink } from "@/lib/notify";
+import { kakaoChannelUrl } from "@/lib/kakao";
 import { smsDraft } from "@/lib/sms";
 import { StatusBadge, toSeoulDateTime } from "@/components/ui";
 import { ADMIN_TRANSITIONS, CATEGORY_LABEL, formatWon, STATUS_LABEL } from "@/lib/domain";
@@ -51,13 +52,17 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
           event={sms.event}
           eventName={TEMPLATES[sms.event].name}
           phone={sms.phone}
+          unit={`${order.dong}동 ${order.ho}호`}
           text={sms.text}
+          kakao={{ configured: !!kakaoChannelUrl(), linked: !!customer?.kakaoLinkedAt }}
           pushNote={
             pushedNow
-              ? "웹 푸시로 이미 보냈어요. 문자는 선택이에요."
+              ? "웹 푸시로 이미 보냈어요. 따로 보내지 않아도 돼요."
               : pushDevices
                 ? `고객이 알림을 켠 기기 ${pushDevices}대`
-                : "고객이 알림을 켜지 않았어요. 문자로 알려 주세요."
+                : customer?.kakaoLinkedAt
+                  ? "고객이 알림을 켜지 않았어요. 카톡으로 알려 주세요."
+                  : "고객이 알림을 켜지 않았어요. 문자로 알려 주세요."
           }
         />
       )}
@@ -170,9 +175,9 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
                     <time>{toSeoulDateTime(n.createdAt)}</time>
                     <span>
                       <b>{TEMPLATES[n.event]?.name ?? n.event}</b>{" "}
-                      <span className="small muted">{n.channel === "push" ? "웹 푸시" : n.channel === "sms_manual" ? "운영자 문자" : "알림톡"}</span>{" "}
+                      <span className="small muted">{n.channel === "push" ? "웹 푸시" : n.channel === "sms_manual" ? "운영자 문자" : n.channel === "kakao_manual" ? "카톡 채널" : "알림톡"}</span>{" "}
                       <span className={`badge ${n.status === "sent" || n.status === "manual" ? "ok" : n.status === "failed" ? "warn" : "mute"}`}>
-                        {n.status === "sent" ? "보냄" : n.status === "manual" ? "문자 앱 열림" : n.status === "failed" ? "실패" : "안 보냄"}
+                        {n.status === "sent" ? "보냄" : n.status === "manual" ? (n.channel === "kakao_manual" ? "문구 복사" : "문자 앱 열림") : n.status === "failed" ? "실패" : "안 보냄"}
                       </span>
                       <span className="muted">
                         {" "}

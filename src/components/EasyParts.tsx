@@ -61,3 +61,44 @@ export function AskForm({ token }: { token: string }) {
     </form>
   );
 }
+
+/** 문자 링크 화면: 카카오톡 채널로 소식 받기. 채널은 고객이 먼저 말을 걸어야 해서, 동·호수만 보내 달라고 안내한다 */
+export function KakaoConnect({ chatUrl, unit, linked }: { chatUrl: string; unit: string; linked: boolean }) {
+  const [copied, setCopied] = useState(false);
+  if (linked)
+    return (
+      <div className="push-box on big">
+        <b>💬 카카오톡으로도 알려 드려요</b>
+        <span className="push-note">파크리오 배터리 119 카카오톡 채널로 진행 상황을 보내 드려요.</span>
+      </div>
+    );
+  return (
+    <div className="push-box big">
+      <b>💬 카카오톡으로 소식 받기</b>
+      <ol className="ios-steps">
+        <li>아래 버튼을 눌러 카카오톡 채널을 열어요</li>
+        <li>
+          <b>{unit}</b> 이라고만 보내 주세요
+        </li>
+      </ol>
+      <a className="btn easy-btn" href={chatUrl} target="_blank" rel="noopener noreferrer" style={{ background: "#fee500", color: "#191600" }}>
+        카카오톡 채널 열기
+      </a>
+      <button
+        type="button"
+        className="btn ghost easy-btn"
+        onClick={async () => {
+          try {
+            await navigator.clipboard.writeText(unit);
+            setCopied(true);
+          } catch {
+            /* 복사가 막히면 직접 적으면 된다 */
+          }
+        }}
+      >
+        {copied ? `“${unit}” 복사했어요` : `“${unit}” 복사하기`}
+      </button>
+      <span className="push-note">그다음부터는 문자 대신 카카오톡으로 알려 드려요.</span>
+    </div>
+  );
+}
