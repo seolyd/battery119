@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppBar, CustomerTimeline, StatusBadge, toSeoulDate } from "@/components/ui";
 import { requireUser } from "@/lib/auth";
@@ -141,6 +142,9 @@ export default async function OrderDetail({
           )}
         </div>
 
+        <Link href={`/help?order=${order.id}`} className="btn ghost">
+          이 주문 문의하기
+        </Link>
         {CUSTOMER_CANCELABLE.includes(order.status) && (
           <form action={cancelOrder.bind(null, order.id)}>
             <button className="btn danger">신청 취소하기</button>

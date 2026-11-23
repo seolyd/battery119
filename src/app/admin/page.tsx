@@ -12,7 +12,7 @@ const STALE_DAYS = 5;
 export default async function AdminToday() {
   const store = getStore();
   const today = seoulToday();
-  const [orders, closed] = await Promise.all([store.listOrders(), store.listClosedDates()]);
+  const [orders, closed, openInquiries] = await Promise.all([store.listOrders(), store.listClosedDates(), store.listInquiries({ status: "open" })]);
 
   const pickups = orders.filter((o) => (o.status === "PAID" || o.status === "AS_REQUESTED") && (!o.pickupDate || o.pickupDate <= today)).sort(byDong);
   const deliveries = orders.filter((o) => o.status === "DELIVERY_SCHEDULED" && o.deliveryDate && o.deliveryDate <= today).sort(byDong);
@@ -49,6 +49,10 @@ export default async function AdminToday() {
         <Link className={`tile ${quotes.length ? "hot" : ""}`} href="/admin/orders?status=REQUESTED">
           <span className="v">{quotes.length}</span>
           <span className="k">견적 필요 (목록 밖 모델)</span>
+        </Link>
+        <Link className={`tile ${openInquiries.length ? "hot" : ""}`} href="/admin/inquiries">
+          <span className="v">{openInquiries.length}</span>
+          <span className="k">답변 대기 문의</span>
         </Link>
         <Link className="tile" href="/admin/orders?status=AT_PARTNER">
           <span className="v">{inShop.length}</span>

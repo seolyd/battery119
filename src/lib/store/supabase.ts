@@ -1,6 +1,6 @@
 import "server-only";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import type { Customer, Inspection, Model, Order, OrderEvent, Partner } from "@/lib/domain";
+import type { Customer, Inquiry, Inspection, Model, NotificationLog, Order, OrderEvent, Partner } from "@/lib/domain";
 import { UnitTakenError, type Store } from "./types";
 
 // 운영 저장소. 서비스 롤 키로 서버에서만 접근한다 (테이블은 RLS로 외부 접근 차단).
@@ -111,7 +111,36 @@ const snake: Record<string, string> = {
   runtimeMin: "runtime_min",
   heatOk: "heat_ok",
   exteriorOk: "exterior_ok",
+  inquiryId: "inquiry_id",
+  toMasked: "to_masked",
+  answeredAt: "answered_at",
 };
+
+const toInquiry = (r: Row): Inquiry => ({
+  id: r.id as string,
+  kind: r.kind as Inquiry["kind"],
+  customerId: (r.customer_id as string) ?? null,
+  orderId: (r.order_id as string) ?? null,
+  dong: r.dong as string,
+  ho: r.ho as string,
+  phone: r.phone as string,
+  body: r.body as string,
+  answer: (r.answer as string) ?? null,
+  status: r.status as Inquiry["status"],
+  createdAt: r.created_at as string,
+  answeredAt: (r.answered_at as string) ?? null,
+});
+
+const toNotification = (r: Row): NotificationLog => ({
+  id: String(r.id),
+  event: r.event as NotificationLog["event"],
+  orderId: (r.order_id as string) ?? null,
+  inquiryId: (r.inquiry_id as string) ?? null,
+  toMasked: r.to_masked as string,
+  status: r.status as NotificationLog["status"],
+  detail: (r.detail as string) ?? null,
+  createdAt: r.created_at as string,
+});
 
 function toRow(obj: object): Row {
   const out: Row = {};
@@ -227,6 +256,35 @@ export function createSupabaseStore(client?: SupabaseClient): Store {
       const res = await db.from("login_failures").select("id", { count: "exact", head: true }).eq("ip", ip).gte("at", sinceIso);
       if (res.error) throw new Error(res.error.message);
       return res.count ?? 0;
+    },
+
+    async createInquiry(input) {
+      return toInquiry(must(await db.from("inquiries").insert(toRow(input)).select().single()));
+    },
+    async getInquiry(id) {
+      const r = must(await db.from("inquiries").select("*").eq("id", id).maybeSingle());
+      return r ? toInquiry(r) : null;
+    },
+    async listInquiries(opts) {
+      let q = db.from("inquiries").select("*").order("created_at", { ascending: false }).limit(300);
+      if (opts?.customerId) q = q.eq("customer_id", opts.customerId);
+      if (opts?.status) q = q.eq("status", opts.status);
+      return must(await q).map(toInquiry);
+    },
+    async answerInquiry(id, answer) {
+      return toInquiry(
+        must(await db.from("inquiries").update({ answer, status: "answered", answered_at: new Date().toISOString() }).eq("id", id).select().single()),
+      );
+    },
+
+    async addNotification(log) {
+      must(await db.from("notifications").insert(toRow(log)));
+    },
+    async listNotifications(opts) {
+      let q = db.from("notifications").select("*").order("created_at");
+      if (opts.orderId) q = q.eq("order_id", opts.orderId);
+      if (opts.inquiryId) q = q.eq("inquiry_id", opts.inquiryId);
+      return must(await q).map(toNotification);
     },
   };
 }

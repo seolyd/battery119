@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import type { Customer, Inspection, Model, Order, OrderEvent, Partner } from "@/lib/domain";
+import type { Customer, Inquiry, Inspection, Model, NotificationLog, Order, OrderEvent, Partner } from "@/lib/domain";
 import seedModels from "@/data/models.json";
 import { seoulToday } from "@/lib/schedule";
 import { UnitTakenError, type Store } from "./types";
@@ -17,6 +17,8 @@ interface Db {
   inspections: Map<string, Inspection>;
   orderSeq: Map<string, number>;
   loginFailures: { ip: string; at: string }[];
+  inquiries: Map<string, Inquiry>;
+  notifications: NotificationLog[];
 }
 
 type SeedModel = Omit<Model, "partnerId" | "active"> & { active?: boolean };
@@ -40,6 +42,8 @@ export function createMemoryDb(): Db {
     inspections: new Map(),
     orderSeq: new Map(),
     loginFailures: [],
+    inquiries: new Map(),
+    notifications: [],
   };
 }
 
@@ -172,6 +176,38 @@ export function createMemoryStore(db: Db = createMemoryDb()): Store {
     },
     async countLoginFailures(ip, sinceIso) {
       return db.loginFailures.filter((f) => f.ip === ip && f.at >= sinceIso).length;
+    },
+
+    async createInquiry(input) {
+      const q: Inquiry = { ...input, id: randomUUID(), answer: null, status: "open", createdAt: now(), answeredAt: null };
+      db.inquiries.set(q.id, q);
+      return clone(q);
+    },
+    async getInquiry(id) {
+      const q = db.inquiries.get(id);
+      return q ? clone(q) : null;
+    },
+    async listInquiries(opts) {
+      return clone(
+        [...db.inquiries.values()]
+          .filter((q) => (!opts?.customerId || q.customerId === opts.customerId) && (!opts?.status || q.status === opts.status))
+          .sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
+      );
+    },
+    async answerInquiry(id, answer) {
+      const q = db.inquiries.get(id);
+      if (!q) throw new Error("문의를 찾을 수 없어요.");
+      Object.assign(q, { answer, status: "answered", answeredAt: now() });
+      return clone(q);
+    },
+
+    async addNotification(log) {
+      db.notifications.push({ ...log, id: randomUUID(), createdAt: now() });
+    },
+    async listNotifications(opts) {
+      return clone(
+        db.notifications.filter((n) => (!opts.orderId || n.orderId === opts.orderId) && (!opts.inquiryId || n.inquiryId === opts.inquiryId)),
+      );
     },
   };
 }

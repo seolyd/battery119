@@ -4,6 +4,7 @@ import { AdminOrderActions, DoorCode, ResetPin } from "@/components/AdminOrderAc
 import { StatusBadge, toSeoulDateTime } from "@/components/ui";
 import { ADMIN_TRANSITIONS, CATEGORY_LABEL, formatWon, STATUS_LABEL } from "@/lib/domain";
 import { formatDay, nextDeliveryDate } from "@/lib/schedule";
+import { TEMPLATES } from "@/lib/notify/templates";
 import { getStore } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
@@ -13,12 +14,13 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
   const store = getStore();
   const order = await store.getOrder(id);
   if (!order) notFound();
-  const [customer, events, inspection, partners, closed] = await Promise.all([
+  const [customer, events, inspection, partners, closed, notes] = await Promise.all([
     store.getCustomer(order.customerId),
     store.listEvents(order.id),
     store.getInspection(order.id),
     store.listPartners(),
     store.listClosedDates(),
+    store.listNotifications({ orderId: id }),
   ]);
   const partner = partners.find((p) => p.id === order.partnerId);
   const margin = order.price != null && order.partnerCost != null ? order.price - order.partnerCost : null;
@@ -122,6 +124,36 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
               inspection={inspection}
               defaultDelivery={nextDeliveryDate(new Date(), closed)}
             />
+          </div>
+        </section>
+
+        <section className="panel">
+          <h2>
+            알림 발송 <span className="small muted">알림톡·문자</span>
+          </h2>
+          <div className="body">
+            {notes.length ? (
+              <ul className="events">
+                {notes.map((n) => (
+                  <li key={n.id}>
+                    <time>{toSeoulDateTime(n.createdAt)}</time>
+                    <span>
+                      <b>{TEMPLATES[n.event]?.name ?? n.event}</b>{" "}
+                      <span className={`badge ${n.status === "sent" ? "ok" : n.status === "failed" ? "warn" : "mute"}`}>
+                        {n.status === "sent" ? "보냄" : n.status === "failed" ? "실패" : "안 보냄"}
+                      </span>
+                      <span className="muted">
+                        {" "}
+                        · {n.toMasked}
+                        {n.detail ? ` · ${n.detail}` : ""}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <span className="small muted">보낸 알림이 없어요.</span>
+            )}
           </div>
         </section>
 
