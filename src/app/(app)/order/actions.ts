@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { encryptDoorCode } from "@/lib/crypto";
 import { buildOrder, RuleError, type OrderInput, type RuleField } from "@/lib/orderRules";
+import { notifyAdminOrder, notifyOrder } from "@/lib/notify";
 import { getStore } from "@/lib/store";
 
 export interface SubmitResult {
@@ -36,6 +37,8 @@ export async function submitOrder(input: WizardInput): Promise<SubmitResult> {
       ...(doorCode ? { doorCodeEnc: encryptDoorCode(doorCode) } : {}),
     });
     orderId = order.id;
+    // 알림은 실패해도 신청은 완료된다 (발송 결과는 관리자 주문 상세에 기록)
+    await Promise.all([notifyOrder("ORDER_RECEIVED", order), notifyAdminOrder(order)]);
   } catch (e) {
     if (e instanceof RuleError) return { error: e.message, field: e.field };
     console.error("submitOrder failed", e);

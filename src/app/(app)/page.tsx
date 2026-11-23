@@ -202,6 +202,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ e
 
         <footer className="landing-foot">
           <BrandLockup compact />
+          <Link href="/help" className="small">
+            문의하기
+          </Link>
           <p>{DISCLAIMER}</p>
         </footer>
       </main>

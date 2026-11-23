@@ -21,6 +21,9 @@ export default async function Me() {
           </b>
         </div>
         <ProfileForm name={c.name ?? ""} phone={c.phone ?? ""} hasDoorCode={!!c.doorCodeEnc} />
+        <Link href="/help" className="btn ghost">
+          문의하기
+        </Link>
         <Link href="/prices" className="btn ghost">
           모델별 가격 보기
         </Link>

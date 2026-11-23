@@ -1,4 +1,6 @@
 import type {
+  Inquiry,
+  NotificationLog,
   Customer,
   Inspection,
   Model,
@@ -75,4 +77,12 @@ export interface Store {
   /** 로그인 실패 기록 (접속지별 시도 제한) */
   recordLoginFailure(ip: string): Promise<void>;
   countLoginFailures(ip: string, sinceIso: string): Promise<number>;
+
+  createInquiry(input: Omit<Inquiry, "id" | "answer" | "status" | "createdAt" | "answeredAt">): Promise<Inquiry>;
+  getInquiry(id: string): Promise<Inquiry | null>;
+  listInquiries(opts?: { customerId?: string; status?: Inquiry["status"] }): Promise<Inquiry[]>;
+  answerInquiry(id: string, answer: string): Promise<Inquiry>;
+
+  addNotification(log: Omit<NotificationLog, "id" | "createdAt">): Promise<void>;
+  listNotifications(opts: { orderId?: string; inquiryId?: string }): Promise<NotificationLog[]>;
 }

@@ -10,7 +10,7 @@ import {
   LoginError,
   normalizeUnit,
 } from "@/lib/loginRules";
-import { normalizePhone } from "@/lib/orderRules";
+import { isValidPhone, normalizePhone } from "@/lib/phone";
 import { burnPinCheck, hashPin, verifyPin } from "@/lib/pin";
 import { customerSession } from "@/lib/session";
 import { getStore } from "@/lib/store";
@@ -76,19 +76,20 @@ export async function signup(_: AuthState, form: FormData): Promise<AuthState> {
     const { dong, ho } = normalizeUnit(dongIn, hoIn);
     checkNewPin(str(form, "pin"), str(form, "pin2"));
     const phone = str(form, "phone");
+    if (!isValidPhone(phone)) return { ...keep, error: "휴대폰 번호를 010-1234-5678처럼 적어 주세요. 진행 상황 알림을 보내 드려요." };
     if (form.get("resident") !== "on") return { ...keep, error: "파크리오 입주민인지 확인해 주세요." };
     const c = await getStore().createCustomer({
       dong,
       ho,
       pinHash: hashPin(str(form, "pin")),
       name: str(form, "name").slice(0, 20) || null,
-      phone: phone ? normalizePhone(phone) : null,
+      phone: normalizePhone(phone),
     });
     uid = c.id;
   } catch (e) {
     if (e instanceof LoginError) return { ...keep, error: e.message };
     if (e instanceof UnitTakenError)
-      return { ...keep, error: "이미 가입된 세대예요. 로그인해 주세요. 비밀번호를 모르면 카카오톡 채널로 문의해 주세요." };
+      return { ...keep, error: "이미 가입된 세대예요. 로그인해 주세요. 비밀번호를 모르면 로그인 화면의 '비밀번호를 잊으셨나요?'를 눌러 주세요." };
     console.error("signup failed", e);
     return { ...keep, error: "가입하지 못했어요. 잠시 후 다시 시도해 주세요." };
   }

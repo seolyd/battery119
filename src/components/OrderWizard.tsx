@@ -390,6 +390,7 @@ export function OrderWizard({
               연락처
               <input type="tel" inputMode="tel" placeholder="010-1234-5678" value={phone} maxLength={16} onChange={(e) => setPhone(e.target.value)} />
               {phone.trim() && !isValidPhone(phone) && <span className="small" style={{ color: "var(--danger)" }}>휴대폰 번호 10~11자리를 적어 주세요.</span>}
+              <span className="small">입금 안내, 수거·배송 일정을 이 번호로 카카오 알림톡(안 되면 문자)을 보내 드려요.</span>
             </label>
             <div className="card accent">
               <div className="row">

@@ -236,3 +236,54 @@ export function inWarranty(order: Pick<Order, "status" | "deliveredAt">, now = n
 export function formatWon(n: number): string {
   return n.toLocaleString("ko-KR") + "원";
 }
+
+// ---------- 문의 ----------
+
+/** general: 로그인한 고객의 일반 문의 / pin_reset: 로그인 없이 보내는 비밀번호 재설정 요청 */
+export type InquiryKind = "general" | "pin_reset";
+
+export interface Inquiry {
+  id: string;
+  kind: InquiryKind;
+  /** 로그인한 고객이면 계정, 비밀번호 재설정 요청이면 동·호수로 찾은 계정 (없으면 null) */
+  customerId: string | null;
+  orderId: string | null;
+  dong: string;
+  ho: string;
+  /** 요청한 사람이 적은 연락처 */
+  phone: string;
+  body: string;
+  answer: string | null;
+  status: "open" | "answered";
+  createdAt: string;
+  answeredAt: string | null;
+}
+
+// ---------- 알림 발송 기록 ----------
+
+export type NotifyEvent =
+  | "ORDER_RECEIVED"
+  | "QUOTE_READY"
+  | "PAID"
+  | "PICKED_UP"
+  | "DELIVERY_SCHEDULED"
+  | "RETURN_SCHEDULED"
+  | "DELIVERED"
+  | "CANCELED"
+  | "INQUIRY_ANSWERED"
+  | "PIN_RESET"
+  | "ADMIN_NEW_ORDER"
+  | "ADMIN_NEW_INQUIRY";
+
+export interface NotificationLog {
+  id: string;
+  event: NotifyEvent;
+  orderId: string | null;
+  inquiryId: string | null;
+  /** 받는 번호 (뒤 4자리만 남겨서 저장) */
+  toMasked: string;
+  /** sent: 발송 요청 성공 / failed: 발송 실패 / skipped: 알림톡 설정 전이라 보내지 않음 */
+  status: "sent" | "failed" | "skipped";
+  detail: string | null;
+  createdAt: string;
+}

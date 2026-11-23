@@ -5,13 +5,34 @@ import { requireAdmin } from "@/lib/auth";
 import { decryptDoorCode } from "@/lib/crypto";
 import { checkNewPin, LoginError } from "@/lib/loginRules";
 import { hashPin } from "@/lib/pin";
-import { STATUS_LABEL, type OrderStatus } from "@/lib/domain";
+import { STATUS_LABEL, type NotifyEvent, type Order, type OrderStatus } from "@/lib/domain";
 import { RuleError, transitionPatch } from "@/lib/orderRules";
+import { notifyOrder } from "@/lib/notify";
 import { getStore } from "@/lib/store";
 
 export interface ActionState {
   error?: string;
   ok?: string;
+}
+
+/** 상태가 바뀔 때 고객에게 보낼 알림 */
+function customerEventFor(before: Order, to: OrderStatus): NotifyEvent | null {
+  switch (to) {
+    case "PAYMENT_PENDING":
+      return before.status === "REQUESTED" ? "QUOTE_READY" : null;
+    case "PAID":
+      return "PAID";
+    case "PICKED_UP":
+      return "PICKED_UP";
+    case "DELIVERY_SCHEDULED":
+      return before.status === "NOT_REPAIRABLE" ? "RETURN_SCHEDULED" : "DELIVERY_SCHEDULED";
+    case "DELIVERED":
+      return "DELIVERED";
+    case "CANCELED":
+      return "CANCELED";
+    default:
+      return null;
+  }
 }
 
 const num = (v: FormDataEntryValue | null) => {
@@ -48,9 +69,11 @@ export async function changeStatus(orderId: string, _: ActionState, formData: Fo
       if (!ins?.passed) return { error: "품질검사를 통과해야 배송을 잡을 수 있어요." };
     }
 
-    await store.updateOrder(order.id, patch);
+    const updated = await store.updateOrder(order.id, patch);
     const note = String(formData.get("note") ?? "").trim() || null;
     await store.addEvent({ orderId: order.id, from: order.status, to, actor: "admin", note });
+    const event = customerEventFor(order, to);
+    if (event) await notifyOrder(event, updated);
   } catch (e) {
     if (e instanceof RuleError) return { error: e.message };
     console.error(e);

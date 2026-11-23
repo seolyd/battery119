@@ -63,7 +63,9 @@ export function LoginForms({ next, startWithSignup }: { next: string; startWithS
           <button className="btn" disabled={loginPending}>
             {loginPending ? "확인하는 중…" : "로그인"}
           </button>
-          <p className="small muted">비밀번호를 잊으셨으면 카카오톡 채널로 문의해 주세요. 확인 후 새로 정해 드려요.</p>
+          <a href="/help/pin-reset" className="small muted" style={{ textAlign: "center" }}>
+            비밀번호를 잊으셨나요?
+          </a>
         </form>
       ) : (
         <form action={signupAction} className="stack">
@@ -85,8 +87,9 @@ export function LoginForms({ next, startWithSignup }: { next: string; startWithS
             <input name="name" maxLength={20} placeholder="부르실 이름" />
           </label>
           <label className="field">
-            연락처 (선택)
-            <input name="phone" type="tel" inputMode="tel" maxLength={13} placeholder="010-1234-5678" />
+            휴대폰 번호
+            <input name="phone" type="tel" inputMode="tel" maxLength={16} placeholder="010-1234-5678" required />
+            <span className="small">진행 상황 알림톡과 비밀번호 재설정에 써요.</span>
           </label>
           <label className="agree">
             <input type="checkbox" name="resident" required />

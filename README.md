@@ -32,6 +32,8 @@ npm run dev
 | 포장 | 고객이 박스로 직접 포장. 동의해야 신청 가능, 동의 시각 기록 | `src/lib/orderRules.ts` |
 | 협력업체 | 모델별로 지정. **고객 화면에는 보이지 않음** | `models.partner_id` |
 | 교체 불가 | 전액 환불 + 무료 반송 | 관리자 주문 상세 |
+| 알림 | 상태가 바뀔 때마다 고객에게 카카오 알림톡(실패 시 문자), 운영자에게 새 신청·문의 문자 | `src/lib/notify/` · [설정 가이드](docs/alimtalk.md) |
+| 문의 | 앱 안 문의하기(로그인), 비밀번호 재설정 요청(로그인 없이). 관리자 **문의** 화면에서 답변 | `src/app/(app)/help/` |
 | 보증 | 배송일부터 최소 6개월 (모델별 최대 12개월), 고객이 무상 재점검 요청 가능 | `src/lib/domain.ts` |
 
 서버 시간대와 상관없이 모든 날짜 계산은 서울 시간으로 합니다.
@@ -86,6 +88,7 @@ npm run seed:sql                  # supabase/seed.sql, migrations/0004_model_var
 2. 이 저장소의 `supabase/migrations/0001_init.sql` 내용을 전부 붙여 넣고 **Run**
 3. 새 쿼리에 `supabase/migrations/0002_grants.sql` 내용을 붙여 넣고 **Run** (앱 서버에 표 권한 주기. 빠뜨리면 `permission denied for table` 오류가 나요)
 4. 새 쿼리에 `supabase/seed.sql` 내용을 붙여 넣고 **Run** (협력업체 4곳, 모델 191개)
+   그다음 `supabase/migrations/0004_model_variants.sql`, `0005_inquiries_notifications.sql`도 차례로 **Run**
 5. 왼쪽 **Table Editor**에서 `models` 표에 191줄이 보이면 성공
 
 > `supabase/migrations/0004_model_variants.sql`은 새로 만들 때도 실행해도 되고(아무 변화 없음), 11월 22일 전에 만든 DB에는 꼭 실행해야 합니다 (모델 나누기).
