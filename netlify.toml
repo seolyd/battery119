@@ -1,0 +1,25 @@
+# Netlify 배포 설정. Next.js는 Netlify가 자동으로 인식해서 서버 기능(로그인, 주문 저장, 알림)까지 돌린다.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# 무료 크레딧은 데이터 전송량이 가장 많이 쓴다. 바뀌지 않는 파일은 휴대폰에 오래 저장해 두게 한다.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/icon-*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# 알림 서비스 워커는 고치면 바로 바뀌어야 하므로 저장해 두지 않는다
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"

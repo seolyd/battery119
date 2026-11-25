@@ -28,7 +28,7 @@ export default function AdminSetup() {
   return (
     <>
       <h1 className="h2">설정 점검</h1>
-      <p className="small muted">설정을 바꾼 뒤에는 Vercel에서 Redeploy해야 반영돼요.</p>
+      <p className="small muted">설정을 바꾼 뒤에는 Netlify에서 다시 배포(Deploys → Trigger deploy)해야 반영돼요.</p>
       {isDemoMode() && <div className="alert">데모 모드예요. 실제 운영에서는 Supabase 설정도 필요해요.</div>}
       <div className="stack" style={{ maxWidth: 760 }}>
         <Row ok={!!push} label="웹 푸시 알림 (무료)">
@@ -37,7 +37,7 @@ export default function AdminSetup() {
           ) : (
             <>
               <span className="small">
-                아래 세 값을 Vercel &gt; Settings &gt; Environment Variables에 그대로 넣고 Redeploy하세요. 이 키는 지금 새로 만든 것이라, 이 화면을 새로고침하면
+                아래 세 값을 Netlify &gt; Project configuration &gt; Environment variables에 그대로 넣고 다시 배포하세요. 이 키는 지금 새로 만든 것이라, 이 화면을 새로고침하면
                 다른 값이 나와요. <b>한 번 넣은 뒤에는 바꾸지 마세요</b> (바꾸면 고객이 알림을 다시 켜야 해요).
               </span>
               <dl className="kv">

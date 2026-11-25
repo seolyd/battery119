@@ -21,7 +21,7 @@
    - **알림톡 템플릿 등록**: 아래 템플릿을 하나씩 등록하고 검수를 신청합니다. 본문은 **한 글자도 바꾸지 말고** 그대로 붙여 넣으세요. 다르면 발송이 실패합니다.
    - 검수가 끝나면 템플릿마다 `KA`로 시작하는 템플릿 ID가 생깁니다.
    - **API 키 발급**: API Key와 API Secret을 만듭니다.
-4. **Vercel 환경 변수** 추가 후 Redeploy
+4. **Netlify 환경 변수** 추가 후 다시 배포 (Deploys → Trigger deploy)
 
    | 변수 | 값 |
    |---|---|
@@ -31,7 +31,7 @@
    | `SOLAPI_SENDER` | 솔라피에 등록한 발신번호 (예: `010-1234-5678`) |
    | `SOLAPI_TEMPLATES` | 템플릿 ID 목록. 예: `ORDER_RECEIVED=KA01TP...,PAID=KA01TP...,PICKED_UP=KA01TP...` |
    | `ADMIN_PHONE` | 새 신청·문의 문자를 받을 운영자 휴대폰 |
-   | `APP_URL` | 알림에 넣을 앱 주소. 예: `https://battery119.vercel.app` |
+   | `APP_URL` | 알림에 넣을 앱 주소. 예: `https://battery119.netlify.app` |
 
    `SOLAPI_TEMPLATES`에 없는 알림은 보내지 않고 기록만 남깁니다. 검수가 끝난 것부터 하나씩 추가해도 됩니다.
 

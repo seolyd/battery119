@@ -15,6 +15,8 @@ import { render, TEMPLATES } from "./templates";
 
 export function appUrl(): string {
   if (process.env.APP_URL) return process.env.APP_URL.replace(/\/$/, "");
+  // Netlify는 배포한 사이트 주소를 URL에 넣어 준다
+  if (process.env.URL && /^https:\/\//.test(process.env.URL)) return process.env.URL.replace(/\/$/, "");
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
   return "http://localhost:3000";
 }

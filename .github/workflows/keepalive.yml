@@ -1,0 +1,29 @@
+# Supabase 무료 프로젝트는 7일 동안 접속이 없으면 잠든다.
+# 하루 한 번 앱의 상태 확인 주소를 불러서 DB를 깨워 둔다 (GitHub Actions 무료).
+# 저장소 Settings > Secrets and variables > Actions > Variables 에 APP_URL 을 넣어 두세요.
+name: keep-alive
+
+on:
+  schedule:
+    - cron: "17 1 * * *" # 매일 오전 10시 17분 (한국 시간)
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: 앱 상태 확인
+        env:
+          APP_URL: ${{ vars.APP_URL }}
+        run: |
+          if [ -z "$APP_URL" ]; then
+            echo "::warning::저장소 변수 APP_URL 이 없어요. Settings > Secrets and variables > Actions > Variables 에 앱 주소를 넣어 주세요."
+            exit 0
+          fi
+          url="${APP_URL%/}/api/health"
+          for i in 1 2 3; do
+            body=$(curl -fsS --max-time 30 "$url") && echo "$body" && exit 0
+            echo "다시 시도 ($i)"; sleep 20
+          done
+          echo "::error::$url 에 접속하지 못했어요"; exit 1
