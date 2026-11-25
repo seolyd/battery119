@@ -3,7 +3,7 @@ import webpush from "web-push";
 import { getStore } from "@/lib/store";
 
 // 웹 푸시. 브라우저 회사(애플·구글)의 푸시 서버를 쓰고 비용이 없다.
-// 키(VAPID)는 관리자 화면 > 설정에서 만들어 Vercel 환경 변수에 넣는다.
+// 키(VAPID)는 관리자 화면 > 설정에서 만들어 Netlify 환경 변수에 넣는다.
 
 export interface PushKeys {
   publicKey: string;

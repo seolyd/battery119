@@ -79,7 +79,7 @@ npm run seed:sql                  # supabase/seed.sql, migrations/0004_model_var
 
 운영자는 `/admin-login`에서 `ADMIN_PASSWORD`로 로그인합니다 (12시간 유지).
 
-## 실제 운영 설정 (Supabase 무료 + Vercel 무료)
+## 실제 운영 설정 (Supabase 무료 + Netlify 무료)
 
 ### 1. Supabase 프로젝트 만들기
 1. https://supabase.com 가입 → **New project**
@@ -101,11 +101,15 @@ npm run seed:sql                  # supabase/seed.sql, migrations/0004_model_var
 ### 3. 키 두 개 복사하기
 - **Project Settings → Data API**: Project URL → `SUPABASE_URL`
 - **Project Settings → API Keys**: `service_role` (secret) 키 → `SUPABASE_SERVICE_ROLE_KEY`
-  - 이 키는 DB를 마음대로 읽고 쓸 수 있는 열쇠예요. 저장소나 채팅에 붙여 넣지 말고 Vercel 설정에만 넣으세요.
+  - 이 키는 DB를 마음대로 읽고 쓸 수 있는 열쇠예요. 저장소나 채팅에 붙여 넣지 말고 Netlify 설정에만 넣으세요.
 
-### 4. Vercel에 배포하기
-1. https://vercel.com 에 GitHub 계정으로 가입 → **Add New → Project** → `battery119` 저장소 **Import**
-2. **Environment Variables**에 아래 값을 넣고 **Deploy**
+### 4. Netlify에 배포하기 (무료, 상업적 사용 가능)
+> Vercel 무료(Hobby) 플랜은 약관상 상업적 사용이 안 돼서 Netlify를 씁니다.
+
+1. https://app.netlify.com 에 **GitHub 계정으로 가입**
+2. **Add new project → Import an existing project → GitHub** → `battery119` 저장소 선택
+3. 빌드 설정은 `netlify.toml`에 있어서 그대로 두면 됩니다 (Build command `npm run build`, Publish directory `.next`)
+4. **Add environment variables**에 아래 값을 넣고 **Deploy**
 
    | 변수 | 값 |
    |---|---|
@@ -115,16 +119,25 @@ npm run seed:sql                  # supabase/seed.sql, migrations/0004_model_var
    | `DOOR_CODE_KEY` | 아래 명령으로 생성. **한 번 정하면 바꾸지 마세요** (바꾸면 저장된 공동현관 번호를 못 읽어요) |
    | `ADMIN_PASSWORD` | 관리자 비밀번호 (10자 이상) |
    | `BANK_ACCOUNT` | 예: `카카오뱅크 3333-00-0000000 (예금주: 홍길동)` |
+   | `APP_URL` | 앱 주소. 예: `https://battery119.netlify.app` (문자 속 링크가 이 주소로 만들어져요) |
+   | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | 웹 푸시 키. 배포 후 관리자 **설정** 화면에서 만들어 넣고 다시 배포 |
+   | `KAKAO_CHANNEL_URL` | 카카오톡 채널 주소 (선택) |
 
    `SESSION_SECRET`과 `DOOR_CODE_KEY` 만들기: Supabase **SQL Editor**에서 아래를 실행하면 나오는 값을 하나씩 쓰세요 (두 번 실행해서 서로 다른 값으로).
    ```sql
    select encode(gen_random_bytes(32), 'base64');
    ```
-3. 배포가 끝나면 나오는 주소(예: `battery119.vercel.app`)로 접속해서 가입·신청·관리자 로그인 확인
+5. **사이트 주소 정하기**: Project configuration → **Change project name**에서 `battery119`로 바꾸면 `https://battery119.netlify.app`이 됩니다 (이미 쓰는 이름이면 다른 이름). 바꾼 주소를 `APP_URL`에 넣고 **Deploys → Trigger deploy**
+6. 접속해서 가입·신청·관리자 로그인 확인
+
+### 5. DB 깨워 두기 (GitHub Actions, 무료)
+Supabase 무료 프로젝트는 **7일 동안 아무 요청이 없으면 일시 정지**됩니다. `.github/workflows/keepalive.yml`이 하루 한 번 `/api/health`를 불러서 깨워 둡니다.
+- GitHub 저장소 **Settings → Secrets and variables → Actions → Variables 탭 → New repository variable**: 이름 `APP_URL`, 값 `https://battery119.netlify.app`
+- **Actions** 탭 → **keep-alive** → **Run workflow**로 한 번 눌러 초록색 체크가 뜨는지 확인
 
 ### 무료 플랜에서 알아둘 점
-- Supabase 무료 프로젝트는 **7일 동안 아무 요청이 없으면 일시 정지**됩니다. `vercel.json`에 하루 한 번 `/api/health`를 부르는 예약 작업을 넣어 두어서 잠들지 않습니다.
-- 무료 플랜 용량(DB 500MB)은 이 서비스 규모에서 충분합니다.
+- **Netlify 무료 크레딧은 월 300**입니다. 월 100건 정도면 약 70크레딧(추정)으로 넉넉하지만, **다 쓰면 그달 남은 기간 동안 사이트 전체가 멈춥니다.** 처음 한두 달은 Netlify **Usage & billing** 화면에서 사용량을 자주 확인하고, 월 300~400건 규모가 되면 유료로 올리세요. 바뀌지 않는 파일은 `netlify.toml`에서 휴대폰에 오래 저장하게 해서 전송량을 줄였습니다.
+- Supabase 무료 플랜 용량(DB 500MB)은 이 서비스 규모에서 충분합니다.
 - 무료 플랜은 자동 백업이 없으니, 가끔 **Table Editor → orders → Export to CSV**로 내려받아 두세요.
 
 ### 보안 설계
